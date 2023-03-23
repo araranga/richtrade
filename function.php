@@ -223,6 +223,7 @@ while($winner!=1){
 	$datalogs['dealer'] = $poke1['id'];
 	$datalogs['pokename'] = $poke1['pokename'];
 	$datalogs['skillname'] = $tiraskill['title'];
+	$datalogs['element'] = $tiraskill['typebattle'];
 	
 
 
@@ -364,6 +365,7 @@ while($winner!=1){
 	$datalogs['dealer'] = $poke2['id'];
 	$datalogs['pokename'] = $poke2['pokename'];
 	$datalogs['skillname'] = $tiraskill['title'];	
+	$datalogs['element'] = $tiraskill['typebattle'];
 
 	$logs[] = $datalogs;
 	

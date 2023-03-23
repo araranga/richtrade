@@ -69,6 +69,20 @@ function trans()
 			$error .= "<i class=\"fa fa-warning\"></i>Amount to summon(".$_POST['withdraw'].") is insufficient on current pokeballs numbers:(".$row['pokeballs']."). Please input valid amount.<br>";
 		}
 		
+		
+		if(empty($_POST['skill1'])){
+			
+			$error .= "<i class=\"fa fa-warning\"></i>Skill 1 empty.<br>";
+		}
+		if(empty($_POST['skill2'])){
+			
+			$error .= "<i class=\"fa fa-warning\"></i>Skill 2 empty.<br>";
+		}
+		if(empty($_POST['skill3'])){
+			
+			$error .= "<i class=\"fa fa-warning\"></i>Skill 3 empty.<br>";
+		}		
+		
 		if($error=='')
 		{
 		$sum  = $row['pokeballs'] - $_POST['withdraw'];
