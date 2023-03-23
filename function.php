@@ -1029,7 +1029,7 @@ $id = $poke['id'];
 $user = $poke['user'];
 
 
-$rewardwin = 15;
+$rewardwin = 8;
 
 
 

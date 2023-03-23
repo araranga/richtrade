@@ -708,7 +708,9 @@ if(datadamage=='0'){
 		$turntime++;
 	
 	
-		
+		if(empty($a['element'])){
+			$a['element'] = 'na';
+		}
 	?>
 	
 	<div id='blogs<?php echo $logc ?>' class='btllogs' data-skill='<?php echo $a['skillname']; ?>' data-element='<?php echo $a['element']; ?>' data-round='<?php echo $round - 1; ?>' data-turn='<?php echo $turn; ?>' data-dealer='<?php echo $a['dealer']; ?>' data-enemyhp='<?php echo $a['enemyhp']; ?>' data-damage='<?php echo $a['damage']; ?>' data-notes='<?php for ($x = 1; $x <= $round; $x++) { echo ">>>"; } ?><?php echo htmlentities(implode(" , ",$a['notes'])); ?>'>
