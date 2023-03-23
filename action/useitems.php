@@ -107,7 +107,7 @@ while($row2 = mysql_fetch_md_assoc($q2)){
 
 
 $release = array();
-$release[] = "Select Item";
+//$release[] = "Select Item";
 
 
 $release2 = array();
@@ -122,7 +122,7 @@ $qpokesasd = mysql_query_md("SELECT a.*,b.title_name FROM tbl_item_history as a 
 
 
 
-$q2 = mysql_query_md("SELECT * FROM `tbl_pokemon_users` WHERE user='{$_SESSION['accounts_id']}'");
+$q2 = mysql_query_md("SELECT * FROM `tbl_pokemon_users` WHERE user='{$_SESSION['accounts_id']}' AND (is_market IS NULL OR is_market!=1)");
 while($row2 = mysql_fetch_md_assoc($q2)){
 	$release[$row2['id']] = "Level {$row2['level']} :"."-- ".$row2['pokename']." - ".$row2['hash'];
 }

@@ -30,10 +30,18 @@ $hash = $_REQUEST['hash'];
 
 $poke = loadpoke($hash);
 
+$qmarket = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE (is_market IS NULL  OR is_market!=1) AND user='{$poke['user']}'");
+$qmarketcount = mysql_num_rows_md($qmarket);
 
+if($qmarketcount<=1){
+	
 
+	echo "Unable to process. You only have 1 Warrior. Its must be 2 or more.";
 
+	exit();
 
+	
+}
 
 
 if($amount<=0){
