@@ -94,6 +94,17 @@ background-position: 570px 127px!important;
 	background-position: 256px 63px!important;
 }
 
+.cast{
+	
+    background-position:-124px -128px!important;	
+}
+
+.dodge{
+	
+    background-position: 191px 0px!important;
+	
+}
+
 .showchar {
 	
 	margin: 84px;

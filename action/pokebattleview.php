@@ -535,10 +535,8 @@ font-size: 15px;
 
 <script>
 function p2atk(){
-  $(".enemyc").removeClass('pain');
-  $(".heroc").removeClass('battle');  
-  $(".enemyc").addClass('battle');	
-  $(".enemyc").animate(
+  $("#userhero<?php echo $p2['id']; ?>").addClass('battle');	
+  $("#userhero<?php echo $p2['id']; ?>").animate(
     {
       "margin-right": "-30px",
       "margin-top": "-10px"
@@ -546,7 +544,7 @@ function p2atk(){
     50,
     "swing"
   );
-  $(".enemyc").animate(
+  $("#userhero<?php echo $p2['id']; ?>").animate(
     {
       "margin-right": "30px",
       "margin-top": "10px"
@@ -554,7 +552,7 @@ function p2atk(){
     50,
     "swing"
   );
-  $(".enemyc").animate(
+  $("#userhero<?php echo $p2['id']; ?>").animate(
     {
       "margin-right": "0px",
       "margin-top": "0px"
@@ -563,15 +561,12 @@ function p2atk(){
     "swing"
   );	
   
- $(".heroc").addClass('pain');
 }
 
 
 function p1atk(){
-  $(".heroc").removeClass('pain');
-  $(".enemyc").removeClass('battle');  
-  $(".heroc").addClass('battle');
-    $(".heroc").animate(
+  $("#userhero<?php echo $p1['id']; ?>").addClass('battle');
+    $("#userhero<?php echo $p1['id']; ?>").animate(
       {
         "margin-left": "-30px",
         "margin-top": "10px"
@@ -579,7 +574,7 @@ function p1atk(){
       50,
       "swing"
     );
-    $(".heroc").animate(
+    $("#userhero<?php echo $p1['id']; ?>").animate(
       {
         "margin-left": "30px",
         "margin-top": "-10px"
@@ -587,7 +582,7 @@ function p1atk(){
       50,
       "swing"
     );
-    $(".heroc").animate(
+    $("#userhero<?php echo $p1['id']; ?>").animate(
       {
         "margin-left": "0px",
         "margin-top": "0px"
@@ -595,8 +590,7 @@ function p1atk(){
       50,
       "swing"
     );	
-	
-	$(".enemyc").addClass('pain');
+
 	
 }
 function showfight(){
@@ -615,7 +609,7 @@ function showfight(){
 			  var dataturn = jQuery(abc).attr('data-turn');
 			  var notes = jQuery(abc).attr('data-notes');
 		      console.log(jQuery(abc).text());
-			jQuery('#battlelogs').append("<br> Round"+jQuery(abc).attr('data-round')+" --"+notes);
+			  jQuery('#battlelogs').append("<br> Round"+jQuery(abc).attr('data-round')+" --"+notes);
 			  
 			  jQuery('#heroeffs').html('');
 			  jQuery('#enemyeffs').html('');
@@ -630,10 +624,14 @@ var datadamage = jQuery(abc).attr('data-damage');
 if (elementdata === undefined) {
 	var elementdata = 'na';
 }
-
+var is_dodge = 0;
 if(datadamage=='0'){
 	datadamage = 'Dodge!!';
+	is_dodge = 1;
 }
+
+  $("#userhero<?php echo $p1['id']; ?>").attr('class','heroc mainchar flipme rpgleft');
+  $("#userhero<?php echo $p2['id']; ?>").attr('class','enemyc mainchar rpgleft'); 
 	
 				var imageele = '';
 				if(elementdata!='na'){
@@ -641,24 +639,43 @@ if(datadamage=='0'){
 				}
 				
 	
-			  if(turn==1){
+			  if(dealer=='<?php echo $p1['id']; ?>'){
+				  
 				// 		
 
 				
 			    jQuery('#heroeffs').html("<span class='heroffsdmg'>"+imageele+skillname+"</span>");
 				
 				jQuery('#enemyeffs').html("<span class='heroffsdmg'> -"+datadamage+"</span>");  
-                     				
-				p1atk(); 
+                   
+				p1atk();
+ 				if(is_dodge==1){
+					$("#userhero<?php echo $p2['id']; ?>").addClass('dodge');
+				}else{
+					$("#userhero<?php echo $p2['id']; ?>").addClass('pain');
+				}					
+				
+				
+				
+				
+				
+				
 				jQuery('#progressp1').attr('value',enemyhp);
 				jQuery('#progressp1txt').text(enemyhp);	
 
 				
 			  }else{
 				  
-				jQuery('#enemyeffs').html("<span class='heroffsdmg'>"+imageele+skillname+"</span>"); 
-                jQuery('#heroeffs').html("<span class='heroffsdmg'> -"+datadamage+"</span>");				
 				p2atk(); 
+				jQuery('#enemyeffs').html("<span class='heroffsdmg'>"+imageele+skillname+"</span>"); 
+                jQuery('#heroeffs').html("<span class='heroffsdmg'> -"+datadamage+"</span>");
+ 				if(is_dodge==1){
+					$("#userhero<?php echo $p1['id']; ?>").addClass('dodge');
+				}else{
+					$("#userhero<?php echo $p1['id']; ?>").addClass('pain');
+				}				
+				
+				
 				jQuery('#progressp2').attr('value',enemyhp);
 				jQuery('#progressp2txt').text(enemyhp);
 				
