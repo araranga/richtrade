@@ -688,14 +688,11 @@ if(datadamage=='0'){
 		jQuery('.battlemsg').fadeIn();
 		jQuery('.hero').addClass('fadebattle');
 		jQuery('.enemy').addClass('fadebattle');
-		
-		jQuery('#userhero<?php echo $loser_id; ?>').removeClass('pain').removeClass('battle').addClass('death');
-		jQuery('#userhero<?php echo $champion_id; ?>').removeClass('pain').removeClass('battle').addClass('win');
-	    //jQuery('#heroeffs').html('');
-	    //jQuery('#enemyeffs').html('');		
-		
-		
-		
+		  $("#userhero<?php echo $p1['id']; ?>").attr('class','heroc mainchar flipme rpgleft');
+		  $("#userhero<?php echo $p2['id']; ?>").attr('class','enemyc mainchar rpgleft'); 		
+		jQuery('#userhero<?php echo $loser_id; ?>').addClass('death');
+		jQuery('#userhero<?php echo $champion_id; ?>').addClass('win');
+
 	},2200 * (jQuery('.btllogs').length));
 	
 }
