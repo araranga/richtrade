@@ -290,6 +290,17 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 			}
 		   echo "<br>";
 		   
+		   
+		   
+		   if(empty($rowqpokes['emblem'])){
+			   
+			   $rowqpokes['emblem'] = 0;
+			   
+		   }
+		   else{
+			  $emb = loademblem($rowqpokes['emblem']); 
+			   echo "<strong>Emblem: ".$emb['title_name']."</strong>";
+		   }
 			
 		   ?>
 		   
@@ -298,11 +309,14 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 			<input class="btn btn-info btn-lg btnbattle" type="button" onclick="window.location='index.php?pages=viewpoke&pokeid=<?php echo $rowqpokes['hash']; ?>'" name="battle" value="View">
 			<?php if(empty($rowqpokes['is_market'])) { ?>
 			<br/>
+		   <input class="btn btn-success btn-lg btnbattle" style='background-color: green;' type="button" onclick="emblemme('<?php echo $rowqpokes['hash']; ?>',<?php echo $rowqpokes['emblem']; ?>)" name="emblem" value="Update Emblem">			
+		   <br>
 		   <input class="btn btn-primary btn-lg btnbattle" type="button" onclick="battleme('<?php echo $rowqpokes['hash']; ?>')" name="battle" value="Battle!">
 		   <br>
 		   <input class="btn btn-secondary btn-lg btnbattle" type="button" onclick="window.location='index.php?pages=useitems&pokeid=<?php echo $rowqpokes['id']; ?>'" name="battle" value="Upgrade!">
 		   <br>
 		   <input class="btn btn-info btn-lg btnbattle" style='background-color: #ff0000;' type="button" onclick="sellme('<?php echo $rowqpokes['hash']; ?>')" name="sell" value="Sell!">
+
 			<?php } else { 
 			?>
 			<span style='color:red;'>This Warrior is on market</span>
@@ -322,6 +336,13 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 <button id='battlenow' type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary1">
                   Launch Primary Modal
                 </button>
+
+<button id='emblemupdate' type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary-emblem" style='display:none'>
+                  Launch Primary Modal
+</button>
+
+	
+
 	
 <div class="modal fade" id="modal-primary2" style="display: none;">
         <div class="modal-dialog">
@@ -381,7 +402,70 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
         <!-- /.modal-dialog -->
 </div>				
 
+
+
+<div class="modal fade" id="modal-primary-emblem" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Update Emblem - <span class='hashbattleemblem'></span></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span></button>
+            </div>
+
+			
+            <div class="modal-body">
+				<table class='table table-striped table-bordered table-hover'>
+					<tr>
+						<td>Emblem Name</td>
+						<td>Effects</td>
+					</tr>
+					
+					<?php 
+					$qemblem = mysql_query_md("SELECT * FROM tbl_emblem");
+					while($qemblemrow = mysql_fetch_md_assoc($qemblem)) { 
+							$countavatar++;
+					?>
+					<tr>
+						<td>
+						<input required id='emblemdatas<?php echo ($qemblemrow['id']); ?>' class='selectchar' type='radio' name='emblemradio' value='<?php echo ($qemblemrow['id']); ?>'>
+						<label for="emblemdatas<?php echo ($qemblemrow['id']); ?>" >
+						<img style='width:25px' src='/sprites/passive/<?php echo ($qemblemrow['image']); ?>'><?php echo ucfirst($qemblemrow['title_name']); ?>
+						</label>
+						</td>
+						<td><?php echo ucfirst($qemblemrow['description']); ?></td>
+					</tr>		
+					<?php } ?>
+				</table>			
+            </div>			
+            <div id='emblembody' class="modal-body">
+            </div>			
+			<input class='form-control' type='hidden' id='emblemhash'>
+			<input class='form-control' type='hidden' id='emblemdata' value=''>
+            <div class="modal-footer justify-content-between">
+              <button id='updateemblem' type="button" onclick="saveemblem()" class="btn btn-primary">Update!</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+</div>		
+	
+
 <script>
+
+
+function saveemblem(){
+	var hash = jQuery('#emblemhash').val();
+	var emblem = jQuery('input[name="emblemradio"]:checked').val();;
+		jQuery.post("action/saveemblem.php", {hash: hash,emblem:emblem}, function(result){
+			jQuery('#sellbody').html(result);
+		
+		});		
+	
+}
+
+
 
 function savesell(){
 	var hash = jQuery('#sellhash').val();
@@ -399,11 +483,18 @@ function savesell(){
 	
 }
 
-
 function sellme(battlehash){
 		jQuery('.hashbattlesell').text(battlehash);
 		jQuery('#sellhash').val(battlehash);
 		jQuery('#sellnowtoday').trigger('click');
+	
+}
+
+function emblemme(battlehash,emblemdata){
+		jQuery('.hashbattleemblem').text(battlehash);
+		jQuery('#emblemhash').val(battlehash);
+		jQuery('#emblemdatas'+emblemdata).attr('checked','checked');
+		jQuery('#emblemupdate').trigger('click');
 	
 }
 

@@ -77,6 +77,12 @@ $field[] = array("type"=>"select","value"=>"element2","label"=>"Skill 2 Element:
 
 $field[] = array("type"=>"text","value"=>"skill3","label"=>"Skill 3 Name (Lowest Damage Output)");
 $field[] = array("type"=>"select","value"=>"element3","label"=>"Skill 3 Element:","option"=>$damages);
+
+
+
+
+
+
 ?>
 
 <div class="panel panel-default">
@@ -107,6 +113,36 @@ foreach($images as $image) {
 }
 ?>
 <br style='clear:both;'/>
+</div>
+
+<?php
+$countavatar = 0;
+$q = mysql_query_md("SELECT * FROM tbl_emblem");
+?>
+<hr>
+<H2>Select EMBLEMS</h2>
+<div class='tableborderrpg'>
+<table class='table table-striped table-bordered table-hover'>
+	<tr>
+		<td>Emblem Name</td>
+		<td>Effects</td>
+	</tr>
+	
+	<?php 
+	while($row = mysql_fetch_md_assoc($q)) { 
+			$countavatar++;
+	?>
+	<tr>
+		<td>
+		<input <?php if($countavatar==1) { echo "checked='checked'"; } ?>required id='emblem<?php echo $countavatar; ?>' class='selectchar' type='radio' name='emblem' value='<?php echo ($row['id']); ?>'>
+		<label for="emblem<?php echo $countavatar; ?>" >
+		<img src='/sprites/passive/<?php echo ($row['image']); ?>'><?php echo ucfirst($row['title_name']); ?>
+		</label>
+		</td>
+		<td><?php echo ucfirst($row['description']); ?></td>
+	</tr>		
+	<?php } ?>
+</table>
 </div>
 	   
 		 <center>
@@ -177,6 +213,26 @@ input.selectchar {
 </div>	
 
 
+<?php
+$q = mysql_query_md("SELECT * FROM tbl_emblem");
+?>
+<H2>EMBLEMS</h2>
+<p>Emblems can customize anytime.</p>
+<div class='tableborderrpg'>
+<table class='table table-striped table-bordered table-hover'>
+	<tr>
+		<td>Emblem Name</td>
+		<td>Effects</td>
+	</tr>
+	
+	<?php while($row = mysql_fetch_md_assoc($q)) { ?>
+	<tr>
+		<td><img src='/sprites/passive/<?php echo ($row['image']); ?>'><?php echo ucfirst($row['title_name']); ?></td>
+		<td><?php echo ucfirst($row['description']); ?></td>
+	</tr>		
+	<?php } ?>
+</table>
+</div>
 
 
 <H2>DAMAGES COMPUTATION</h2>

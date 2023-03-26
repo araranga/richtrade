@@ -74,8 +74,8 @@ function generatebattle($id)
     $turn = rand(1, 2);
     $logs = [];
 
-    $hp1 = $poke1["hp"];
-    $hp2 = $poke2["hp"];
+    $fullhp1 = $hp1 = $poke1["hp"];
+    $fullhp2 = $hp2 = $poke2["hp"];
 
     $winnerpoke = 0;
 
@@ -99,7 +99,7 @@ function generatebattle($id)
 
             $notes[] = "{$poke1["pokename"]} Uses {$tiraskill["title"]}({$tiraskill["typebattle"]}) to {$poke2["pokename"]}({$poke2["pokeclass"]})";
 
-            $curdamage = $tiraskill["power"] + $poke1["attack"];
+            $initialdmg = $curdamage = $tiraskill["power"] + $poke1["attack"];
 
             $enemy = explode("|", $poke2["pokeclass"]);
 
@@ -169,7 +169,9 @@ function generatebattle($id)
                 $notes[] = "Deals a $curdamage!";
                 $notes[] = $adddmg;
             }
-
+			
+			
+			//BEFORE ATTACK
             $hp2 = $hp2 - $curdamage;
 
             $datalogs = [];
@@ -180,9 +182,27 @@ function generatebattle($id)
             $datalogs["dealer"] = $poke1["id"];
             $datalogs["pokename"] = $poke1["pokename"];
             $datalogs["skillname"] = $tiraskill["title"];
-            $datalogs["element"] = $tiraskill["typebattle"];
-
+            $datalogs["element"] = $tiraskill["typebattle"];	
             $logs[] = $datalogs;
+			
+			
+			
+			
+			
+			
+			//AFTER ATTACK	
+			
+			
+	
+
+            if ($hp1 <= 0) {
+                $winnerpoke = $poke2["id"];
+                $loserpoke = $poke1["id"];
+                $winner = 1;
+                break;
+            }	
+			
+			
 
             if ($hp2 <= 0) {
                 $winnerpoke = $poke1["id"];
@@ -452,6 +472,13 @@ function loadpoke($hash)
 function loadpokev2($id)
 {
     $q = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE id='$id'");
+    $row = mysql_fetch_md_assoc($q);
+    return $row;
+}
+
+function loademblem($id)
+{
+    $q = mysql_query_md("SELECT * FROM tbl_emblem WHERE id='$id'");
     $row = mysql_fetch_md_assoc($q);
     return $row;
 }
@@ -874,7 +901,7 @@ function savebattlebot($hash, $user)
 
     $user = $poke["user"];
 
-    $rewardwin = 8;
+    $rewardwin = systemconfig("battlelimit");
 
     $current = date("Y-m-d");
 
