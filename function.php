@@ -836,7 +836,7 @@ function checkpoke($winnerpoke)
         "UPDATE tbl_accounts SET balance = balance + $rewardwin WHERE accounts_id='$userid'"
     );
 
-    $req = $poke["level"] * 5;
+    $req = $poke["level"] * 10;
 
     if ($req == $poke["exp"]) {
         pokelevelup($winnerpoke, $poke["rate"]);
