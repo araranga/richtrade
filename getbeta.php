@@ -54,7 +54,8 @@ include("function.php");
 
 <meta property="og:image" content="<?php echo $protocol . $_SERVER['HTTP_HOST']; ?>/sprites/bg/Tower1.png" /> 
 
-  
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4346027402657123"
+     crossorigin="anonymous"></script>  
 <meta name="description" content="Play and grind! Beat players and bosses! And get rewarded!!!!! Come on while its free!">
 <meta name="robots" content="index,follow">  
   <!-- Google tag (gtag.js) -->

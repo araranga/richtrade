@@ -25,6 +25,82 @@ foreach($rowxxx as $key=>$val)
 <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
 <body class="hold-transition sidebar-mini layout-fixed">
   <style>
+.battle .itemweapon {
+    display: block!important;
+}  
+.itemweapon {
+    width: 60px;
+    height: 49px;
+    position: absolute;
+    z-index: 999;
+    margin-left: -23px;
+    margin-top: 12px;
+	display:none;
+}
+
+
+.itemweapon-claw{
+    background: url(/sprites/weapon.png) 83px -207px;
+}
+.itemweapon-punch {
+
+	background:url('/sprites/weapon.png') 86px -270px;
+
+}
+
+.itemweapon-pike{
+    background:url('/sprites/weapon.png') 99px -334px;
+}
+
+.itemweapon-gun{
+   background:url('/sprites/weapon.png') 86px -140px;
+}
+
+.itemweapon-crossbow{
+
+background:url('/sprites/weapon.png') 86px -76px;
+}
+
+.itemweapon-bow{
+
+background:url('/sprites/weapon.png') 86px -14px;
+}
+
+.itemweapon-sword{
+	
+	background:url('/sprites/weapon.png') -197px -85px;
+
+}
+
+.itemweapon-staff{
+
+  background:url('/sprites/weapon.png') -197px 44px;
+
+}
+
+.itemweapon-whip{
+
+  background:url('/sprites/weapon.png') -195px 108px;
+
+}
+
+.itemweapon-axe{
+background:url('/sprites/weapon.png') -195px 174px;
+}
+
+
+.itemweapon-mace{
+background:url('/sprites/weapon.png') -197px 233px;
+}
+
+.itemweapon-dagger{
+
+background:url('/sprites/weapon.png') -198px 362px;
+}  
+  
+  
+    
+  
 .user-panel .info {
     display: inline-block;
     padding: 5px 5px 5px 10px;
@@ -389,6 +465,13 @@ setInterval(function() {
 
 <script type="text/javascript">
   
+  jQuery( document ).ready(function() {
+	 
+	 jQuery('#noemblem').trigger('click');
+	 
+ });
+ 
+ 
  jQuery( document ).ready(function() {
 	 
 	 jQuery('#nohero').trigger('click');

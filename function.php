@@ -6,6 +6,25 @@ function addeco($amount)
     );
 }
 
+
+function listweapon(){
+	
+	
+	$weapons = "sword,claw,punch,pike,gun,crossbow,bow,staff,whip,axe,mace,dagger";
+	
+	$array = array();
+	
+	foreach(explode(",",$weapons) as $d){
+		
+		$array[$d] = $d;
+		
+	}
+	
+	
+	
+	return $array;
+}
+
 function checkbeta($betakey)
 {
     $q = mysql_query_md(
@@ -57,6 +76,19 @@ function generatebattle($id)
     //preload skills
     $skill1 = loadpokeskill($poke1["hash"]);
     $skill2 = loadpokeskill($poke2["hash"]);
+	
+	
+	//preload emblem
+	$emblem1 = getEmblem($poke1['emblem']);
+	$emblem2 = getEmblem($poke2['emblem']);
+
+
+	$roundp1 = 0;
+	$roundp2 = 0;
+
+
+	$dps_regen2 = 0;
+	$dps_regen1 = 0;
 
     //preload class
     $pokeclass = [];
@@ -78,11 +110,34 @@ function generatebattle($id)
     $fullhp2 = $hp2 = $poke2["hp"];
 
     $winnerpoke = 0;
+	
+	$turn = 2;
 
     while ($winner != 1) {
         $tira++;
+		
+	
+	//freeze effective
+			if($enemy_freeze_2==1){
+				$enemy_freeze_2 = 0;
+				$roundp1++;
+				
+				$turn = 2;
+	
+			}
+			
+			if($enemy_freeze_1==1){
+				$enemy_freeze_1 = 0;
+				$roundp2++;
+				
+				$turn = 1;
+			}	
+	//
+
 
         if ($turn == 1) {
+			
+			$roundp1++;
             $random_skill = array_rand($skill1);
 
             $tiraskill = $skill1[array_rand($skill1)];
@@ -97,7 +152,7 @@ function generatebattle($id)
                 );
             }
 
-            $notes[] = "{$poke1["pokename"]} Uses {$tiraskill["title"]}({$tiraskill["typebattle"]}) to {$poke2["pokename"]}({$poke2["pokeclass"]})";
+            $initial_msg = $notes[] = "{$poke1["pokename"]} Uses {$tiraskill["title"]}({$tiraskill["typebattle"]}) to {$poke2["pokename"]}({$poke2["pokeclass"]})";
 
             $initialdmg = $curdamage = $tiraskill["power"] + $poke1["attack"];
 
@@ -170,51 +225,266 @@ function generatebattle($id)
                 $notes[] = $adddmg;
             }
 			
+
+
+
+			//BEFORE ATK
+
+			if($emblem1=='dpsatk'){		
+				
+				$dpsatk  = round($poke1['attack'] * 0.55);
+				$curdamage = $curdamage + $dpsatk;
+				$notes[] = "Fire attacks give +($dpsatk) additonal dmg! Total of ($curdamage";
+				
+				if($roundp2==4){
+					$emblem1 = '';
+				}
+			}	
+
+			if($emblem1=='dpshp'){		
+				
+				$dpsatk  = round($hp1 * 0.08);
+				$curdamage = $curdamage + $dpsatk;
+				$notes[] = "Poison attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
+				
+				if($roundp2==3){
+					$emblem1 = '';
+				}
+			}	
+	
+	
+
+			if($emblem1=='lastwill'){		
+				$lastwill_comp = ($hp1/$fullhp1) * 100;
+				if($lastwill_comp<=21){
+				$dpsatk = ($curdamage * 1.50);
+				$curdamage = $curdamage + $dpsatk;
+				$notes[] = "Last Will attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
+				
+				
+					$emblem1 = '';
+				}
+				
+			}	
+
+
+			if($emblem1=='regen'){		
+				$lastwill_comp = ($hp1/$fullhp1) * 100;
+				if($lastwill_comp<=26){
+				$dpsatk = round($fullhp1 * 0.26);
+				$hp2  = $hp1 + $dpsatk;
+				$datalogs["damage"] = 0;
+				$datalogs["notes"] = array("REGEN: +($dpsatk)!");
+				$datalogs["enemyhp"] = $hp2;
+				$datalogs["hp1"] = $hp1;
+				$datalogs["hp2"] = $hp2;
+				$datalogs["dealer"] = $poke1["id"];
+				$datalogs["pokename"] = $poke1["pokename"];
+				$datalogs["skillname"] = "REGEN(heal)";
+				$datalogs["element"] = "normal";
+				$logs[] = $datalogs;
+				$emblem1 = '';
+				}				
+			}	
+
+	
+			if($emblem1=='puredamage'){
+
+				$is_double_attack = getluck(8,100);		
+				
+				if($is_double_attack==1){
+					$curdamage = $initialdmg + 4;
+					$notes = array();
+					$notes[] = $initial_msg;
+					$notes[] = "Armor Break Activated!! Deals ($curdamage)";
+					
+				}
+
+			}
+	
 			
-			//BEFORE ATTACK
+	
+			if($emblem1=='dpsregen' && $hp2!=$fullhp2){		
+				
+				$dpsatk  = round($poke1['defense'] * 4);
+				$hp1  = $hp1 + $dpsatk;
+				$datalogs["damage"] = 0;
+				$datalogs["notes"] = array("Forest Buff heals: +($dpsatk)!");
+				$datalogs["enemyhp"] = $hp1;
+				$datalogs["hp1"] = $hp1;
+				$datalogs["hp2"] = $hp2;
+				$datalogs["dealer"] = $poke1["id"];
+				$datalogs["pokename"] = $poke1["pokename"];
+				$datalogs["skillname"] = "Forest Buff(heal)";
+				$datalogs["element"] = "normal";
+				$logs[] = $datalogs;
+
+				if($dps_regen1==4){
+					$emblem1 = '';
+				}
+			}		
+	
+	
+	
+	
+			//
+
+
             $hp2 = $hp2 - $curdamage;
-
             $datalogs = [];
-
             $datalogs["damage"] = $curdamage;
             $datalogs["notes"] = $notes;
             $datalogs["enemyhp"] = $hp2;
+			$datalogs["hp1"] = $hp1;
+			$datalogs["hp2"] = $hp2;			
             $datalogs["dealer"] = $poke1["id"];
             $datalogs["pokename"] = $poke1["pokename"];
             $datalogs["skillname"] = $tiraskill["title"];
-            $datalogs["element"] = $tiraskill["typebattle"];	
+            $datalogs["element"] = $tiraskill["typebattle"];
             $logs[] = $datalogs;
-			
-			
-			
-			
-			
-			
-			//AFTER ATTACK	
-			
-			
-	
-
-            if ($hp1 <= 0) {
-                $winnerpoke = $poke2["id"];
-                $loserpoke = $poke1["id"];
-                $winner = 1;
-                break;
-            }	
-			
-			
-
             if ($hp2 <= 0) {
+                $winner = 1;
                 $winnerpoke = $poke1["id"];
                 $loserpoke = $poke2["id"];
-                $winner = 1;
                 break;
             }
+			
+			
+			
+			
+			
+			//AFTER ATK
+			
+			
+			
+			if($emblem2=='reflect'){
+
+				$is_double_attack = getluck(8,100);		
+				
+				if($is_double_attack==1){
+					$notes = array();
+					$notes[] = "Reflect Shield!! Deals ($curdamage)";
+				
+					$hp1 = $hp1 - $curdamage;
+					$datalogs = [];
+					$datalogs["damage"] = $curdamage;
+					$datalogs["notes"] = $notes;
+					$datalogs["enemyhp"] = $hp1;
+					$datalogs["hp1"] = $hp1;
+					$datalogs["hp2"] = $hp2;			
+					$datalogs["dealer"] = $poke2["id"];
+					$datalogs["pokename"] = $poke2["pokename"];
+					$datalogs["skillname"] = "Reflect Shield!";
+					$datalogs["element"] = "normal";
+					$logs[] = $datalogs;
+					if ($hp1 <= 0) {
+						$winner = 1;
+						$winnerpoke = $poke2["id"];
+						$loserpoke = $poke1["id"];
+						break;
+					}
+				
+				}
+
+			}
+				
+			
+			
+			if($emblem1=='freezeturn_cd'){
+				
+				if($roundp1==3){
+					$emblem1='freezeturn';
+				}
+			}
+			if($emblem1=='freezeturn'){
+				
+				$is_double_attack = getluck(10,100);		
+				
+				if($is_double_attack==1){
+
+
+					$enemy_freeze_1 = 1;	
+					$emblem1 = 'freezeturn_cd';		
+					$datalogs["damage"] = 0;
+					$datalogs["notes"] = array("Freeze Turn activated!");
+					$datalogs["enemyhp"] = $hp1;
+					$datalogs["hp1"] = $hp1;
+					$datalogs["hp2"] = $hp2;
+					$datalogs["dealer"] = $poke1["id"];
+					$datalogs["pokename"] = $poke1["pokename"];
+					$datalogs["skillname"] = "FREEZE!!!";
+					$datalogs["element"] = "normal";
+					$logs[] = $datalogs;					
+					
+					
+					
+					
+				}					
+				
+			}
+			
+			
+			if($emblem1=='doubleattack'){
+
+				$is_double_attack = getluck(8,100);		
+				
+				if($is_double_attack==1){
+				$notes = array();
+				$notes[] = "Double Attack activated! Additional($curdamage)!";
+				
+				$hp2 = $hp2 - $curdamage;
+				$datalogs = [];
+				$datalogs["damage"] = $curdamage;
+				$datalogs["notes"] = $notes;
+				$datalogs["enemyhp"] = $hp2;
+				$datalogs["hp1"] = $hp1;
+				$datalogs["hp2"] = $hp2;				
+				$datalogs["dealer"] = $poke1["id"];
+				$datalogs["pokename"] = $poke1["pokename"];
+				$datalogs["skillname"] = "Double Attack!";
+				$datalogs["element"] = "normal";
+				$logs[] = $datalogs;
+				if ($hp2 <= 0) {
+					$winner = 1;
+					$winnerpoke = $poke1["id"];
+					$loserpoke = $poke2["id"];
+
+					break;
+				}				
+				
+				
+				}	
+				
+			}
+			//
+			
 
             $turn = 2;
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         if ($turn == 2) {
+			$roundp2++;
+		
+			
+			
+			
             $random_skill = array_rand($skill2);
 
             $tiraskill = $skill2[array_rand($skill2)];
@@ -229,9 +499,9 @@ function generatebattle($id)
                 );
             }
 
-            $notes[] = "{$poke2["pokename"]} Uses {$tiraskill["title"]}({$tiraskill["typebattle"]}) to {$poke1["pokename"]}({$poke1["pokeclass"]})";
+            $initial_msg = $notes[] = "{$poke2["pokename"]} Uses {$tiraskill["title"]}({$tiraskill["typebattle"]}) to {$poke1["pokename"]}({$poke1["pokeclass"]})";
 
-            $curdamage = $tiraskill["power"] + $poke2["attack"];
+            $initialdmg = $curdamage = $tiraskill["power"] + $poke2["attack"];
 
             if ($is_crit) {
                 $curdamage = $curdamage * 2;
@@ -302,20 +572,120 @@ function generatebattle($id)
                 $notes[] = $adddmg;
             }
 
+			//BEFORE ATK
+
+			if($emblem2=='dpsatk'){		
+				
+				$dpsatk  = round($poke2['attack'] * 0.55);
+				$curdamage = $curdamage + $dpsatk;
+				$notes[] = "Fire attacks give +($dpsatk) additonal dmg! Total of ($curdamage";
+				
+				if($roundp2==4){
+					$emblem2 = '';
+				}
+			}	
+
+			if($emblem2=='dpshp'){		
+				
+				$dpsatk  = round($hp1 * 0.08);
+				$curdamage = $curdamage + $dpsatk;
+				$notes[] = "Poison attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
+				
+				if($roundp2==3){
+					$emblem2 = '';
+				}
+			}	
+	
+	
+
+			if($emblem2=='lastwill'){		
+				$lastwill_comp = ($hp2/$fullhp2) * 100;
+				if($lastwill_comp<=21){
+				$dpsatk = ($curdamage * 1.50);
+				$curdamage = $curdamage + $dpsatk;
+				$notes[] = "Last Will attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
+				
+				
+					$emblem2 = '';
+				}
+				
+			}	
+
+
+			if($emblem2=='regen'){		
+				$lastwill_comp = ($hp2/$fullhp2) * 100;
+				if($lastwill_comp<=26){
+				$dpsatk = round($fullhp2 * 0.26);
+				$hp2  = $hp2 + $dpsatk;
+				$datalogs["damage"] = 0;
+				$datalogs["notes"] = array("REGEN: +($dpsatk)!");
+				$datalogs["enemyhp"] = $hp1;
+				$datalogs["hp1"] = $hp1;
+				$datalogs["hp2"] = $hp2;
+				$datalogs["dealer"] = $poke2["id"];
+				$datalogs["pokename"] = $poke2["pokename"];
+				$datalogs["skillname"] = "REGEN(heal)";
+				$datalogs["element"] = "normal";
+				$logs[] = $datalogs;
+				$emblem2 = '';
+				}				
+			}	
+
+	
+			if($emblem2=='puredamage'){
+
+				$is_double_attack = getluck(8,100);		
+				
+				if($is_double_attack==1){
+					$curdamage = $initialdmg + 4;
+					$notes = array();
+					$notes[] = $initial_msg;
+					$notes[] = "Armor Break Activated!! Deals ($curdamage)";
+					
+				}
+
+			}
+	
+			
+	
+			if($emblem2=='dpsregen' && $hp2!=$fullhp2){		
+				
+				$dpsatk  = round($poke2['defense'] * 4);
+				$hp2  = $hp2 + $dpsatk;
+				$datalogs["damage"] = 0;
+				$datalogs["notes"] = array("Forest Buff heals: +($dpsatk)!");
+				$datalogs["enemyhp"] = $hp1;
+				$datalogs["hp1"] = $hp1;
+				$datalogs["hp2"] = $hp2;
+				$datalogs["dealer"] = $poke2["id"];
+				$datalogs["pokename"] = $poke2["pokename"];
+				$datalogs["skillname"] = "Forest Buff(heal)";
+				$datalogs["element"] = "normal";
+				$logs[] = $datalogs;
+
+				if($dps_regen2==4){
+					$emblem2 = '';
+				}
+			}		
+	
+	
+	
+	
+			//
+
+
             $hp1 = $hp1 - $curdamage;
-
             $datalogs = [];
-
             $datalogs["damage"] = $curdamage;
             $datalogs["notes"] = $notes;
             $datalogs["enemyhp"] = $hp1;
+			$datalogs["hp1"] = $hp1;
+			$datalogs["hp2"] = $hp2;			
             $datalogs["dealer"] = $poke2["id"];
             $datalogs["pokename"] = $poke2["pokename"];
             $datalogs["skillname"] = $tiraskill["title"];
             $datalogs["element"] = $tiraskill["typebattle"];
-
             $logs[] = $datalogs;
-
             if ($hp1 <= 0) {
                 $winner = 1;
                 $winnerpoke = $poke2["id"];
@@ -323,6 +693,115 @@ function generatebattle($id)
 
                 break;
             }
+			
+			
+			
+			
+			
+			//AFTER ATK
+			
+			
+			
+			if($emblem1=='reflect'){
+
+				$is_double_attack = getluck(8,100);		
+				
+				if($is_double_attack==1){
+					$notes = array();
+					$notes[] = "Reflect Shield!! Deals ($curdamage)";
+				
+					$hp2 = $hp2 - $curdamage;
+					$datalogs = [];
+					$datalogs["damage"] = $curdamage;
+					$datalogs["notes"] = $notes;
+					$datalogs["enemyhp"] = $hp2;
+					$datalogs["hp1"] = $hp1;
+					$datalogs["hp2"] = $hp2;			
+					$datalogs["dealer"] = $poke1["id"];
+					$datalogs["pokename"] = $poke1["pokename"];
+					$datalogs["skillname"] = "Reflect Shield!";
+					$datalogs["element"] = "normal";
+					$logs[] = $datalogs;
+					if ($hp2 <= 0) {
+						$winner = 1;
+						$winnerpoke = $poke1["id"];
+						$loserpoke = $poke2["id"];
+						break;
+					}
+				
+				}
+
+			}
+				
+			
+			
+			if($emblem2=='freezeturn_cd'){
+				
+				if($roundp2==3){
+					$emblem2='freezeturn';
+				}
+			}
+			if($emblem2=='freezeturn'){
+				
+				$is_double_attack = getluck(10,100);		
+				
+				if($is_double_attack==1){
+
+
+					$enemy_freeze_2 = 1;	
+					$emblem2 = 'freezeturn_cd';		
+					$datalogs["damage"] = 0;
+					$datalogs["notes"] = array("Freeze Turn activated!");
+					$datalogs["enemyhp"] = $hp1;
+					$datalogs["hp1"] = $hp1;
+					$datalogs["hp2"] = $hp2;
+					$datalogs["dealer"] = $poke2["id"];
+					$datalogs["pokename"] = $poke2["pokename"];
+					$datalogs["skillname"] = "FREEZE!!!";
+					$datalogs["element"] = "normal";
+					$logs[] = $datalogs;					
+					
+					
+					
+					
+				}					
+				
+			}
+			
+			
+			if($emblem2=='doubleattack'){
+
+				$is_double_attack = getluck(8,100);		
+				
+				if($is_double_attack==1){
+				$notes = array();
+				$notes[] = "Double Attack activated! Additional($curdamage)!";
+				
+				$hp1 = $hp1 - $curdamage;
+				$datalogs = [];
+				$datalogs["damage"] = $curdamage;
+				$datalogs["notes"] = $notes;
+				$datalogs["enemyhp"] = $hp1;
+				$datalogs["hp1"] = $hp1;
+				$datalogs["hp2"] = $hp2;				
+				$datalogs["dealer"] = $poke2["id"];
+				$datalogs["pokename"] = $poke2["pokename"];
+				$datalogs["skillname"] = "Double Attack!";
+				$datalogs["element"] = "normal";
+				$logs[] = $datalogs;
+				if ($hp1 <= 0) {
+					$winner = 1;
+					$winnerpoke = $poke2["id"];
+					$loserpoke = $poke1["id"];
+
+					break;
+				}				
+				
+				
+				}	
+				
+			}
+			//
 
             $turn = 1;
         }
@@ -482,6 +961,21 @@ function loademblem($id)
     $row = mysql_fetch_md_assoc($q);
     return $row;
 }
+
+
+function getEmblem($id)
+{
+	if(empty($id)){
+		return "doubleattack";
+	}
+    $q = mysql_query_md("SELECT * FROM tbl_emblem WHERE id='$id'");
+    $row = mysql_fetch_md_assoc($q);
+	$exp = explode(".",$row['image']);
+    return $exp[0];
+}
+
+
+
 
 function getluck($chance, $odds)
 {

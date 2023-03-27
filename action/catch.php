@@ -54,7 +54,7 @@ $field[] = array("type"=>"text","value"=>"pokename","label"=>"Warrior Name");
 $field[] = array("type"=>"password","value"=>"password","label"=>"Please enter password:");
 //$field[] = array("type"=>"number","value"=>"withdraw","label"=>"Number of Draw:");
 
-
+$field[] = array("type"=>"select","value"=>"weapon","label"=>"Weapon (this is for aethestic):","option"=>listweapon());
 
 
 

@@ -204,6 +204,8 @@ foreach($rowxxx as $key=>$val)
 <meta name="description" content="Play and grind! Beat players and bosses! And get rewarded!!!!! Come on while its free!">
 <meta name="robots" content="index,follow">   
   <!-- Google tag (gtag.js) -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4346027402657123"
+     crossorigin="anonymous"></script>  
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-L70CN7PG1X"></script>
 <script>
   window.dataLayer = window.dataLayer || [];

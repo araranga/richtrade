@@ -178,6 +178,57 @@ $pokemons = mysql_num_rows_md(mysql_query_md("SELECT * FROM tbl_pokemon_users WH
         <!-- /.modal-dialog -->
 </div>	
 <?php } ?>
+
+
+
+
+
+
+
+
+
+
+
+<?php
+
+$noemblems = mysql_num_rows_md(mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$user' AND emblem IS NULL AND (is_market IS NULL OR is_market = '')"));
+
+?>
+
+<?php if($noemblems>0) { ?>
+<button id='noemblem' type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-noemblem" style='display:none'>
+                  Launch Primary Modal
+</button>
+	
+
+<div class="modal fade" id="modal-noemblem" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span></button>
+            </div>			
+            <div id='battlebodyhero' class="modal-body">
+              <div class='kaira' style='float:left; background-position:287px 144px!important;'></div>
+			  <p>Hi I'm <strong>Julia</strong>,
+			  <br>The new patch added some battle mechanism which <strong>Emblem</strong>.
+			   Add the emblem of each of your warrior in <strong>My Fighters > Click Update Emblem on each Warrior available</strong>. This emblem system will help you win more on some battles. 
+			   Good luck!
+			  
+			  
+			  </p>
+            </div>
+
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+</div>	
+<?php } ?>
+
+
+
+
 <style>
 .kaira{
     background: url(/sprites/npc/1.png) 0px 143px;

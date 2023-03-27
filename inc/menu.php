@@ -140,6 +140,14 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="index.php?pages=emblem" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Emblem</p>
+                </a>
+              </li>			  
+			  
+			  
+              <li class="nav-item">
                 <a href="index.php?pages=withdraw" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Withdrawals</p>

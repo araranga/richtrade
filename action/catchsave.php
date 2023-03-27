@@ -126,13 +126,14 @@ while($x<=ceil($_POST['withdraw']))
 	$back = ($_POST['avatar']);
 	$main = ($_POST['avatar']);
 	$emblem = ($_POST['emblem']);
+	$weapon = ($_POST['weapon']);
 
 		
 		$pokeclassfin = $_POST['avatar_class'];
 		
 
 
-$pokeadd = "INSERT INTO tbl_pokemon_users SET emblem='$emblem',user='$user',pokemon='$pokeid',attack='$attack',defense='$defense',hp='$hp',speed='$speed',critical='$critical',accuracy='$accuracy',level=1,rate='$rate',front='$front',back='$back',main='$main',pokename='$pokename',pokeclass='$pokeclassfin',hash='$hash'";
+$pokeadd = "INSERT INTO tbl_pokemon_users SET weapon='$weapon',emblem='$emblem',user='$user',pokemon='$pokeid',attack='$attack',defense='$defense',hp='$hp',speed='$speed',critical='$critical',accuracy='$accuracy',level=1,rate='$rate',front='$front',back='$back',main='$main',pokename='$pokename',pokeclass='$pokeclassfin',hash='$hash'";
 mysql_query_md($pokeadd);
 	
 

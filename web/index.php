@@ -48,6 +48,10 @@ $CurPageURL = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     <meta name="msapplication-TileImage" content="../fav/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <!-- Google tag (gtag.js) -->
+	
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4346027402657123"
+     crossorigin="anonymous"></script>	
+	
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L70CN7PG1X"></script>
     <script>
       window.dataLayer = window.dataLayer || [];

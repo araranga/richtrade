@@ -501,21 +501,36 @@ font-size: 15px;
    </section>
    <br style='clear:both;'/>
 </section>
+<?php
 
+   if(empty($p1['weapon'])){
+	   
+	  $p1['weapon'] =  array_rand(listweapon(),1);
+   }
+
+   if(empty($p2['weapon'])){
+	   
+	  $p2['weapon'] =  array_rand(listweapon(),1);
+   }
+?>
 		 <div class='rpgcov rpg2'>
 		 
 		<div class='herocover'>
 		 <div id='heroeffs'>
 		 
 		 </div>
-		 <div id='userhero<?php echo $p1['id']; ?>' class='heroc mainchar flipme rpgleft' style='background: url(/actors/<?php echo $p1['front']; ?>) 0px 0px;'></div>
+		 <div id='userhero<?php echo $p1['id']; ?>' class='heroc mainchar flipme rpgleft' style='background: url(/actors/<?php echo $p1['front']; ?>) 0px 0px;'>
+			<div class='itemweapon itemweapon-<?php echo $p1['weapon']; ?>'></div>
+		 </div>
         
 		</div>
 
 		<div class='enemycover'>
 		  <div id='enemyeffs'>
 		  </div>
-		 <div id='userhero<?php echo $p2['id']; ?>' class='enemyc mainchar rpgleft' style='background: url(/actors/<?php echo $p2['front']; ?>) 0px 0px;'></div>
+		 <div id='userhero<?php echo $p2['id']; ?>' class='enemyc mainchar rpgleft' style='background: url(/actors/<?php echo $p2['front']; ?>) 0px 0px;'>
+			<div class='itemweapon itemweapon-<?php echo $p2['weapon']; ?>'></div>
+		</div>
 		</div>
 		 
 
@@ -624,6 +639,14 @@ var datadamage = jQuery(abc).attr('data-damage');
 if (elementdata === undefined) {
 	var elementdata = 'na';
 }
+
+
+var hp1 = jQuery(abc).attr('hp1');
+var hp2 = jQuery(abc).attr('hp2');
+
+
+
+
 var is_dodge = 0;
 if(datadamage=='0'){
 	datadamage = 'Dodge!!';
@@ -662,6 +685,19 @@ if(datadamage=='0'){
 				
 				jQuery('#progressp1').attr('value',enemyhp);
 				jQuery('#progressp1txt').text(enemyhp);	
+				
+				if (hp1 === undefined) {
+		
+	
+				
+				}else{
+
+				jQuery('#progressp1').attr('value',hp1);
+				jQuery('#progressp1txt').text(hp1);		
+				jQuery('#progressp2').attr('value',hp2);
+				jQuery('#progressp2txt').text(hp2);						
+					
+				}
 
 				
 			  }else{
@@ -674,10 +710,21 @@ if(datadamage=='0'){
 				}else{
 					$("#userhero<?php echo $p1['id']; ?>").addClass('pain');
 				}				
-				
-				
 				jQuery('#progressp2').attr('value',enemyhp);
-				jQuery('#progressp2txt').text(enemyhp);
+				jQuery('#progressp2txt').text(enemyhp);					
+				
+				if (hp1 === undefined) {
+		
+	
+				
+				}else{
+
+				jQuery('#progressp1').attr('value',hp1);
+				jQuery('#progressp1txt').text(hp1);		
+				jQuery('#progressp2').attr('value',hp2);
+				jQuery('#progressp2txt').text(hp2);						
+					
+				}
 				
 				
 				
@@ -727,7 +774,7 @@ if(datadamage=='0'){
 		}
 	?>
 	
-	<div id='blogs<?php echo $logc ?>' class='btllogs' data-skill='<?php echo $a['skillname']; ?>' data-element='<?php echo $a['element']; ?>' data-round='<?php echo $round - 1; ?>' data-turn='<?php echo $turn; ?>' data-dealer='<?php echo $a['dealer']; ?>' data-enemyhp='<?php echo $a['enemyhp']; ?>' data-damage='<?php echo $a['damage']; ?>' data-notes='<?php for ($x = 1; $x <= $round; $x++) { echo ">>>"; } ?><?php echo htmlentities(implode(" , ",$a['notes'])); ?>'>
+	<div id='blogs<?php echo $logc ?>' class='btllogs' hp1="<?php echo $a['hp1']; ?>" hp2="<?php echo $a['hp2']; ?>" data-skill='<?php echo $a['skillname']; ?>' data-element='<?php echo $a['element']; ?>' data-round='<?php echo $round - 1; ?>' data-turn='<?php echo $turn; ?>' data-dealer='<?php echo $a['dealer']; ?>' data-enemyhp='<?php echo $a['enemyhp']; ?>' data-damage='<?php echo $a['damage']; ?>' data-notes='<?php for ($x = 1; $x <= $round; $x++) { echo ">>>"; } ?><?php echo htmlentities(implode(" , ",$a['notes'])); ?>'>
 	Turn <?php echo $logc ?>:
 	</div>
 	<?php
