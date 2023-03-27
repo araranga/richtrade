@@ -5,8 +5,24 @@ require_once("./function.php");
 $id = $_GET['id'];
 $query = "SELECT * FROM tbl_battle WHERE id ='$id'";
 $q = mysql_query_md($query);
+
+
+
+
 $count = mysql_num_rows_md($q);
 $row = mysql_fetch_md_assoc($q);
+$logs = $row['logs'];
+
+$checkold =  mysql_num_rows_md(mysql_query_md("SELECT * FROM tbl_battle WHERE id ='$id' AND logs LIKE '%hp1%'"));
+if(empty($checkold))
+{
+?>
+<script>
+window.location = '/index.php?pages=pokebattleview-old&id=<?php echo $id; ?>'
+</script>
+<?php
+}
+
 
 
 $logs = json_decode($row['logs'],true);

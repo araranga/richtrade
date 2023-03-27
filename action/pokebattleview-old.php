@@ -76,8 +76,66 @@ $champion_id = $row['winner'];
 ?>
 
 
-<h2>Battle View ID#: <?php echo md5($_GET['id']); ?></h2>
+<h2 style='word-break: break-all;'>Battle View ID#: <p><?php echo md5($_GET['id']); ?></p></h2>
 <style>
+
+@media screen and (max-width: 600px) {
+.heroffsdmg{
+	font-size:8px!important;
+}
+#heroeffs {
+  margin-left:-28px!important;
+
+}
+.effectsrpg {
+    width: 25px;
+    height: 25px;
+}
+#enemyeffs {
+  margin-left:117px!important;
+}
+
+
+.stadium {
+    width: 289px!important;
+    padding: 0px;
+	background-position: 417px 427px!important;
+}
+.char h2 {
+    font-size: 12px;
+}
+
+.char .data p {
+    font-size:10px;
+}
+
+
+#dimScreen {
+        width: 288px!important;
+}
+
+.btmsg {
+
+    margin-left: -40px!important;
+	
+}
+
+.prebattle {
+
+    padding-top: 112px!important;
+    margin-left: 22px!important;
+}
+
+}
+
+
+
+.stadium{
+width: 892px;
+padding: 25px;
+    overflow: hidden;
+	max-height:340px;
+}
 body {
   font-family: "helvetica neue", helvetica, arial, sans-serif;
   font-size: 16px;
@@ -170,9 +228,19 @@ strong {
 .char-container:hover h2 {
   font-size: 1.2em;
 }
-
+<?php
+$dirname = "sprites/arena/";
+$images = glob($dirname."*.png");
+$countavatar = 0;
+foreach($images as $image) {
+    $finalimg = str_replace($dirname,"",$image);
+	$character[$finalimg] = $finalimg;
+}
+?>	
 .stadium {
-  background: #7DCD79;
+  background: url('/sprites/arena/<?php echo array_rand($character); ?>') 175px 521px;
+ 
+    border-radius: 24px;
 }
 .stadium > section {
   display: block;
@@ -180,10 +248,11 @@ strong {
 }
 .stadium > section .char {
   height: 175px;
-  position: relative;
+  width:100%;
+
 }
 .stadium > section .char > * {
-  position: absolute;
+
   text-transform: capitalize;
 }
 .stadium > section .char img {
@@ -191,28 +260,17 @@ strong {
 }
 .stadium > section .char .data {
   background: #CCC;
-  width: 20vw;
+  width: 95%;
   padding: 15px 2%;
   box-sizing: border-box;
   top: 25px;
+  border-radius: 24px;
 }
 .stadium > section .char .data progress {
   width: 100%;
 }
 .stadium > section .char .data p {
   text-align: right;
-}
-.stadium .enemy img {
-  right: 15vw;
-}
-.stadium .enemy .data {
-  left: 15vw;
-}
-.stadium .hero img {
-  left: 15vw;
-}
-.stadium .hero .data {
-  right: 15vw;
 }
 
 .attack-list {
@@ -311,9 +369,10 @@ div#battlelogs {
     background: #b7b1b1;
     padding: 10px;
     height: 121px;
-    margin-left: 611px;
+    margin-left: 248px;
     text-align: center;
     padding-top: 39px;
+    margin-top: 18px;
 }
 
 .fadebattle {
@@ -321,25 +380,69 @@ div#battlelogs {
 }
 
 #dimScreen {
-    width: 100%;
-    height: 100%;
-    background:rgba(0,0,0,0.5); 
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10013123; /* Just to keep it at the very top */
+    width: 915px;
+    height: 351px;
+    padding: 20px;
+    position: absolute;
+    z-index: 999;
+    background: rgba(0,0,0,0.5);
 }
 
-.prebattle{
-	    margin: 0 auto;
-    width: 250px;
+.prebattle {
+    margin: 0 auto;
+    width: 243px;
     font-size: 51px;
     color: white;
-    padding-top: 14%;	
+    padding-top: 118px;
 }
 
 #showfight{
 	font-size:30px;
+}
+
+.rpg{
+    float: left;
+    width: 50%;
+    text-align: center;	
+}
+
+.rpg2 {
+    width: 148px;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 55px;
+}
+.rpgleft{
+	float:left;
+}
+.rpgright{
+	float:right;
+}
+
+
+
+.effectsrpg {
+    width: 25px;
+    height: 25px;
+}
+
+#heroeffs {
+  margin-left:-67px;margin-top:-30px;
+  position:absolute;
+
+}
+
+#enemyeffs {
+  margin-left:152px;margin-top:-30px;
+  position:absolute;
+
+}
+.heroffsdmg{
+font-size: 15px;
+    color: red;
+    background-color: black;
+    font-weight: 700;
+    padding: 3px;
 }
 </style>
 
@@ -353,37 +456,17 @@ div#battlelogs {
 
 
 <section class="stadium">
-
-
-   <section class="enemy" style="padding: 70px 0px;">
-      <section class="char">
-
-          <div id='userhero<?php echo $p2['id']; ?>' class='mainchar' style='background: url(/actors/<?php echo $p2['front']; ?>) 0px 0px;'></div>
-         <aside class="data">
-            <h2>
-			<?php echo $p2['pokename']; ?>
-			</h2>
-			<p><?php $x2= loadmember($p2['user']); echo $x2['fullname'];?></p>
-            <div>
-               <progress id='progressp1' max="<?php echo $p2['hp']; ?>" value="<?php echo $p2['hp']; ?>"></progress>
-               <p><span id='progressp1txt'><?php echo $p2['hp']; ?></span>/<?php echo $p2['hp']; ?></p>
-            </div>
-         </aside>
-      </section>
-   </section>
-
-
 <div class='battlemsg'>
 	<div class='btmsg'><h2><?php echo $winmsg; ?></h2></div>
 </div>
 
 
-
-    <section class="hero" style="padding: 70px 0px;">
+<section>
+    <section class="hero rpg">
       <section class="char">
 
-          <div id='userhero<?php echo $p1['id']; ?>' class='mainchar flipme' style='background: url(/actors/<?php echo $p1['front']; ?>) 0px 0px;'></div>
-         <aside class="data">
+          
+         <aside class="data rpgleft">
             <h2>
 			<?php echo $p1['pokename']; ?>		
 			</h2>
@@ -394,7 +477,53 @@ div#battlelogs {
             </div>
          </aside>
       </section>
-   </section> 	  
+   </section> 
+
+
+
+
+   <section class="enemy rpg">
+      <section class="char">
+
+          
+         <aside class="data rpgleft">
+            <h2>
+			<?php echo $p2['pokename']; ?>
+			</h2>
+			<p><?php $x2= loadmember($p2['user']); echo $x2['fullname'];?></p>
+            <div>
+               <progress id='progressp1' max="<?php echo $p2['hp']; ?>" value="<?php echo $p2['hp']; ?>"></progress>
+               <p><span id='progressp1txt'><?php echo $p2['hp']; ?></span>/<?php echo $p2['hp']; ?></p>
+            </div>
+         </aside>
+
+      </section>
+   </section>
+   <br style='clear:both;'/>
+</section>
+
+		 <div class='rpgcov rpg2'>
+		 
+		<div class='herocover'>
+		 <div id='heroeffs'>
+		 
+		 </div>
+		 <div id='userhero<?php echo $p1['id']; ?>' class='heroc mainchar flipme rpgleft' style='background: url(/actors/<?php echo $p1['front']; ?>) 0px 0px;'></div>
+        
+		</div>
+
+		<div class='enemycover'>
+		  <div id='enemyeffs'>
+		  </div>
+		 <div id='userhero<?php echo $p2['id']; ?>' class='enemyc mainchar rpgleft' style='background: url(/actors/<?php echo $p2['front']; ?>) 0px 0px;'></div>
+		</div>
+		 
+
+		 <br style='clear:both;'/>
+		 </div>
+
+
+	  
 	  
 
    	  
@@ -406,10 +535,8 @@ div#battlelogs {
 
 <script>
 function p2atk(){
-  $(".enemy .char .mainchar").removeClass('pain');
-  $(".hero .char .mainchar").removeClass('battle');  
-  $(".enemy .char .mainchar").addClass('battle');	
-  $(".enemy .char .mainchar").animate(
+  $("#userhero<?php echo $p2['id']; ?>").addClass('battle');	
+  $("#userhero<?php echo $p2['id']; ?>").animate(
     {
       "margin-right": "-30px",
       "margin-top": "-10px"
@@ -417,7 +544,7 @@ function p2atk(){
     50,
     "swing"
   );
-  $(".enemy .char .mainchar").animate(
+  $("#userhero<?php echo $p2['id']; ?>").animate(
     {
       "margin-right": "30px",
       "margin-top": "10px"
@@ -425,7 +552,7 @@ function p2atk(){
     50,
     "swing"
   );
-  $(".enemy .char .mainchar").animate(
+  $("#userhero<?php echo $p2['id']; ?>").animate(
     {
       "margin-right": "0px",
       "margin-top": "0px"
@@ -434,15 +561,12 @@ function p2atk(){
     "swing"
   );	
   
- $(".hero .char .mainchar").addClass('pain');
 }
 
 
 function p1atk(){
-  $(".hero .char .mainchar").removeClass('pain');
-  $(".enemy .char .mainchar").removeClass('battle');  
-  $(".hero .char .mainchar").addClass('battle');
-    $(".hero .char .mainchar").animate(
+  $("#userhero<?php echo $p1['id']; ?>").addClass('battle');
+    $("#userhero<?php echo $p1['id']; ?>").animate(
       {
         "margin-left": "-30px",
         "margin-top": "10px"
@@ -450,7 +574,7 @@ function p1atk(){
       50,
       "swing"
     );
-    $(".hero .char .mainchar").animate(
+    $("#userhero<?php echo $p1['id']; ?>").animate(
       {
         "margin-left": "30px",
         "margin-top": "-10px"
@@ -458,7 +582,7 @@ function p1atk(){
       50,
       "swing"
     );
-    $(".hero .char .mainchar").animate(
+    $("#userhero<?php echo $p1['id']; ?>").animate(
       {
         "margin-left": "0px",
         "margin-top": "0px"
@@ -466,14 +590,15 @@ function p1atk(){
       50,
       "swing"
     );	
-	
-	$(".enemy .char .mainchar").addClass('pain');
+
 	
 }
-
 function showfight(){
+	
 	jQuery('#showfight').hide();
 	jQuery('#dimScreen').hide();
+
+
 	$( ".btllogs" ).each(function( index ) {
 		setTimeout(function(){
 			  var abc = "#blogs"+(index+1);
@@ -484,18 +609,78 @@ function showfight(){
 			  var dataturn = jQuery(abc).attr('data-turn');
 			  var notes = jQuery(abc).attr('data-notes');
 		      console.log(jQuery(abc).text());
-			jQuery('#battlelogs').append("<br> Round"+jQuery(abc).attr('data-round')+" --"+notes);
+			  jQuery('#battlelogs').append("<br> Round"+jQuery(abc).attr('data-round')+" --"+notes);
 			  
-			  
-			  if(turn==1){
-				  		  
-				p1atk(); 
+			  jQuery('#heroeffs').html('');
+			  jQuery('#enemyeffs').html('');
+//<span class='heroffsdmg'></span>	
+
+//		  
+
+var skillname = jQuery(abc).attr('data-skill');
+var elementdata = jQuery(abc).attr('data-element');
+var datadamage = jQuery(abc).attr('data-damage');
+
+if (elementdata === undefined) {
+	var elementdata = 'na';
+}
+var is_dodge = 0;
+if(datadamage=='0'){
+	datadamage = 'Dodge!!';
+	is_dodge = 1;
+}
+
+  $("#userhero<?php echo $p1['id']; ?>").attr('class','heroc mainchar flipme rpgleft');
+  $("#userhero<?php echo $p2['id']; ?>").attr('class','enemyc mainchar rpgleft'); 
+	
+				var imageele = '';
+				if(elementdata!='na'){
+					imageele = "<img src='/sprites/type/"+elementdata+".png' class='effectsrpg'>";
+				}
+				
+	
+			  if(dealer=='<?php echo $p1['id']; ?>'){
+				  
+				// 		
+
+				
+			    jQuery('#heroeffs').html("<span class='heroffsdmg'>"+imageele+skillname+"</span>");
+				
+				jQuery('#enemyeffs').html("<span class='heroffsdmg'> -"+datadamage+"</span>");  
+                   
+				p1atk();
+ 				if(is_dodge==1){
+					$("#userhero<?php echo $p2['id']; ?>").addClass('dodge');
+				}else{
+					$("#userhero<?php echo $p2['id']; ?>").addClass('pain');
+				}					
+				
+				
+				
+				
+				
+				
 				jQuery('#progressp1').attr('value',enemyhp);
-				jQuery('#progressp1txt').text(enemyhp);				
+				jQuery('#progressp1txt').text(enemyhp);	
+
+				
 			  }else{
+				  
 				p2atk(); 
+				jQuery('#enemyeffs').html("<span class='heroffsdmg'>"+imageele+skillname+"</span>"); 
+                jQuery('#heroeffs').html("<span class='heroffsdmg'> -"+datadamage+"</span>");
+ 				if(is_dodge==1){
+					$("#userhero<?php echo $p1['id']; ?>").addClass('dodge');
+				}else{
+					$("#userhero<?php echo $p1['id']; ?>").addClass('pain');
+				}				
+				
+				
 				jQuery('#progressp2').attr('value',enemyhp);
 				jQuery('#progressp2txt').text(enemyhp);
+				
+				
+				
 			  }
 		},2000 * (index+1)); 	  	  	    	    
 	});	
@@ -503,9 +688,11 @@ function showfight(){
 		jQuery('.battlemsg').fadeIn();
 		jQuery('.hero').addClass('fadebattle');
 		jQuery('.enemy').addClass('fadebattle');
-		
-		jQuery('#userhero<?php echo $loser_id; ?>').removeClass('pain').removeClass('battle').addClass('death');
-		jQuery('#userhero<?php echo $champion_id; ?>').removeClass('pain').removeClass('battle').addClass('win');
+		  $("#userhero<?php echo $p1['id']; ?>").attr('class','heroc mainchar flipme rpgleft');
+		  $("#userhero<?php echo $p2['id']; ?>").attr('class','enemyc mainchar rpgleft'); 		
+		jQuery('#userhero<?php echo $loser_id; ?>').addClass('death');
+		jQuery('#userhero<?php echo $champion_id; ?>').addClass('win');
+
 	},2200 * (jQuery('.btllogs').length));
 	
 }
@@ -535,10 +722,12 @@ function showfight(){
 		$turntime++;
 	
 	
-		
+		if(empty($a['element'])){
+			$a['element'] = 'na';
+		}
 	?>
 	
-	<div id='blogs<?php echo $logc ?>' class='btllogs' data-round='<?php echo $round - 1; ?>' data-turn='<?php echo $turn; ?>' data-dealer='<?php echo $a['dealer']; ?>' data-enemyhp='<?php echo $a['enemyhp']; ?>' data-damage='<?php echo $a['damage']; ?>' data-notes='<?php for ($x = 1; $x <= $round; $x++) { echo ">>>"; } ?><?php echo htmlentities(implode(" , ",$a['notes'])); ?>'>
+	<div id='blogs<?php echo $logc ?>' class='btllogs' data-skill='<?php echo $a['skillname']; ?>' data-element='<?php echo $a['element']; ?>' data-round='<?php echo $round - 1; ?>' data-turn='<?php echo $turn; ?>' data-dealer='<?php echo $a['dealer']; ?>' data-enemyhp='<?php echo $a['enemyhp']; ?>' data-damage='<?php echo $a['damage']; ?>' data-notes='<?php for ($x = 1; $x <= $round; $x++) { echo ">>>"; } ?><?php echo htmlentities(implode(" , ",$a['notes'])); ?>'>
 	Turn <?php echo $logc ?>:
 	</div>
 	<?php
@@ -549,13 +738,3 @@ function showfight(){
 <div id='battlelogs'>
 </div>
 <br style='clear:both;'/>
- 
- 
- <style>
- .stadium .enemy .mainchar {
-    right: 15vw;
-}
-.stadium .hero .mainchar {
-    left: 15vw;
-}
-</style>
