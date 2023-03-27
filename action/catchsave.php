@@ -104,14 +104,14 @@ while($x<=ceil($_POST['withdraw']))
 		
 
 		
-		$attack = rand(50,150);
-		$defense = rand(5,35);
-		$hp = rand(200,800) + 1000;
+		$attack = rand(110,150);
+		$defense = rand(15,35);
+		$hp = rand(500,800) + 1000;
 		$user = $_SESSION['accounts_id'];
 		$speed = rand(10,40);
 		$critical = rand(1,30);
 		$accuracy = rand(1,30);
-		$rate = rand(1,10);
+		$rate = rand(5,10);
 		
 		$level = 1;
 		

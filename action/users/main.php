@@ -56,6 +56,7 @@ foreach($field as $ff){
                   
                   <th>UserName</th>
                   <th>Fullname</th>
+				  <th>Balance</th>
                   <th>Role</th>
                   <th>Action</th>
                </tr>
@@ -70,6 +71,7 @@ foreach($field as $ff){
                <tr>
                   <td><?php echo $row['username']; ?></td>
                   <td><?php echo $row['fullname']; ?></td>
+				  <td><?php echo $row['balance']; ?></td>
                   <td><?php echo $roledata; ?></td>
                   <td>
                      <input onclick="window.location='<?php echo "?pages=".$_GET['pages']."&task=edit&id=$pid"; ?>';" type="button" class="btn btn-primary btn-sm" value="Edit">
