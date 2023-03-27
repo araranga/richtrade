@@ -234,7 +234,7 @@ GROUP by a.id*/
 
 
 
-															<span>Trainer:You</span>														   
+															<span>Trainer: ID#:<?php $x1= loadmember($rowqpokes['user']); echo $x1['fullname'];?></span>													   
 														
 														</div>
 												<?php
@@ -294,7 +294,7 @@ GROUP by a.id*/
 														   </span><br/>	
 
 														   
-															<span>Trainer: ID#:<?php $x2= loadmember($row['p2user']); echo $x2['fullname'];?></span>	
+															<span>Trainer: ID#:<?php $x1= loadmember($rowqpokes['user']); echo $x1['fullname'];?></span>		
 														</div>
 												<?php
 													}
