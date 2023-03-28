@@ -28,7 +28,19 @@
                   <p>Edit Profile</p>
                 </a>
               </li>
-			  
+	
+
+
+
+              <li class="nav-item">
+                <a href="index.php?pages=bosshunt" class="nav-link">
+                  <i class="nav-icon"><img src="bosshunt.png" style="width: 32px;"></i>
+                  <p>Boss Hunt</p>
+                </a>
+              </li>	
+
+
+	
               <li class="nav-item">
                 <a href="index.php?pages=leaderboard" class="nav-link">
                   <i class="nav-icon"><img src="leaderboard.png" style="width: 32px;"></i>
@@ -145,6 +157,15 @@
                   <p>Users</p>
                 </a>
               </li>
+			  
+              <li class="nav-item">
+                <a href="index.php?pages=boss" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Bosses</p>
+                </a>
+              </li>			  
+			  
+			  
               <li class="nav-item">
                 <a href="index.php?pages=items" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
