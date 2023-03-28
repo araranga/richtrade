@@ -305,7 +305,7 @@ function generatebattle($id)
 			
 	
 			if($emblem1=='dpsregen' && $hp2!=$fullhp2){		
-				
+				$dps_regen1++;
 				$dpsatk  = round($poke1['defense'] * 3);
 				$hp1  = $hp1 + $dpsatk;
 				$datalogs["damage"] = 0;
@@ -649,7 +649,7 @@ function generatebattle($id)
 			
 	
 			if($emblem2=='dpsregen' && $hp2!=$fullhp2){		
-				
+				$dps_regen2++;
 				$dpsatk  = round($poke2['defense'] * 3);
 				$hp2  = $hp2 + $dpsatk;
 				$datalogs["damage"] = 0;

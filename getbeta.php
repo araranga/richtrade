@@ -90,7 +90,7 @@ if($_GET['error']==1)
 
 
     <div class="card-body login-card-body">
-      <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
+      <p class="login-box-msg">Here where you can request beta-keys (Take note it is limited).</p>
 
 
         <div class="input-group mb-3">
