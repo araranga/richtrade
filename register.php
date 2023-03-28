@@ -262,7 +262,8 @@ if(!empty($error))
           </div>
 		  
         </div>
-		
+		<a href="getbeta.php" class="text-center" style='text-decoration:underline'>>> No Beta key? Click here.</a><br/>
+		<br>
 
 
 
@@ -307,7 +308,7 @@ if(!empty($error))
           <!-- /.col -->
         </div>
       </form>
-	  <a href="getbeta.php" class="text-center">No Beta key? Click here.</a><br/>
+	  
 
       <a href="login.php" class="text-center">I already have a membership</a>
 	  

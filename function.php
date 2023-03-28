@@ -232,7 +232,7 @@ function generatebattle($id)
 
 			if($emblem1=='dpsatk'){		
 				
-				$dpsatk  = round($poke1['attack'] * 0.55);
+				$dpsatk  = round($poke1['attack'] * 0.65);
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Fire attacks give +($dpsatk) additonal dmg! Total of ($curdamage";
 				
@@ -243,7 +243,7 @@ function generatebattle($id)
 
 			if($emblem1=='dpshp'){		
 				
-				$dpsatk  = round($hp1 * 0.08);
+				$dpsatk  = round($hp1 * 0.09);
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Poison attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 				
@@ -272,7 +272,7 @@ function generatebattle($id)
 				$lastwill_comp = ($hp1/$fullhp1) * 100;
 				if($lastwill_comp<=26){
 				$dpsatk = round($fullhp1 * 0.26);
-				$hp2  = $hp1 + $dpsatk;
+				$hp1  = $hp1 + $dpsatk;
 				$datalogs["damage"] = 0;
 				$datalogs["notes"] = array("REGEN: +($dpsatk)!");
 				$datalogs["enemyhp"] = $hp2;
@@ -306,7 +306,7 @@ function generatebattle($id)
 	
 			if($emblem1=='dpsregen' && $hp2!=$fullhp2){		
 				
-				$dpsatk  = round($poke1['defense'] * 4);
+				$dpsatk  = round($poke1['defense'] * 3);
 				$hp1  = $hp1 + $dpsatk;
 				$datalogs["damage"] = 0;
 				$datalogs["notes"] = array("Forest Buff heals: +($dpsatk)!");
@@ -576,7 +576,7 @@ function generatebattle($id)
 
 			if($emblem2=='dpsatk'){		
 				
-				$dpsatk  = round($poke2['attack'] * 0.55);
+				$dpsatk  = round($poke2['attack'] * 0.65);
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Fire attacks give +($dpsatk) additonal dmg! Total of ($curdamage";
 				
@@ -587,7 +587,7 @@ function generatebattle($id)
 
 			if($emblem2=='dpshp'){		
 				
-				$dpsatk  = round($hp1 * 0.08);
+				$dpsatk  = round($hp1 * 0.09);
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Poison attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 				
@@ -650,7 +650,7 @@ function generatebattle($id)
 	
 			if($emblem2=='dpsregen' && $hp2!=$fullhp2){		
 				
-				$dpsatk  = round($poke2['defense'] * 4);
+				$dpsatk  = round($poke2['defense'] * 3);
 				$hp2  = $hp2 + $dpsatk;
 				$datalogs["damage"] = 0;
 				$datalogs["notes"] = array("Forest Buff heals: +($dpsatk)!");
