@@ -12,6 +12,9 @@
               </p>
             </a>
 
+
+
+
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="index.php?pages=changepass" class="nav-link">
@@ -25,6 +28,15 @@
                   <p>Edit Profile</p>
                 </a>
               </li>
+			  
+              <li class="nav-item">
+                <a href="index.php?pages=leaderboard" class="nav-link">
+                  <i class="nav-icon"><img src="leaderboard.png" style="width: 32px;"></i>
+                  <p>Leaderboard</p>
+                </a>
+              </li>			  
+			  
+			  
 
               <li class="nav-item">
                 <a href="index.php?pages=guide" class="nav-link">
