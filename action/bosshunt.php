@@ -3,6 +3,31 @@ session_start();
 require_once("./connect.php");
 require_once("./function.php");
 ?>
+<h2>BOSS HUNT!!</h2>   
+<?php
+$current = date("Y-m-d");
+$user = $_SESSION['accounts_id'];
+$queryx = "SELECT * FROM tbl_battlelog WHERE user='$user' AND battledata LIKE '%$current%'";
+$qx = mysql_query_md($queryx);
+$countx = $battlecount = mysql_num_rows_md($qx);
+?>
+<div class='row'>
+          <div class="col-lg-12 col-12">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3><?php echo $countx; ?> / <?php echo systemconfig("battlelimit"); ?></h3>
+
+                <p>Battle Energy</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+            </div>
+          </div>
+		  		  
+		  
+</div>
 
 <div id="poke-container" class="ui cards">
 <style>

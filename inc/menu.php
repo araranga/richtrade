@@ -38,7 +38,12 @@
                   <p>Boss Hunt</p>
                 </a>
               </li>	
-
+			  <li class="nav-item">
+				<a href="index.php?pages=bossbattle" class="nav-link">
+				  <i class="nav-icon"><img src="bossbattle.png" style="width: 32px;"></i>
+				  <p>My Boss Battles</p>
+				</a>
+			  </li>
 
 	
               <li class="nav-item">
@@ -110,7 +115,7 @@
                 <a href="index.php?pages=pokebattle" class="nav-link">
                   <i class="nav-icon"><img src="battle.png" style="width: 32px;"></i>
                   <p>My Battles</p>
-                </a>
+                </a>				
               </li>
 
 

@@ -804,7 +804,7 @@ function generatebattle($id)
             $turn = 1;
         }
 
-        if ($tira == 100) {
+        if ($tira == 10000) {
             $winner = 1;
         }
     }
@@ -2351,7 +2351,7 @@ function generatebattleboss($id)
             $turn = 1;
         }
 
-        if ($tira == 100) {
+        if ($tira == 100000) {
             $winner = 1;
         }
     }
@@ -2368,7 +2368,7 @@ function generatebattleboss($id)
 			"UPDATE tbl_accounts SET balance = balance + $reward WHERE accounts_id='$getuser'"
 		);	
 		
-		$vt = "Slayer of the {$poke2['pokename']} - $getuser"; 
+		$vt = "Slayer of the {$poke2['pokename']}"; 
 
 		mysql_query_md("INSERT INTO tbl_achievement SET hero='{$poke1['id']}',boss='{$poke2['id']}',victorytext='$vt'");	
 
