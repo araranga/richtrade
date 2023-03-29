@@ -46,7 +46,9 @@ function trans()
 		mysql_query_md("UPDATE tbl_accounts SET balance='".$sum."' WHERE accounts_id='$accounts_id'");
 		$success = 1;
 		$trans = trans();
-		mysql_query_md("INSERT INTO tbl_withdraw_history SET conv='$convtotal',transnum='$trans',claimtype='".$_POST['claimtype']."',address='".$_POST['address']."',accounts_id='$accounts_id',new_balance='".$sum."',amount='".$_POST['withdraw']."',current_balance='".$row['balance']."'");
+		$convtotal_deduct = ($conv * $_POST['withdraw']) - ($conv * 0.08);
+		
+		mysql_query_md("INSERT INTO tbl_withdraw_history SET conv='$convtotal_deduct',transnum='$trans',claimtype='".$_POST['claimtype']."',address='".$_POST['address']."',accounts_id='$accounts_id',new_balance='".$sum."',amount='".$_POST['withdraw']."',current_balance='".$row['balance']."'");
 		$q = mysql_query_md("SELECT * FROM tbl_accounts WHERE accounts_id='$accounts_id'");
 		
 		subeco($convtotal);
@@ -84,6 +86,8 @@ if($error!='')
 <h5><i class="icon fas fa-info"></i> Conversion</h5>
 *Your 1 point is now converted as <?php echo number_format($conv,5); ?> pesos<br/>
 *Limited 100 points to withdraw.
+<br/>
+*Additional 8% deduction for withdrawal fee. Which help us pay server and stuff
 </div>
 
 
@@ -136,7 +140,7 @@ function eta(){
 	
 	var withdraw = parseFloat(jQuery('#withdraw').val());
 	var conv = parseFloat("<?php echo $conv; ?>");
-	var total = withdraw * conv;
+	var total = (withdraw * conv) - ((withdraw * conv) * 0.08);
 	
 	jQuery('#eta').text(total.toFixed(2));
 }

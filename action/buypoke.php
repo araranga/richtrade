@@ -53,7 +53,7 @@ function trans()
 		$q = mysql_query_md("SELECT * FROM tbl_accounts WHERE accounts_id='$accounts_id'");
 		
 		addeco($_POST['withdraw'] * 0.05);
-		$total = $_POST['withdraw'] = $_POST['withdraw'] - ($_POST['withdraw'] * 0.05);
+		$total = $_POST['withdraw'] - ($_POST['withdraw'] * 0.20);
 		
 		
 		mysql_query_md("UPDATE tbl_market SET buyer='{$_SESSION['accounts_id']}',sold='1' WHERE pokeid='{$poke['id']}'");
