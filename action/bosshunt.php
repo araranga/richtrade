@@ -60,7 +60,7 @@ $countx = $battlecount = mysql_num_rows_md($qx);
 
 <?php
 
-$qpokes = mysql_query_md("SELECT * FROM tbl_bosses");		
+$qpokes = mysql_query_md("SELECT * FROM tbl_bosses ORDER by hp ASC");		
 
 	while($rowqpokes = mysql_fetch_md_assoc($qpokes)) {
 ?>	
