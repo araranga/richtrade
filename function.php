@@ -1409,7 +1409,7 @@ function savebattlebot($hash, $user)
 
     $user = $poke["user"];
 
-    $rewardwin = systemconfig("battlelimit");
+    $rewardwin = systemconfig("battlelimitbot");
 
     $current = date("Y-m-d");
 

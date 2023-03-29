@@ -223,7 +223,8 @@ $countx = $battlecount = mysql_num_rows_md($qx);
 
 <div class="callout callout-info">
               <h5><i class="fas fa-info"></i> Note:</h5>
-              You can battle 1 at a time only. Please wait to load again.
+              You can battle 1 at a time only per hero. Please wait to load again.<br/>
+			  <strong>Energy reset every 12AM.</strong>
 </div>
 
 <div id='pokemonjs' style='display:none;'></div>

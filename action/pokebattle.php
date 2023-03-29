@@ -17,9 +17,6 @@ require_once("./function.php");
 ?>
 <h2>Battle History</h2>
 
-<audio controls autoplay loop hidden>
-    <source src="https://vgmsite.com/soundtracks/pokemon-gameboy-sound-collection/ijviptkm/120-pokemon%20gym.mp3" type="audio/mpeg">
-</audio>
 <?php
 if($total==0) {
 ?>

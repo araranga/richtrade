@@ -70,15 +70,15 @@ function trans()
 		}
 		
 		
-		if(empty($_POST['skill1'])){
+		if(empty(trim($_POST['skill1']))){
 			
 			$error .= "<i class=\"fa fa-warning\"></i>Skill 1 empty.<br>";
 		}
-		if(empty($_POST['skill2'])){
+		if(empty(trim($_POST['skill2']))){
 			
 			$error .= "<i class=\"fa fa-warning\"></i>Skill 2 empty.<br>";
 		}
-		if(empty($_POST['skill3'])){
+		if(empty(trim($_POST['skill3']))){
 			
 			$error .= "<i class=\"fa fa-warning\"></i>Skill 3 empty.<br>";
 		}		
@@ -243,6 +243,9 @@ if($success!='')
 
 <script>
 jQuery('#pokeremain').text("<?php echo $row['pokeballs']; ?>");
+
+
+window.location = 'index.php?pages=pokemon';
 </script>
 
 <?php
