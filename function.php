@@ -234,7 +234,7 @@ function generatebattle($id)
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Fire attacks give +($dpsatk) additonal dmg! Total of ($curdamage";
 				
-				if($roundp2==4){
+				if($roundp1==4){
 					$emblem1 = '';
 				}
 			}	
@@ -245,7 +245,7 @@ function generatebattle($id)
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Poison attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 				
-				if($roundp2==3){
+				if($roundp1==3){
 					$emblem1 = '';
 				}
 			}	
@@ -1781,7 +1781,7 @@ function generatebattleboss($id)
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Fire attacks give +($dpsatk) additonal dmg! Total of ($curdamage";
 				
-				if($roundp2==4){
+				if($roundp1==4){
 					$emblem1 = '';
 				}
 			}	
@@ -1792,7 +1792,7 @@ function generatebattleboss($id)
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Poison attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 				
-				if($roundp2==3){
+				if($roundp1==3){
 					$emblem1 = '';
 				}
 			}	
