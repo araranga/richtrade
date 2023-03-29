@@ -65,7 +65,7 @@ $champion_id = $row['winner'];
 
 $winnerdata = loadpokev2($row['winner']);
 
-$winmsg = $winner['pokename']." WINS!";
+$winmsg = $winnerdata['pokename']." WINS!";
 ?>
 
 <?php
