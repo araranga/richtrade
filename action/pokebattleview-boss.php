@@ -35,20 +35,19 @@ if(!empty($_GET['v']))
 	$p1 = loadpokev2($row['p1poke']);	
 	$p2 = loadbossv2($row['p2poke']);
 
-$winmsg = "You Lose";
 if($_SESSION['accounts_id']==$row['p1user']){
 	mysql_query_md("UPDATE tbl_battle SET v1='1' WHERE id ='$id'");
 	
-	if($row['winner']==$row['p1poke']){
-		$winmsg = "You Win";
-	}	
 	
 }
 
 		if($row['winner']==$row['p2poke']){
+			$winmsg = "{$p2['pokename']} WINS!";
 			$loser_id = $row['p1poke'];
+			
 		}
 		if($row['winner']==$row['p1poke']){
+			$winmsg = "{$p1['pokename']} WINS!";
 			$loser_id = $row['p2poke'];
 		}	
 $champion_id = $row['winner'];
