@@ -44,33 +44,15 @@ if(!empty($_GET['v']))
 }
 
 
-	$p1 = loadpokev2($logs[0]['dealer']);
-	
-	if($logs[0]['dealer']==$row['p1poke']){
-		$p2play = $row['p2poke'];
-	}
-	if($logs[0]['dealer']==$row['p2poke']){
-		$p2play = $row['p1poke'];
-	}
-	
-	$p2 = loadpokev2($p2play);
+	$p1 = loadpokev2($row['p1poke']);
+	$p2 = loadpokev2($row['p2poke']);
 
 $winmsg = "You Lose";
 if($_SESSION['accounts_id']==$row['p1user']){
 	mysql_query_md("UPDATE tbl_battle SET v1='1' WHERE id ='$id'");
-	
-	if($row['winner']==$row['p1poke']){
-		$winmsg = "You Win";
-	}	
-	
 }
 if($_SESSION['accounts_id']==$row['p2user']){
-	mysql_query_md("UPDATE tbl_battle SET v2='1' WHERE id ='$id'");
-	
-	if($row['winner']==$row['p2poke']){
-		$winmsg = "You Win";
-	}	
-	
+	mysql_query_md("UPDATE tbl_battle SET v2='1' WHERE id ='$id'");	
 }
 
 		if($row['winner']==$row['p2poke']){
@@ -81,6 +63,9 @@ if($_SESSION['accounts_id']==$row['p2user']){
 		}	
 $champion_id = $row['winner'];
 
+$winnerdata = loadpokev2($row['winner']);
+
+$winmsg = $winner['pokename']." WINS!";
 ?>
 
 <?php
@@ -488,8 +473,8 @@ font-size: 15px;
 			</h2>
 			<p><?php $x2= loadmember($p1['user']); echo $x2['fullname'];?></p>
             <div>
-               <progress id='progressp2' max="<?php echo $p1['hp']; ?>" value="<?php echo $p1['hp']; ?>"></progress>
-               <p><span id='progressp2txt'><?php echo $p1['hp']; ?></span>/<?php echo $p1['hp']; ?></p>
+               <progress id='progressp1' max="<?php echo $p1['hp']; ?>" value="<?php echo $p1['hp']; ?>"></progress>
+               <p><span id='progressp1txt'><?php echo $p1['hp']; ?></span>/<?php echo $p1['hp']; ?></p>
             </div>
          </aside>
       </section>
@@ -508,8 +493,8 @@ font-size: 15px;
 			</h2>
 			<p><?php $x2= loadmember($p2['user']); echo $x2['fullname'];?></p>
             <div>
-               <progress id='progressp1' max="<?php echo $p2['hp']; ?>" value="<?php echo $p2['hp']; ?>"></progress>
-               <p><span id='progressp1txt'><?php echo $p2['hp']; ?></span>/<?php echo $p2['hp']; ?></p>
+               <progress id='progressp2' max="<?php echo $p2['hp']; ?>" value="<?php echo $p2['hp']; ?>"></progress>
+               <p><span id='progressp2txt'><?php echo $p2['hp']; ?></span>/<?php echo $p2['hp']; ?></p>
             </div>
          </aside>
 
@@ -697,11 +682,6 @@ if(datadamage=='0'){
 				
 				
 				
-				
-				
-				jQuery('#progressp1').attr('value',enemyhp);
-				jQuery('#progressp1txt').text(enemyhp);	
-				
 				if (hp1 === undefined) {
 		
 	
@@ -726,9 +706,7 @@ if(datadamage=='0'){
 				}else{
 					$("#userhero<?php echo $p1['id']; ?>").addClass('pain');
 				}				
-				jQuery('#progressp2').attr('value',enemyhp);
-				jQuery('#progressp2txt').text(enemyhp);					
-				
+
 				if (hp1 === undefined) {
 		
 	

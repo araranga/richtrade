@@ -111,6 +111,8 @@ function generatebattle($id)
 
     $winnerpoke = 0;
 	
+	$turn = 2;
+	
     while ($winner != 1) {
         $tira++;
 		
