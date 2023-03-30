@@ -167,7 +167,13 @@ foreach($rowxxx as $key=>$val)
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   
-  
+<?php
+ 
+$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";  
+$CurPageURL = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];  
+
+ 
+ ?>  
   
   <link rel="apple-touch-icon" sizes="57x57" href="fav/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="fav/apple-icon-60x60.png">
@@ -189,14 +195,14 @@ foreach($rowxxx as $key=>$val)
   
 <meta name="twitter:title" content="Pocket FighterZ ">
 <meta name="twitter:description" content="Play and grind! Beat players and bosses! And get rewarded!!!!! Come on while its free!">
-<meta name="twitter:image" content="<?php echo $protocol . $_SERVER['HTTP_HOST']; ?>/social/social.png">
+<meta name="twitter:image" content="<?php echo $protocol . $_SERVER['HTTP_HOST']; ?>/sprites/social/social.png">
 <meta name="twitter:card" content="summary_large_image"> 
   
 <meta property="og:url" content="<?php echo $CurPageURL; ?>" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Pocket FighterZ" />
 <meta property="og:description" content="Play and grind! Beat players and bosses! And get rewarded!!!!! Come on while its free!" />
-<meta property="og:image" content="<?php echo $protocol . $_SERVER['HTTP_HOST']; ?>/social/social.png" /> 
+<meta property="og:image" content="<?php echo $protocol . $_SERVER['HTTP_HOST']; ?>/sprites/social/social.png" /> 
 
 <meta property="og:image" content="<?php echo $protocol . $_SERVER['HTTP_HOST']; ?>/sprites/bg/Tower1.png" /> 
 	<meta property="og:image:width" content="1200"/>
