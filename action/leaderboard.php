@@ -16,7 +16,14 @@ require_once("./function.php");
  $pagecount = getpagecount($total,10);
 ?>
 <h2>Leaderboard</h2>
-
+<div class="callout callout-info">
+              <h5><i class="fas fa-info"></i> Note:</h5>
+<p>Starting: May 2023, User on top 5 will receive bonus monthly.</p>
+<p>Top 1: 60 points</p>
+<p>Top 2: 35 points</p>
+<p>Top 3: 25 points</p>
+<p>Top 4-5: 10 points</p>
+</div>
 <audio controls autoplay loop hidden>
     <source src="https://vgmsite.com/soundtracks/pokemon-gameboy-sound-collection/ijviptkm/120-pokemon%20gym.mp3" type="audio/mpeg">
 </audio>

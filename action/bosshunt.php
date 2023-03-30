@@ -28,7 +28,15 @@ else{
 	$battlebonus = $loaduser['deadline_bonus'];
 }	
 
-?>		
+?>	
+<div class="callout callout-info">
+              <h5><i class="fas fa-info"></i> Note:</h5>
+<p>
+Once you defeated the boss. The current hero will be restricted to fight it again. But dont worry it will reset every 20 days also you can battle it with different warrior.
+</p>
+</div>
+
+	
 <div class='row'>
           <div class="col-lg-12 col-12">
             <!-- small box -->

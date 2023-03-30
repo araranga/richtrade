@@ -274,7 +274,7 @@ function generatebattle($id)
 				$dpsatk = round($fullhp1 * 0.26);
 				$hp1  = $hp1 + $dpsatk;
 				$datalogs["damage"] = 0;
-				$datalogs["notes"] = array("REGEN: +($dpsatk)!");
+				$datalogs["notes"] = array("REGEN use by: {$poke1["pokename"]}: +($dpsatk)!");
 				$datalogs["enemyhp"] = $hp2;
 				$datalogs["hp1"] = $hp1;
 				$datalogs["hp2"] = $hp2;
@@ -290,13 +290,16 @@ function generatebattle($id)
 	
 			if($emblem1=='puredamage'){
 
-				$is_double_attack = getluck(8,100);		
+				$is_double_attack = getluck(10,100);		
 				
 				if($is_double_attack==1){
 					$curdamage = $initialdmg + 4;
+					if($is_crit){
+						$curdamage = $curdamage * 2;
+					}					
 					$notes = array();
 					$notes[] = $initial_msg;
-					$notes[] = "Armor Break Activated!! Deals ($curdamage)";
+					$notes[] = "Armor Break Activated use by {$poke1["pokename"]} !! Deals ($curdamage)";
 					
 				}
 
@@ -309,7 +312,7 @@ function generatebattle($id)
 				$dpsatk  = round($poke1['defense'] * 3);
 				$hp1  = $hp1 + $dpsatk;
 				$datalogs["damage"] = 0;
-				$datalogs["notes"] = array("Forest Buff heals: +($dpsatk)!");
+				$datalogs["notes"] = array("Forest Buff heals use by: {$poke1["pokename"]}: +($dpsatk)!");
 				$datalogs["enemyhp"] = $hp1;
 				$datalogs["hp1"] = $hp1;
 				$datalogs["hp2"] = $hp2;
@@ -618,7 +621,7 @@ function generatebattle($id)
 				$dpsatk = round($fullhp2 * 0.26);
 				$hp2  = $hp2 + $dpsatk;
 				$datalogs["damage"] = 0;
-				$datalogs["notes"] = array("REGEN: +($dpsatk)!");
+				$datalogs["notes"] = array("REGEN use by: {$poke2["pokename"]}:  +($dpsatk)!");
 				$datalogs["enemyhp"] = $hp1;
 				$datalogs["hp1"] = $hp1;
 				$datalogs["hp2"] = $hp2;
@@ -634,13 +637,16 @@ function generatebattle($id)
 	
 			if($emblem2=='puredamage'){
 
-				$is_double_attack = getluck(8,100);		
+				$is_double_attack = getluck(10,100);		
 				
 				if($is_double_attack==1){
 					$curdamage = $initialdmg + 4;
+					if($is_crit){
+						$curdamage = $curdamage * 2;
+					}					
 					$notes = array();
 					$notes[] = $initial_msg;
-					$notes[] = "Armor Break Activated!! Deals ($curdamage)";
+					$notes[] = "Armor Break Activated used by {$poke2["pokename"]} !! Deals ($curdamage)";
 					
 				}
 
@@ -653,7 +659,7 @@ function generatebattle($id)
 				$dpsatk  = round($poke2['defense'] * 3);
 				$hp2  = $hp2 + $dpsatk;
 				$datalogs["damage"] = 0;
-				$datalogs["notes"] = array("Forest Buff heals: +($dpsatk)!");
+				$datalogs["notes"] = array("Forest Buff heals use by: {$poke2["pokename"]}: +($dpsatk)!");
 				$datalogs["enemyhp"] = $hp1;
 				$datalogs["hp1"] = $hp1;
 				$datalogs["hp2"] = $hp2;
@@ -1578,13 +1584,14 @@ function savebattleboss($hero,$boss)
         echo "Limited of $rewardwin Battle Per Day only";
         exit();
     }
-    $query = "SELECT * FROM tbl_achievement WHERE hero='$id' AND boss='$boss_id'";
+    $query = "SELECT * FROM tbl_achievement WHERE hero='$id' AND boss='$boss_id' AND fightdate >= CURRENT_TIMESTAMP";
     $q = mysql_query_md($query);
+	$rr =  mysql_fetch_md_assoc($q);
     $count = mysql_num_rows_md($q);	
 	
 	if(!empty($count)){
 		
-        echo "You already defeated this boss.";
+        echo "You already defeated this boss using ({$herodata['pokename']}). Unlock date for this will be on: ".date("M-d-Y h:i:s",strtotime($rr['fightdate']));
         exit();		
 		
 	}
@@ -1616,6 +1623,16 @@ function savebattleboss($hero,$boss)
 	
 }
 
+function addmore($initial,$level,$percentage){
+	
+	$getadditonal = ($initial * $percentage) * $level;
+	
+	$final = $getadditonal + $initial;
+	return $final;
+	
+}
+
+
 function generatebattleboss($id)
 {
     $query = "SELECT * FROM tbl_battle_boss WHERE id ='$id' AND winner IS NULL";
@@ -1628,6 +1645,20 @@ function generatebattleboss($id)
     //loading pokemon
     $poke1 = loadpokev2($row["p1poke"]);
     $poke2 = loadbossv2($row["p2poke"]);
+	
+	
+    $queryacv = "SELECT * FROM tbl_achievement WHERE hero='{$row["p1poke"]}' AND boss='{$row["p2poke"]}'";
+    $queryacvq = mysql_query_md($queryacv);
+    $acvcount = mysql_num_rows_md($queryacvq);		
+	
+	
+	
+	$poke2["hp"] = addmore($poke2["hp"],$acvcount,0.50);
+	$poke2["defense"] = addmore($poke2["defense"],$acvcount,2);
+	$poke2["attack"] = addmore($poke2["attack"],$acvcount,0.50);
+	$poke2["accuracy"] = addmore($poke2["accuracy"],$acvcount,0.50);
+	$poke2["speed"] = addmore($poke2["speed"],$acvcount,0.50);
+	
 	
     //var_dump($poke1);
     //var_dump($poke2);
@@ -1799,7 +1830,7 @@ function generatebattleboss($id)
 
 			if($emblem1=='dpsatk'){		
 				
-				$dpsatk  = round($poke1['attack'] * 0.65);
+				$dpsatk  = round($poke1['attack'] * 0.75);
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Fire attacks give +($dpsatk) additonal dmg! Total of ($curdamage";
 				
@@ -1841,7 +1872,7 @@ function generatebattleboss($id)
 				$dpsatk = round($fullhp1 * 0.26);
 				$hp1  = $hp1 + $dpsatk;
 				$datalogs["damage"] = 0;
-				$datalogs["notes"] = array("REGEN: +($dpsatk)!");
+				$datalogs["notes"] = array("REGEN use by: {$poke1["pokename"]}: +($dpsatk)!");
 				$datalogs["enemyhp"] = $hp2;
 				$datalogs["hp1"] = $hp1;
 				$datalogs["hp2"] = $hp2;
@@ -1857,13 +1888,17 @@ function generatebattleboss($id)
 	
 			if($emblem1=='puredamage'){
 
-				$is_double_attack = getluck(8,100);		
+				$is_double_attack = getluck(10,100);		
 				
 				if($is_double_attack==1){
 					$curdamage = $initialdmg + 4;
+			
+					if($is_crit){
+						$curdamage = $curdamage * 2;
+					}
 					$notes = array();
 					$notes[] = $initial_msg;
-					$notes[] = "Armor Break Activated!! Deals ($curdamage)";
+					$notes[] = "Armor Break Activated use by: {$poke1["pokename"]}!! Deals ($curdamage)";
 					
 				}
 
@@ -1876,7 +1911,7 @@ function generatebattleboss($id)
 				$dpsatk  = round($poke1['defense'] * 3);
 				$hp1  = $hp1 + $dpsatk;
 				$datalogs["damage"] = 0;
-				$datalogs["notes"] = array("Forest Buff heals: +($dpsatk)!");
+				$datalogs["notes"] = array("Forest Buff heals use by: {$poke1["pokename"]}: +($dpsatk)!");
 				$datalogs["enemyhp"] = $hp1;
 				$datalogs["hp1"] = $hp1;
 				$datalogs["hp2"] = $hp2;
@@ -2143,7 +2178,7 @@ function generatebattleboss($id)
 
 			if($emblem2=='dpsatk'){		
 				
-				$dpsatk  = round($poke2['attack'] * 0.65);
+				$dpsatk  = round($poke2['attack'] * 0.75);
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Fire attacks give +($dpsatk) additonal dmg! Total of ($curdamage";
 				
@@ -2185,7 +2220,7 @@ function generatebattleboss($id)
 				$dpsatk = round($fullhp2 * 0.26);
 				$hp2  = $hp2 + $dpsatk;
 				$datalogs["damage"] = 0;
-				$datalogs["notes"] = array("REGEN: +($dpsatk)!");
+				$datalogs["notes"] = array("REGEN use by: {$poke2["pokename"]} +($dpsatk)!");
 				$datalogs["enemyhp"] = $hp1;
 				$datalogs["hp1"] = $hp1;
 				$datalogs["hp2"] = $hp2;
@@ -2201,10 +2236,14 @@ function generatebattleboss($id)
 	
 			if($emblem2=='puredamage'){
 
-				$is_double_attack = getluck(8,100);		
+				$is_double_attack = getluck(10,100);		
 				
 				if($is_double_attack==1){
 					$curdamage = $initialdmg + 4;
+					if($is_crit){
+						$curdamage = $curdamage * 2;
+					}					
+					
 					$notes = array();
 					$notes[] = $initial_msg;
 					$notes[] = "Armor Break Activated!! Deals ($curdamage)";
@@ -2220,7 +2259,7 @@ function generatebattleboss($id)
 				$dpsatk  = round($poke2['defense'] * 3);
 				$hp2  = $hp2 + $dpsatk;
 				$datalogs["damage"] = 0;
-				$datalogs["notes"] = array("Forest Buff heals: +($dpsatk)!");
+				$datalogs["notes"] = array("Forest Buff heals use by: {$poke2["pokename"]} : +($dpsatk)!");
 				$datalogs["enemyhp"] = $hp1;
 				$datalogs["hp1"] = $hp1;
 				$datalogs["hp2"] = $hp2;
@@ -2390,9 +2429,13 @@ function generatebattleboss($id)
 			"UPDATE tbl_accounts SET balance = balance + $reward WHERE accounts_id='$getuser'"
 		);	
 		
+		
 		$vt = "Slayer of the {$poke2['pokename']}"; 
 
-		mysql_query_md("INSERT INTO tbl_achievement SET hero='{$poke1['id']}',boss='{$poke2['id']}',victorytext='$vt'");	
+		$NewDate=Date('y:m:d h:i:s', strtotime('+20 days'));
+
+
+		mysql_query_md("INSERT INTO tbl_achievement SET hero='{$poke1['id']}',boss='{$poke2['id']}',victorytext='$vt',fightdate = CURRENT_DATE 	+ INTERVAL 20 DAY");	
 
 		
 	}

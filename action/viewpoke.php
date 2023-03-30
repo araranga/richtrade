@@ -94,12 +94,13 @@ GROUP by a.id*/
 				  
 
 		<?php
-		$achvx = mysql_query_md("SELECT * FROM tbl_achievement WHERE hero='{$rowqpokes['id']}'");		
-
+		$achvx = mysql_query_md("SELECT * FROM tbl_achievement WHERE hero='{$rowqpokes['id']}' GROUP by hero,boss");		
+		$countach = 0;
 			while($achv = mysql_fetch_md_assoc($achvx)) {
+				$countach++;
 		?>		
                   <li class="list-group-item">
-                    <b>Achievement ID#<?php echo $achv['id']; ?></b> <a class="float-right"><?php echo $achv['victorytext']; ?></a>
+                    <b>Achievement <?php echo $countach; ?>:</b> <a class="float-right"><?php echo $achv['victorytext']; ?></a>
                   </li>			
 		<?php
 			}
