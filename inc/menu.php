@@ -154,7 +154,12 @@
 
             <ul class="nav nav-treeview">
 
-
+              <li class="nav-item">
+                <a href="index.php?pages=complan" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pricing</p>
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a href="index.php?pages=users" class="nav-link">

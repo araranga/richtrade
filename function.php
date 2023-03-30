@@ -836,7 +836,7 @@ function checkpoke($winnerpoke)
         "UPDATE tbl_accounts SET balance = balance + $rewardwin WHERE accounts_id='$userid'"
     );
 
-    $req = $poke["level"] * 10;
+    $req = $poke["level"] * 6;
 
     if ($req == $poke["exp"]) {
         pokelevelup($winnerpoke, $poke["rate"]);
@@ -1454,6 +1454,8 @@ function savebattlebot($hash, $user)
 function savebattle($hash)
 {
     $poke = loadpoke($hash);
+	
+	
 
     if (empty($poke["id"])) {
         echo "Warrior is not available. ID_MISSING";
@@ -1464,16 +1466,34 @@ function savebattle($hash)
     $user = $poke["user"];
 
     if ($user != $poke["user"]) {
-        //echo "Warrior is not available. ACCT_INC";
-        //exit();
+        echo "Warrior is not available. ACCT_INC";
+        exit();
     }
 
     if (!empty($poke["is_market"])) {
         echo "Warrior is not able to battle since this is on sale on Market.";
         exit();
     }
+$loaduser = loadmember($poke['user']);
+$battlebonus = 0;
+	//check for subscription
+ $date_now = new DateTime();
+ $date2    = new DateTime($loaduser['deadline']);
 
-    $rewardwin = systemconfig("battlelimit");
+if ($date_now > $date2) {
+	$battlebonus = 0;
+}
+else{
+	$battlebonus = $loaduser['deadline_bonus'];
+}	
+	//
+
+
+
+
+
+
+    $rewardwin = systemconfig("battlelimit") + $battlebonus;
 
     $current = date("Y-m-d");
 

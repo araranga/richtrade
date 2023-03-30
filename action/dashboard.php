@@ -101,7 +101,27 @@ $pokemons = mysql_num_rows_md(mysql_query_md("SELECT * FROM tbl_pokemon_users WH
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3><?php echo $countx; ?> / <?php echo systemconfig("battlelimit"); ?></h3>
+			  
+<?php
+
+$loaduser = loadmember($_SESSION['accounts_id']);
+$battlebonus = 0;
+	//check for subscription
+ $date_now = new DateTime();
+ $date2    = new DateTime($loaduser['deadline']);
+
+if ($date_now > $date2) {
+	$battlebonus = 0;
+}
+else{
+	$battlebonus = $loaduser['deadline_bonus'];
+}	
+
+?>			  
+			  
+			  
+			  
+                <h3><?php echo $countx; ?> / <?php echo systemconfig("battlelimit") + $battlebonus; ?></h3>
 
                 <p>Battle Energy</p>
               </div>
@@ -114,7 +134,21 @@ $pokemons = mysql_num_rows_md(mysql_query_md("SELECT * FROM tbl_pokemon_users WH
         </div>
 
 
+<div class="callout callout-success" style='border-left-color: #f012be!important;'>
 
+<div class="info-box">
+
+
+              <div class="info-box-content">
+                <span class="info-box-text"></span>
+                <span class="info-box-number">
+                 		<div style='float:left;background-position: 1006px 145px!important;background: url(/sprites/npc/1.png) 0px 143px; width: 144px;height: 144px;border: 1px solid;border-radius: 64px;'></div>
+						<p>Want more energy? purchase <a href='index.php?pages=activate' style='color:black!important;'>here!</a></p>
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+</div>
+</div>
 
 
 <div class="callout callout-success">

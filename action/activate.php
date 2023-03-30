@@ -18,9 +18,10 @@ require_once("./function.php");
 
 ?>
 <div class="callout callout-warning">
-      <h5>Please activate your account below.</h5>
-
-      <p>Purchase any of the plans below to use our exchange function for lifetime.</p>
+      <h5>We allow payment as GCASH only.</h5>
+	  
+	  <p>Payment below will help us build the system better with better compensation and higher points value.</p>
+	 
 </div>
 <style>
 	label.btn.btn-default.text-center.active {
@@ -43,9 +44,9 @@ require_once("./function.php");
 		jQuery('#item_number').val(jQuery(aa).attr('data-rate_id'));
 		jQuery('#amountf').val(jQuery(aa).attr('data-rate_start'));
 
-		jQuery('#referral').text(jQuery(aa).attr('data-rate_end')+"%");
+		jQuery('#referral').text(jQuery(aa).attr('data-rate_end')+" Days.");
 
-		jQuery('#matrix').text(jQuery(aa).attr('data-rate_bonus')+" months");
+		jQuery('#matrix').text(jQuery(aa).attr('data-rate_bonus')+" Additonal Battle Energy.");
 
 		
 
@@ -61,12 +62,12 @@ require_once("./function.php");
         <div class="card-body">
           <div class="row">
             <div class="col-12 col-sm-12">
-              <h3 class="my-3">Registration Fee</h3>
+              <h3 class="my-3">Battle Energy Subscription</h3>
 <!--               <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terr.</p>
  -->
               <hr>
 
-              <h4 class="mt-3">Complan <small>Please select one</small></h4>
+              <h4 class="mt-3"><small>Please select one</small></h4>
               <div class="btn-group btn-group-toggle">
 
               	<?php 
@@ -78,12 +79,12 @@ require_once("./function.php");
               			$v = addslashes($v);
               			$fields[]  = "data-{$k}='$v'";
               		}
-              		$price = "$".number_format($data['rate_start'],2);
+              		$price = "&#8369;".number_format($data['rate_start'],2);
               		$fields[] = "data-price='$price'";
               	
               	?>
                 <label id="dc<?php echo $data['rate_id']; ?>" <?php echo implode(" ", $fields); ?>  class="btn btn-default text-center choicescc" onclick="triggercheckout(this)">
-                  <span class="text-xl">$<?php echo number_format($data['rate_start'],2); ?></span>
+                  <span class="text-xl">&#8369;<?php echo number_format($data['rate_start'],2); ?></span>
                   <br>
                   <?php echo ($data['rate_name']); ?>
                 </label>
@@ -95,24 +96,23 @@ require_once("./function.php");
 
             <div class="tab-content p-3" id="nav-tabContent">
               <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> 
-              		Direct Referral Bonus: <span id='referral'>Bonus</span><br/>
-              		Matrix Subscription Bonus: <span id='matrix'>Bonus</span><br/>
+              		Days: <span id='referral'>7 Days</span><br/>
+              		Daily Battle Energy: <span id='matrix'>5 Additional Energy</span><br/>
 
                </div>
             </div>
           </div>
               <div class="bg-gray py-2 px-3 mt-4">
                 <h2 id="pricecc"class="mb-0">
-                  $80.00
+				&#8369;100
                 </h2>
               </div>
 
               <div class="mt-4">
-                <div class="btn btn-primary btn-lg btn-flat" onclick="checkmeout()">
-                  <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                  Proceed To Payment
-                </div>
-
+<div class="callout callout-warning">
+Any payment should send below and email us hello@pocketfighterz.com the reference number and screenshot:<br/>
+<img src='/gcash.jpg' style='width:150px;'>
+</div>
               </div>
 
 

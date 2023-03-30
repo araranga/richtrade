@@ -17,7 +17,9 @@ $field[] = array("type"=>"text","value"=>"password","label"=>"Password");
 $field[] = array("type"=>"email","value"=>"email","label"=>"Email");
 $field[] = array("type"=>"select","value"=>"role","label"=>"Role","option"=>array("0"=>"Member","1"=>"Administrator"));
 
-
+$field[] = array("type"=>"text","value"=>"deadline","label"=>"Battle Points Bonus expiry");
+$field[] = array("type"=>"number","value"=>"deadline_bonus","label"=>"Bonus Battle");
+$field[] = array("type"=>"number","value"=>"pokeballs","label"=>"Scrolls");
 $complan = array();
 $queryx  = mysql_query_md("SELECT * FROM tbl_rate");
 $complan[0] = "Select a Complan";
