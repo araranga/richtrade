@@ -53,7 +53,7 @@ function trans()
 		
 		if($pokemons>=6){
 			
-			$error .= "<i class=\"fa fa-warning\"></i>Maximum of 6 Pokemons per account only (You can sell your other pokemon to get space).<br>";
+			$error .= "<i class=\"fa fa-warning\"></i>Maximum of 6 Warrior per account only (You can sell your other Warrior to get space).<br>";
 		}
 		
 		if($_POST['password']!=$row['password'])
@@ -66,7 +66,7 @@ function trans()
 		}
 		if($_POST['withdraw']>$row['pokeballs']) 
 		{
-			$error .= "<i class=\"fa fa-warning\"></i>Amount to summon(".$_POST['withdraw'].") is insufficient on current pokeballs numbers:(".$row['pokeballs']."). Please input valid amount.<br>";
+			$error .= "<i class=\"fa fa-warning\"></i>You have no Quest Scroll Left. You can buy it on the Item Shop ;)<br>";
 		}
 		
 		

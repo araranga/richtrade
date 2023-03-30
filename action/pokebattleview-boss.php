@@ -444,7 +444,10 @@ font-size: 15px;
 
 <section class="stadium">
 <div class='battlemsg'>
-	<div class='btmsg'><h2><?php echo $winmsg; ?></h2></div>
+	<div class='btmsg'>
+	<a style='text-decoration: underline;margin-left: 74px;margin-top: -35px;position: absolute;' href='/index.php?pages=pokemon'>Go back</a>
+	<h5><?php echo $winmsg; ?></h5>
+	</div>
 </div>
 
 
@@ -515,7 +518,7 @@ font-size: 15px;
 		<div class='enemycover'>
 		  <div id='enemyeffs'>
 		  </div>
-		 <img id='userhero<?php echo $p2['id']; ?>' src='/sprites/boss/<?php echo $p2['main']; ?>' class='rpgleft' style='width:65px'>
+		 <img id='userhero<?php echo $p2['id']; ?>' src='/sprites/boss/<?php echo $p2['main']; ?>' class='rpgleft mainchar' style='width:65px'>
 		</div>
 		</div>
 		 

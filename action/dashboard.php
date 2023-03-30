@@ -73,7 +73,7 @@ $pokemons = mysql_num_rows_md(mysql_query_md("SELECT * FROM tbl_pokemon_users WH
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3><?php echo $pokemons; ?> / 15</h3>
+                <h3><?php echo $pokemons; ?> / 6</h3>
 
                 <p>Warriors</p>
               </div>

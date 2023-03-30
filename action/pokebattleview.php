@@ -458,7 +458,10 @@ font-size: 15px;
 
 <section class="stadium">
 <div class='battlemsg'>
-	<div class='btmsg'><h2><?php echo $winmsg; ?></h2></div>
+	<div class='btmsg'>
+	<a style='text-decoration: underline;margin-left: 74px;margin-top: -35px;position: absolute;' href='/index.php?pages=pokemon'>Go back</a>
+	<h5><?php echo $winmsg; ?></h5>
+	</div>
 </div>
 
 

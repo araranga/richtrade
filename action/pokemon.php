@@ -217,14 +217,27 @@ $countx = $battlecount = mysql_num_rows_md($qx);
           </div>		  
 		  
 </div>
+<div class="callout callout-success">
+      <h5>Your Wallet:</h5>
+<div class="info-box">
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-wallet"></i></span>
 
+              <div class="info-box-content">
+                <span class="info-box-text"></span>
+                <span class="info-box-number">
+                 		<?php echo number_format($_SESSION['balance'],2); ?>
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+</div>
+</div>
 
 
 
 <div class="callout callout-info">
               <h5><i class="fas fa-info"></i> Note:</h5>
               You can battle 1 at a time only per hero. Please wait to load again.<br/>
-			  <strong>Energy reset every 12AM.</strong>
+			  <strong>Energy reset every 12AM PHT.</strong>
 </div>
 
 <div id='pokemonjs' style='display:none;'></div>
