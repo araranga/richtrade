@@ -317,8 +317,13 @@ background-position: 570px 127px!important;
           <i class="fas fa-search fa-user" style='font-size: 33px;color: white;'></i>
         </div>
         <div class="info">
-          <a href="index.php" class="d-block"><?php echo $_SESSION['fullname']; ?></a>
+          <a href="index.php" class="d-block"><?php echo $_SESSION['fullname']; ?>
+		  <br/>
+		  <span><?php echo date("M d, Y h:i A"); ?></span>
+		  </a>
+		  
         </div>
+	
       </div>
 
 
