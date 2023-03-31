@@ -555,8 +555,10 @@ function emblemme(battlehash,emblemdata){
 
 
 	function battleme(battlehash){
-
-		<?php if($battlecount==systemconfig("battlelimit")) { ?>
+<?php
+$totalimit = systemconfig("battlelimit") + $battlebonus;
+?>
+		<?php if($battlecount==$totalimit) { ?>
 			alert("Limit of <?php echo systemconfig("battlelimit"); ?>  battles a days only");
 			return;
 		<?php } ?>
@@ -581,7 +583,7 @@ function emblemme(battlehash,emblemdata){
 	function savebattle(id){
 		
 		
-		<?php if($battlecount==systemconfig("battlelimit")) { ?>
+		<?php if($battlecount==$totalimit) { ?>
 			alert("Limit of <?php echo systemconfig("battlelimit"); ?>  battles a days only");
 			return;
 		<?php } ?>
