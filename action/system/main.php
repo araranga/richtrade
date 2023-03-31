@@ -23,6 +23,9 @@ $field2[] = array("type"=>"text","value"=>"battlelimit","label"=>"Battle Limit."
 $field2[] = array("type"=>"text","value"=>"battlelimitbot","label"=>"Battle Limit Bot.");
 $field2[] = array("type"=>"select","value"=>"ai","label"=>"AI Auto Battle",option=>array("1"=>"Yes","0"=>"No"));
 $field2[] = array("type"=>"text","value"=>"systemfund","label"=>"System Fund.");
+
+
+$field2[] = array("type"=>"editor","value"=>"announcement");
 //
 ?>
 <h2>System Configuration</h2>

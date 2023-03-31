@@ -1,7 +1,123 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pocket Fighters: Grind and get rewarded!</title>
+  
+  
+  
+  <?php
+	
+	$title = "Grind and get rewarded!";
+	
+	
+	if($_GET['pages']=="bosshunt"){
+		
+		$title = "Boss Hunt";
+		
+	}
+
+	if($_GET['pages']=="viewboss"){
+		
+		$title = "Boss Hunt | BOSS-ID: {$_GET['pokeid']}";
+		
+	}	
+	if($_GET['pages']=="viewpoke"){
+		
+		$title = "Warrior Page | ID: {$_GET['pokeid']}";
+		
+	}		
+	if($_GET['pages']=="buypoke"){
+		
+		$title = "Marketplace Buy this Hero | ID: {$_GET['pokeid']}";
+		
+	}			
+	
+	if($_GET['pages']=="pokebattleview-boss"){
+		
+		$title = "Boss Battle View| ID: {$_GET['id']}";
+	}	
+	
+	if($_GET['pages']=="pokebattleview-old"){
+		
+		$title = "PVP Battle View | ID: {$_GET['id']}";
+	}	
+	if($_GET['pages']=="pokebattleview"){
+		
+		$title = "PVP Battle View| ID: {$_GET['id']}";
+	}			
+	
+	if($_GET['pages']=="bossbattle"){
+		
+		$title = "Boss Battle - History";
+		
+	}	
+ 	if($_GET['pages']=="pokebattle"){
+		
+		$title = "PVP Battle - History";
+		
+	} 
+  
+  	if($_GET['pages']=="leaderboard"){
+		
+		$title = "Leaderboard";
+		
+	}
+	
+	
+  	if($_GET['pages']=="guide"){
+		
+		$title = "Guide Page";
+		
+	}
+
+  	if($_GET['pages']=="withdrawhistory"){
+		
+		$title = "Withdrawal History";
+		
+	}
+	
+  	if($_GET['pages']=="withdrawrequest"){
+		
+		$title = "Withdrawal Request - GCASH";
+		
+	}
+  	if($_GET['pages']=="shop"){
+		
+		$title = "Shop";
+		
+	}	
+  	if($_GET['pages']=="market"){
+		
+		$title = "Marketplace";
+		
+	}	
+
+
+  	if($_GET['pages']=="useitems"){
+		
+		$title = "Upgrade you warrior";
+		
+	}		
+	
+  	if($_GET['pages']=="catch"){
+		
+		$title = "Hire a warrior.";
+		
+	}			
+  	if($_GET['pages']=="pokemon"){
+		
+		$title = "My Warriors.";
+		
+	}
+
+  	if($_GET['pages']=="activate"){
+		
+		$title = "Battle Energy Subscription.";
+		
+	}	
+  ?>
+  
+  
+  <title>Pocket Fighters: <?php echo $title; ?></title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -63,7 +179,8 @@
 <meta name="description" content="Play and grind! Beat players and bosses! And get rewarded!!!!! Come on while its free!">
 <meta name="robots" content="index,follow">  
   
-  
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4346027402657123"
+     crossorigin="anonymous"></script>	  
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-L70CN7PG1X"></script>
 <script>
   window.dataLayer = window.dataLayer || [];

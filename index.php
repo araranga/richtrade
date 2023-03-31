@@ -336,6 +336,30 @@ background-position: 570px 127px!important;
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+	  
+<style>
+.annc a {
+	color:black!important;
+}
+</style>
+<div class="callout callout-success annc" style="border-left-color: black!important;">
+
+<div class="info-box">
+
+
+              <div class="info-box-content">
+                <span class="info-box-text"></span>
+                <span class="info-box-number">
+                 		<div style="float:left;background-position: 871px 145px!important;background: url(/sprites/npc/2.png) 0px 143px; width: 144px;height: 144px;border: 1px solid;border-radius: 64px;padding:30px;"></div>
+						<div style='    padding: 13px;float: left;width: 83%;word-break: break-all;'><?php echo (systemconfig("announcement")); ?></div>
+						<br style='clear:both;'/>
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+</div>
+</div>	  
+	  
+	  
             <?php
 
     $currpage = $_GET['pages'];
