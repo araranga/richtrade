@@ -152,12 +152,14 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_bosses ORDER by hp ASC");
 		
 		
 </div>
-
+<?php
+$totalimit = systemconfig("battlelimit") + $battlebonus;
+?>
 <script>
 	function savebattleboss(id){
 		
 		
-		<?php if($battlecount==systemconfig("battlelimit")) { ?>
+		<?php if($battlecount==$totalimit) { ?>
 			alert("Limit of <?php echo systemconfig("battlelimit"); ?>  battles a days only");
 			return;
 		<?php } ?>
@@ -181,7 +183,7 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_bosses ORDER by hp ASC");
 	
 	function battleme(battlehash){
 
-		<?php if($battlecount==systemconfig("battlelimit")) { ?>
+		<?php if($battlecount==$totalimit) { ?>
 			alert("Limit of <?php echo systemconfig("battlelimit"); ?>  battles a days only");
 			return;
 		<?php } ?>

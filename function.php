@@ -1570,9 +1570,27 @@ function savebattleboss($hero,$boss)
         echo "Warrior is not available. ACCT_INC";
         exit();
     }	
+$loaduser = loadmember($herodata['user']);
+$battlebonus = 0;
+	//check for subscription
+ $date_now = new DateTime();
+ $date2    = new DateTime($loaduser['deadline']);
+
+if ($date_now > $date2) {
+	$battlebonus = 0;
+}
+else{
+	$battlebonus = $loaduser['deadline_bonus'];
+}	
+	//
 
 
-    $rewardwin = systemconfig("battlelimit");
+
+
+
+
+    $rewardwin = systemconfig("battlelimit") + $battlebonus;
+
 
     $current = date("Y-m-d");
 
@@ -1581,7 +1599,7 @@ function savebattleboss($hero,$boss)
     $countx = mysql_num_rows_md($qx);
 
     if ($countx >= $rewardwin) {
-        echo "Limited of $rewardwin Battle Per Day only";
+        echo "Limited of $rewardwin Battle Per Day only.";
         exit();
     }
     $query = "SELECT * FROM tbl_achievement WHERE hero='$id' AND boss='$boss_id' AND fightdate >= CURRENT_TIMESTAMP";
