@@ -1,20 +1,68 @@
 <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+              <li class="nav-item">
+                <a href="index.php?pages=catch" class="nav-link">
+                  <i class="nav-icon"><img src="catch.png" style="width: 32px;"></i>
+                  <p>Hire a Fighter</p>
+                </a>
+              </li>
 
+              <li class="nav-item">
+                <a href="index.php?pages=pokemon" class="nav-link">
+                  <i class="nav-icon"><img src="pokemon.png" style="width: 32px;"></i>
+                  <p>My Fighters</p>
+                </a>
+              </li>
 
+              <li class="nav-item">
+                <a href="index.php?pages=useitems" class="nav-link">
+                  <i class="nav-icon"><img src="upgrade.png" style="width: 32px;"></i>
+                  <p>Upgrade Fighters</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="index.php?pages=bosshunt" class="nav-link">
+                  <i class="nav-icon"><img src="bosshunt.png" style="width: 32px;"></i>
+                  <p>Boss Hunt</p>
+                </a>
+              </li>	
+              <li class="nav-item">
+                <a href="index.php?pages=shop" class="nav-link">
+                  <i class="nav-icon"><img src="market.png" style="width: 32px;"></i>
+                  <p>Item Shop</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="index.php?pages=market" class="nav-link">
+                  <i class="nav-icon"><img src="shop.png" style="width: 32px;"></i>
+                  <p>Marketplace</p>
+                </a>
+              </li>
+			  
+              <li class="nav-item">
+                <a href="index.php?pages=pokebattle" class="nav-link">
+                  <i class="nav-icon"><img src="battle.png" style="width: 32px;"></i>
+                  <p>My PVP Battles</p>
+                </a>				
+              </li>
+			  <li class="nav-item">
+				<a href="index.php?pages=bossbattle" class="nav-link">
+				  <i class="nav-icon"><img src="bossbattle.png" style="width: 32px;"></i>
+				  <p>My Boss Battles</p>
+				</a>
+			  </li>			  
+			  
 <li class="nav-item menu-is-opening menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon"><img src="account.png" style="width: 32px;"></i>
               <p>
-                Accounts
+                My Profile
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-
-
-
-
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="index.php?pages=changepass" class="nav-link">
@@ -25,25 +73,13 @@
               <li class="nav-item">
                 <a href="index.php?pages=editprofile" class="nav-link">
                   <i class="fas fa-address-card nav-icon"></i>
-                  <p>Edit Profile</p>
+                  <p>Edit Nickname</p>
                 </a>
               </li>
 	
+           </ul>
 
 
-
-              <li class="nav-item">
-                <a href="index.php?pages=bosshunt" class="nav-link">
-                  <i class="nav-icon"><img src="bosshunt.png" style="width: 32px;"></i>
-                  <p>Boss Hunt</p>
-                </a>
-              </li>	
-			  <li class="nav-item">
-				<a href="index.php?pages=bossbattle" class="nav-link">
-				  <i class="nav-icon"><img src="bossbattle.png" style="width: 32px;"></i>
-				  <p>My Boss Battles</p>
-				</a>
-			  </li>
 
 	
               <li class="nav-item">
@@ -68,60 +104,7 @@
                   <p>Withdrawal History</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="index.php?pages=shop" class="nav-link">
-                  <i class="nav-icon"><img src="market.png" style="width: 32px;"></i>
-                  <p>Item Shop</p>
-                </a>
-              </li>
 
-              <li class="nav-item">
-                <a href="index.php?pages=market" class="nav-link">
-                  <i class="nav-icon"><img src="shop.png" style="width: 32px;"></i>
-                  <p>Marketplace</p>
-                </a>
-              </li>
-
-
-
-              <li class="nav-item">
-                <a href="index.php?pages=useitems" class="nav-link">
-                  <i class="nav-icon"><img src="upgrade.png" style="width: 32px;"></i>
-                  <p>Upgrade Fighters</p>
-                </a>
-              </li>
-			  
-              <li class="nav-item">
-                <a href="index.php?pages=catch" class="nav-link">
-                  <i class="nav-icon"><img src="catch.png" style="width: 32px;"></i>
-                  <p>Hire a Fighter</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="index.php?pages=pokemon" class="nav-link">
-                  <i class="nav-icon"><img src="pokemon.png" style="width: 32px;"></i>
-                  <p>My Fighters</p>
-                </a>
-              </li>
-
-
-
-
-
-
-
-              <li class="nav-item">
-                <a href="index.php?pages=pokebattle" class="nav-link">
-                  <i class="nav-icon"><img src="battle.png" style="width: 32px;"></i>
-                  <p>My Battles</p>
-                </a>				
-              </li>
-
-
-
-           </ul>
-</li>
           <li class="nav-item">
             <a href="index.php?pages=withdrawrequest" class="nav-link">
               <i class="nav-icon"><img src="coin.png" style="width: 32px;"></i>
@@ -133,11 +116,7 @@
 
 
 
-
-
-
-
-
+</li>
 
 
 

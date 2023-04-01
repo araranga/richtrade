@@ -408,7 +408,7 @@ $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
 // More headers
 $headers .= "From: noreply@pocketfighters.com" . "\r\n" .
-"CC: ardeenathanraranga@gmail.com";
+"CC: hero@pocketfighters.com";
 
 mail($to,$subject,$mailtemplate,$headers);
 

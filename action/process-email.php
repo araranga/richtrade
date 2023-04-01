@@ -20,7 +20,7 @@ $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 // More headers
 $headers .= "From: noreply@pocketfighters.com" . "\r\n" .
-"CC: ardeenathanraranga@gmail.com";
+"CC: hero@pocketfighters.com";
 
 
 $mailtemplate = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional //EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
