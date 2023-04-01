@@ -600,6 +600,7 @@ $totalimit = systemconfig("battlelimit") + $battlebonus;
 		jQuery.post("action/savebattle.php", {battlehash: battlehash}, function(result){
 			jQuery('#battlebody').html(result);
 			jQuery('#overlayx').show();
+			generateaibattle();
 			jQuery('#savebattle').hide();
 		});				
 	}

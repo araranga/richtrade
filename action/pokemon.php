@@ -407,6 +407,7 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 			<h5><i class="icon fas fa-info"></i>Hey!</h5>
 			5% of the amount here when you sold this will be go to the system fund and helps the economy better.
+			Please note that any warrior of you on market will not able to cancel it. So please put price that is reasonable ;)
 			</div>			
 			
 			
@@ -594,7 +595,12 @@ $totalimit = systemconfig("battlelimit") + $battlebonus;
 		jQuery.post("action/savebattle.php", {battlehash: battlehash}, function(result){
 			jQuery('#battlebody').html(result);
 			jQuery('#overlayx').show();
+			generateaibattle();
 			jQuery('#savebattle').hide();
 		});				
 	}
+	
+	
+	
+	
 </script>

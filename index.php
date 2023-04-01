@@ -469,11 +469,11 @@ background-position: 570px 127px!important;
 
 
 setInterval(function() { 
-
+/*
 		jQuery.post("action/aigenerate.php", {battlehash: Math.random()}, function(result){
 
 		});	
-
+*/
 		jQuery.post("action/generatebattle.php", {battlehash: Math.random()}, function(result){
 
 		});	
@@ -506,6 +506,28 @@ setInterval(function() {
 	 jQuery('#nohero').trigger('click');
 	 
  });
+ 
+ 
+ 
+ function generateaibattle(){
+	 
+var timeleft = 180;
+var downloadTimer = setInterval(function(){
+  if(timeleft <= 0){
+    clearInterval(downloadTimer);
+    jQuery(".countdowndata").html("----");
+  } else {
+    jQuery(".countdowndata").html("Estimated: "+ timeleft + " seconds remaining");
+  }
+  timeleft -= 1;
+}, 1000);	 
+	 
+    setTimeout(function() { 
+		jQuery.post("action/aigenerate.php", {battlehash: Math.random()}, function(result){
+		});	
+    }, 30000);	 
+	  
+ }
 </script>
 
 

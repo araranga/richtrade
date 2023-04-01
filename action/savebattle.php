@@ -12,3 +12,4 @@ if(empty($_REQUEST['battlehash'])){
 savebattle($_REQUEST['battlehash']);
 
 ?>
+<div class="countdowndata"></div>

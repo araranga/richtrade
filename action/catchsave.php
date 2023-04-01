@@ -49,7 +49,7 @@ function trans()
 	if($_POST['withdraw']!='')
 	{
 		
-		$pokemons = mysql_num_rows_md(mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$accounts_id'"));
+		$pokemons = mysql_num_rows_md(mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$accounts_id' AND (is_market IS NULL OR is_market != 1)"));
 		
 		if($pokemons>=6){
 			
