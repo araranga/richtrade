@@ -1432,8 +1432,18 @@ function savebattlebot($hash, $user)
     $q = mysql_query_md($query);
     $count = mysql_num_rows_md($q);
 
+	
+	$level = $poke['level'];
+	
+	$lessthan = $poke['level'] - 5;
+	$greaterthan = $poke['level'] + 5;
+	if($lessthan<0){
+		$lessthan = 0;
+	}
+
+
     if (empty($count)) {
-        $queryp2 = "SELECT * FROM tbl_battle WHERE p2poke IS NULL AND p1poke!='$id' AND p1user!='$user' AND winner IS NULL";
+        $queryp2 = "SELECT * FROM tbl_battle WHERE p2poke IS NULL AND p1poke!='$id' AND p1user!='$user' AND winner IS NULL AND (level >= $lessthan AND level <= $greaterthan)";
         $qp2 = mysql_query_md($queryp2);
         $countp2 = mysql_num_rows_md($qp2);
         ///player 2
@@ -1446,7 +1456,7 @@ function savebattlebot($hash, $user)
             mysql_query_md("INSERT INTO tbl_battlelog SET user ='$user'");
         } else {
             mysql_query_md(
-                "INSERT INTO tbl_battle SET p1user='$user',p1poke='$id'"
+                "INSERT INTO tbl_battle SET p1user='$user',p1poke='$id',level='$level'"
             );
             mysql_query_md("INSERT INTO tbl_battlelog SET user ='$user'");
         }
@@ -1480,6 +1490,21 @@ function savebattle($hash)
         echo "Warrior is not able to battle since this is on sale on Market.";
         exit();
     }
+	
+	
+	
+	$level = $poke['level'];
+	
+	$lessthan = $poke['level'] - 5;
+	$greaterthan = $poke['level'] + 5;
+	if($lessthan<0){
+		$lessthan = 0;
+	}	
+	
+	
+	
+	
+	
 $loaduser = loadmember($poke['user']);
 $battlebonus = 0;
 	//check for subscription
@@ -1517,7 +1542,7 @@ else{
     $count = mysql_num_rows_md($q);
 
     if (empty($count)) {
-        $queryp2 = "SELECT * FROM tbl_battle WHERE p2poke IS NULL AND p1poke!='$id' AND p1user!='$user' AND winner IS NULL";
+        $queryp2 = "SELECT * FROM tbl_battle WHERE p2poke IS NULL AND p1poke!='$id' AND p1user!='$user' AND winner IS NULL AND (level >= $lessthan AND level <= $greaterthan)";
         $qp2 = mysql_query_md($queryp2);
         $countp2 = mysql_num_rows_md($qp2);
         ///player 2
@@ -1530,7 +1555,7 @@ else{
         } else {
             mysql_query_md("INSERT INTO tbl_battlelog SET user ='$user'");
             mysql_query_md(
-                "INSERT INTO tbl_battle SET p1user='$user',p1poke='$id'"
+                "INSERT INTO tbl_battle SET p1user='$user',p1poke='$id',level='$level'"
             );
         }
 
