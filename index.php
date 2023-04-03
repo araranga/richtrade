@@ -477,6 +477,8 @@ setInterval(function() {
 		jQuery.post("action/generatebattle.php", {battlehash: Math.random()}, function(result){
 
 		});	
+		
+		<?php if($_SESSION['robot']!=1) { ?>
 		jQuery.post("action/generatebattlenoti.php", {battlehash: Math.random()}, function(result){
 			if(result!=''){
 				toastr.success(result);
@@ -484,6 +486,7 @@ setInterval(function() {
 			}
 			
 		});	
+		<?php } ?>
 }, 5000);
 
 

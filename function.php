@@ -1437,8 +1437,8 @@ function savebattlebot($hash, $user)
 	
 	$level = $poke['level'];
 	
-	$lessthan = $poke['level'] - 5;
-	$greaterthan = $poke['level'] + 5;
+	$lessthan = $poke['level'] - 4;
+	$greaterthan = $poke['level'] + 4;
 	if($lessthan<0){
 		$lessthan = 0;
 	}
@@ -1497,8 +1497,8 @@ function savebattle($hash)
 	
 	$level = $poke['level'];
 	
-	$lessthan = $poke['level'] - 5;
-	$greaterthan = $poke['level'] + 5;
+	$lessthan = $poke['level'] - 4;
+	$greaterthan = $poke['level'] + 4;
 	if($lessthan<0){
 		$lessthan = 0;
 	}	
