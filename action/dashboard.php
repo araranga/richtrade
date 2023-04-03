@@ -325,6 +325,21 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 		   <div class="image">  
 				<div class='mainchar flipme showchar' style='background: url(/actors/<?php echo $rowqpokes['front']; ?>) 0px 0px;'></div>		   
 		   </div>
+		   <hr>
+		   <?php
+		   if($rowqpokes['level']!=1){
+			$levelnxt = ($rowqpokes['exp'] - (($rowqpokes['level'] + 1) * 6));
+			$levelnxt2 = round(($levelnxt + 6) / 6,2) * 100;
+		   }else{
+			$levelnxt = ($rowqpokes['exp'] - (($rowqpokes['level']) * 6));
+			$levelnxt2 = round(($levelnxt + 6) / 6,2) * 100;			   
+			   
+		   }
+		   ?>		 
+		   EXP need to LVL <?php echo ($rowqpokes['level'] +  1); ?>(<?php echo $levelnxt2; ?>%):
+		   <progress id="progress<?php echo $rowqpokes['hash']; ?>" value="<?php echo $levelnxt2; ?>" max="100"> <?php echo $levelnxt; ?>% </progress>				   
+		   <hr>		   
+		   
 		   <h4><?php echo $rowqpokes['pokename']; ?></h4>
 		   <p class='idsdata'>ID:#<?php echo $rowqpokes['hash']; ?></p>
 		   <span>Level:<?php echo $rowqpokes['level']; ?></span>

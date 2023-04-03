@@ -275,6 +275,9 @@ else{
               <h5><i class="fas fa-info"></i> Note:</h5>
               You can battle 1 at a time only per hero. Please wait to load again.<br/>
 			  <strong>Energy reset every 12AM PHT.</strong>
+			  <br>
+			  
+			  <strong>Heroes will level every 6 wins of battle</strong>
 </div>
 
 <div id='pokemonjs' style='display:none;'></div>
@@ -309,6 +312,7 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 	while($rowqpokes = mysql_fetch_md_assoc($qpokes)) {
 ?>	
 		<div id='poke-<?php echo $rowqpokes['hash']; ?>' class="ui card">
+		
 		<div class='typedataholder'>
 			<?php foreach(explode("|",$rowqpokes['pokeclass']) as $tt) { ?>
 				
@@ -319,15 +323,32 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 		   <div class="image">  
 				<div class='mainchar flipme showchar' style='background: url(/actors/<?php echo $rowqpokes['front']; ?>) 0px 0px;'></div>		   
 		   </div>
+		   <hr>
+		   <?php
+		   if($rowqpokes['level']!=1){
+			$levelnxt = ($rowqpokes['exp'] - (($rowqpokes['level'] + 1) * 6));
+			$levelnxt2 = round(($levelnxt + 6) / 6,2) * 100;
+		   }else{
+			$levelnxt = ($rowqpokes['exp'] - (($rowqpokes['level']) * 6));
+			$levelnxt2 = round(($levelnxt + 6) / 6,2) * 100;			   
+			   
+		   }
+		   ?>		 
+		   EXP need to LVL <?php echo ($rowqpokes['level'] +  1); ?>(<?php echo $levelnxt2; ?>%):
+		   <progress id="progress<?php echo $rowqpokes['hash']; ?>" value="<?php echo $levelnxt2; ?>" max="100"> <?php echo $levelnxt; ?>% </progress>				   
+		   <hr>	
 		   <h4><?php echo $rowqpokes['pokename']; ?></h4>
 		   <p class='idsdata'>ID:#<?php echo $rowqpokes['hash']; ?></p>
 		   <span>Level:<?php echo $rowqpokes['level']; ?></span>
+   		   
 		   <span>Attack:<?php echo $rowqpokes['attack']; ?></span>
 		   <span>Defense:<?php echo $rowqpokes['defense']; ?></span>
 		   <span>HP:<?php echo $rowqpokes['hp']; ?></span>
 		   <span>Speed:<?php echo $rowqpokes['speed']; ?></span>
 		   <span>Critical:<?php echo $rowqpokes['critical']; ?></span>
 		   <span>Accuracy:<?php echo $rowqpokes['accuracy']; ?></span><br/>	
+		   
+
 
 
 		   <span>
