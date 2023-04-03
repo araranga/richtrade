@@ -232,7 +232,7 @@ function generatebattle($id)
 
 			if($emblem1=='dpsatk'){		
 				
-				$dpsatk  = round($poke1['attack'] * 0.65);
+				$dpsatk  = round($poke1['attack'] * 0.75);
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Fire attacks give +($dpsatk) additonal dmg! Total of ($curdamage";
 				
@@ -243,7 +243,7 @@ function generatebattle($id)
 
 			if($emblem1=='dpshp'){		
 				
-				$dpsatk  = round($hp1 * 0.09);
+				$dpsatk  = round($fullhp1 * 0.09);
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Poison attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 				
@@ -271,7 +271,7 @@ function generatebattle($id)
 			if($emblem1=='regen'){		
 				$lastwill_comp = ($hp1/$fullhp1) * 100;
 				if($lastwill_comp<=26){
-				$dpsatk = round($fullhp1 * 0.26);
+				$dpsatk = round($fullhp1 * 0.35);
 				$hp1  = $hp1 + $dpsatk;
 				$datalogs["damage"] = 0;
 				$datalogs["notes"] = array("REGEN use by: {$poke1["pokename"]}: +($dpsatk)!");
@@ -293,7 +293,7 @@ function generatebattle($id)
 				$is_double_attack = getluck(10,100);		
 				
 				if($is_double_attack==1){
-					$curdamage = $initialdmg + 4;
+					$curdamage = $initialdmg + 100;
 					if($is_crit){
 						$curdamage = $curdamage * 2;
 					}					
@@ -307,9 +307,9 @@ function generatebattle($id)
 	
 			
 	
-			if($emblem1=='dpsregen' && $hp2!=$fullhp2){		
+			if($emblem1=='dpsregen' && $hp1!=$fullhp1){		
 				$dps_regen1++;
-				$dpsatk  = round($poke1['defense'] * 3);
+				$dpsatk  = round($poke1['defense'] * 2.25);
 				$hp1  = $hp1 + $dpsatk;
 				$datalogs["damage"] = 0;
 				$datalogs["notes"] = array("Forest Buff heals use by: {$poke1["pokename"]}: +($dpsatk)!");
@@ -429,7 +429,7 @@ function generatebattle($id)
 			
 			if($emblem1=='doubleattack'){
 
-				$is_double_attack = getluck(8,100);		
+				$is_double_attack = getluck(12,100);		
 				
 				if($is_double_attack==1){
 				$notes = array();
@@ -579,7 +579,7 @@ function generatebattle($id)
 
 			if($emblem2=='dpsatk'){		
 				
-				$dpsatk  = round($poke2['attack'] * 0.65);
+				$dpsatk  = round($poke2['attack'] * 0.75);
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Fire attacks give +($dpsatk) additonal dmg! Total of ($curdamage";
 				
@@ -590,7 +590,7 @@ function generatebattle($id)
 
 			if($emblem2=='dpshp'){		
 				
-				$dpsatk  = round($hp1 * 0.09);
+				$dpsatk  = round($fullhp2 * 0.09);
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Poison attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 				
@@ -618,7 +618,7 @@ function generatebattle($id)
 			if($emblem2=='regen'){		
 				$lastwill_comp = ($hp2/$fullhp2) * 100;
 				if($lastwill_comp<=26){
-				$dpsatk = round($fullhp2 * 0.26);
+				$dpsatk = round($fullhp2 * 0.35);
 				$hp2  = $hp2 + $dpsatk;
 				$datalogs["damage"] = 0;
 				$datalogs["notes"] = array("REGEN use by: {$poke2["pokename"]}:  +($dpsatk)!");
@@ -640,7 +640,7 @@ function generatebattle($id)
 				$is_double_attack = getluck(10,100);		
 				
 				if($is_double_attack==1){
-					$curdamage = $initialdmg + 4;
+					$curdamage = $initialdmg + 100;
 					if($is_crit){
 						$curdamage = $curdamage * 2;
 					}					
@@ -656,7 +656,7 @@ function generatebattle($id)
 	
 			if($emblem2=='dpsregen' && $hp2!=$fullhp2){		
 				$dps_regen2++;
-				$dpsatk  = round($poke2['defense'] * 3);
+				$dpsatk  = round($poke2['defense'] * 2.25);
 				$hp2  = $hp2 + $dpsatk;
 				$datalogs["damage"] = 0;
 				$datalogs["notes"] = array("Forest Buff heals use by: {$poke2["pokename"]}: +($dpsatk)!");
@@ -777,7 +777,7 @@ function generatebattle($id)
 			
 			if($emblem2=='doubleattack'){
 
-				$is_double_attack = getluck(8,100);		
+				$is_double_attack = getluck(12,100);		
 				
 				if($is_double_attack==1){
 				$notes = array();
@@ -1698,11 +1698,11 @@ function generatebattleboss($id)
 	
 	
 	
-	$poke2["hp"] = addmore($poke2["hp"],$acvcount,0.50);
-	$poke2["defense"] = addmore($poke2["defense"],$acvcount,2);
-	$poke2["attack"] = addmore($poke2["attack"],$acvcount,0.50);
+	$poke2["hp"] = addmore($poke2["hp"],$acvcount,0.25);
+	$poke2["defense"] = addmore($poke2["defense"],$acvcount,1.30);
+	$poke2["attack"] = addmore($poke2["attack"],$acvcount,0.35);
 	$poke2["accuracy"] = addmore($poke2["accuracy"],$acvcount,0.50);
-	$poke2["speed"] = addmore($poke2["speed"],$acvcount,0.50);
+	$poke2["speed"] = addmore($poke2["speed"],$acvcount,0.15);
 	
 	
     //var_dump($poke1);
@@ -1886,7 +1886,7 @@ function generatebattleboss($id)
 
 			if($emblem1=='dpshp'){		
 				
-				$dpsatk  = round($hp1 * 0.09);
+				$dpsatk  = round($fullhp1 * 0.09);
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Poison attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 				
@@ -1914,7 +1914,7 @@ function generatebattleboss($id)
 			if($emblem1=='regen'){		
 				$lastwill_comp = ($hp1/$fullhp1) * 100;
 				if($lastwill_comp<=26){
-				$dpsatk = round($fullhp1 * 0.26);
+				$dpsatk = round($fullhp1 * 0.35);
 				$hp1  = $hp1 + $dpsatk;
 				$datalogs["damage"] = 0;
 				$datalogs["notes"] = array("REGEN use by: {$poke1["pokename"]}: +($dpsatk)!");
@@ -1936,7 +1936,7 @@ function generatebattleboss($id)
 				$is_double_attack = getluck(10,100);		
 				
 				if($is_double_attack==1){
-					$curdamage = $initialdmg + 4;
+					$curdamage = $initialdmg + 100;
 			
 					if($is_crit){
 						$curdamage = $curdamage * 2;
@@ -1951,9 +1951,9 @@ function generatebattleboss($id)
 	
 			
 	
-			if($emblem1=='dpsregen' && $hp2!=$fullhp2){		
+			if($emblem1=='dpsregen' && $hp1!=$fullhp1){		
 				$dps_regen1++;
-				$dpsatk  = round($poke1['defense'] * 3);
+				$dpsatk  = round($poke1['defense'] * 2.25);
 				$hp1  = $hp1 + $dpsatk;
 				$datalogs["damage"] = 0;
 				$datalogs["notes"] = array("Forest Buff heals use by: {$poke1["pokename"]}: +($dpsatk)!");
@@ -2073,7 +2073,7 @@ function generatebattleboss($id)
 			
 			if($emblem1=='doubleattack'){
 
-				$is_double_attack = getluck(8,100);		
+				$is_double_attack = getluck(12,100);		
 				
 				if($is_double_attack==1){
 				$notes = array();
@@ -2234,7 +2234,7 @@ function generatebattleboss($id)
 
 			if($emblem2=='dpshp'){		
 				
-				$dpsatk  = round($hp1 * 0.09);
+				$dpsatk  = round($fullhp2 * 0.09);
 				$curdamage = $curdamage + $dpsatk;
 				$notes[] = "Poison attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 				
@@ -2262,7 +2262,7 @@ function generatebattleboss($id)
 			if($emblem2=='regen'){		
 				$lastwill_comp = ($hp2/$fullhp2) * 100;
 				if($lastwill_comp<=26){
-				$dpsatk = round($fullhp2 * 0.26);
+				$dpsatk = round($fullhp2 * 0.35);
 				$hp2  = $hp2 + $dpsatk;
 				$datalogs["damage"] = 0;
 				$datalogs["notes"] = array("REGEN use by: {$poke2["pokename"]} +($dpsatk)!");
@@ -2284,7 +2284,7 @@ function generatebattleboss($id)
 				$is_double_attack = getluck(10,100);		
 				
 				if($is_double_attack==1){
-					$curdamage = $initialdmg + 4;
+					$curdamage = $initialdmg + 100;
 					if($is_crit){
 						$curdamage = $curdamage * 2;
 					}					
@@ -2301,7 +2301,7 @@ function generatebattleboss($id)
 	
 			if($emblem2=='dpsregen' && $hp2!=$fullhp2){		
 				$dps_regen2++;
-				$dpsatk  = round($poke2['defense'] * 3);
+				$dpsatk  = round($poke2['defense'] * 2.25);
 				$hp2  = $hp2 + $dpsatk;
 				$datalogs["damage"] = 0;
 				$datalogs["notes"] = array("Forest Buff heals use by: {$poke2["pokename"]} : +($dpsatk)!");
@@ -2422,7 +2422,7 @@ function generatebattleboss($id)
 			
 			if($emblem2=='doubleattack'){
 
-				$is_double_attack = getluck(8,100);		
+				$is_double_attack = getluck(12,100);		
 				
 				if($is_double_attack==1){
 				$notes = array();

@@ -46,13 +46,18 @@ function trans()
 		mysql_query_md("UPDATE tbl_accounts SET balance='".$sum."' WHERE accounts_id='$accounts_id'");
 		$success = 1;
 		$trans = trans();
-		$convtotal_deduct = ($conv * $_POST['withdraw']) - ($conv * 0.08);
+		$convtotal_deduct = ($conv * $_POST['withdraw']) - (($conv * $_POST['withdraw']) * 0.08);
 		
 		mysql_query_md("INSERT INTO tbl_withdraw_history SET conv='$convtotal_deduct',transnum='$trans',claimtype='".$_POST['claimtype']."',address='".$_POST['address']."',accounts_id='$accounts_id',new_balance='".$sum."',amount='".$_POST['withdraw']."',current_balance='".$row['balance']."'");
 		$q = mysql_query_md("SELECT * FROM tbl_accounts WHERE accounts_id='$accounts_id'");
 		
 		subeco($convtotal);
-
+		
+		
+		$msg = "Withdrawal request from {$_SESSION['email']} / {$_SESSION['fullname']} total of {$convtotal_deduct} to GCash:{$_POST['address']}";
+		
+		mail("ardeenathanraranga@gmail.com","Withdrawal $trans",$msg);
+		mail("satchieee@gmail.com","Withdrawal $trans",$msg);
 		$row = mysql_fetch_md_assoc($q);		
 		}
 	}
