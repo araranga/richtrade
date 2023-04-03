@@ -327,14 +327,13 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 		   </div>
 		   <hr>
 		   <?php
-		   if($rowqpokes['level']!=1){
-			$levelnxt = ($rowqpokes['exp'] - (($rowqpokes['level'] + 1) * 6));
-			$levelnxt2 = round(($levelnxt + 6) / 6,2) * 100;
-		   }else{
 			$levelnxt = ($rowqpokes['exp'] - (($rowqpokes['level']) * 6));
 			$levelnxt2 = round(($levelnxt + 6) / 6,2) * 100;			   
-			   
-		   }
+			
+			if($levelnxt2<=0){
+				$levelnxt2 = 1;
+			}
+			
 		   ?>		 
 		   EXP need to LVL <?php echo ($rowqpokes['level'] +  1); ?>(<?php echo $levelnxt2; ?>%):
 		   <progress id="progress<?php echo $rowqpokes['hash']; ?>" value="<?php echo $levelnxt2; ?>" max="100"> <?php echo $levelnxt; ?>% </progress>				   
