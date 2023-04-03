@@ -861,8 +861,10 @@ function transgen()
 
 function pokelevelup($id, $rate)
 {
+	
+	$rate_hp = $rate + rand(5,25);
     mysql_query_md("UPDATE tbl_pokemon_users SET level = level + 1,attack = attack + $rate,defense = defense + $rate,
-		hp = hp + $rate, speed = speed + 1,critical = critical + 1,accuracy = accuracy + 1
+		hp = hp + $rate_hp, speed = speed + 1,critical = critical + 1,accuracy = accuracy + 1
 		WHERE id='$id'");
 }
 function loadmovesfrontend($hash)
