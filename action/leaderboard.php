@@ -7,10 +7,10 @@ require_once("./function.php");
  $field = array("transnum","email","username","accounts_id");
  $where = getwheresearch($field);
 
- $total = countquery("SELECT *,((win - lose) * 20) as winrate FROM `tbl_pokemon_users` WHERE user IN (SELECT user FROM `tbl_battlelog` where battledata > now() - INTERVAL 2 day GROUP by user) ORDER by winrate DESC LIMIT 10");
+ $total = countquery("SELECT *,((win - lose) * 20) as winrate FROM `tbl_pokemon_users` WHERE user IN (SELECT user FROM `tbl_battlelog` where battledata > now() - INTERVAL 2 day AND user NOT IN (SELECT accounts_id FROM `tbl_accounts` WHERE robot = 1) GROUP by user)   ORDER by winrate DESC LIMIT 10");
  //primary query
  $limit = getlimit(10,$_GET['p']);
- $query = "SELECT *,((win - lose) * 20) as winrate FROM `tbl_pokemon_users` ORDER by winrate DESC LIMIT 10";
+ $query = "SELECT *,((win - lose) * 20) as winrate FROM `tbl_pokemon_users` WHERE user IN (SELECT user FROM `tbl_battlelog` where battledata > now() - INTERVAL 3 day AND user NOT IN (SELECT accounts_id FROM `tbl_accounts` WHERE robot = 1) GROUP by user)   ORDER by winrate DESC LIMIT 10";
 
  $q = mysql_query_md($query);
  $pagecount = getpagecount($total,10);
@@ -24,7 +24,7 @@ require_once("./function.php");
 <p>Top 3: 25 points</p>
 <p>Top 4-5: 10 points</p>
 
-<p>Formula:  WIN - LOSE * 20 AND must be have battle in last 2 days.</p>
+<p>Formula:  WIN - LOSE * 20 AND must be have battle in last 3 days.</p>
 </div>
 <audio controls autoplay loop hidden>
     <source src="https://vgmsite.com/soundtracks/pokemon-gameboy-sound-collection/ijviptkm/120-pokemon%20gym.mp3" type="audio/mpeg">
