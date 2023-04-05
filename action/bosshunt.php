@@ -233,7 +233,7 @@ $totalimit = systemconfig("battlelimit") + $battlebonus;
 			<option value=''>Select hero</option>
 <?php
 $myuser = $_SESSION['accounts_id'];
-$qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser' AND is_market IS NULL");		
+$qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser' AND (is_market IS NULL OR is_market!=1)");		
 
 while($rowqpokes = mysql_fetch_md_assoc($qpokes)) {
 ?>
@@ -244,7 +244,7 @@ while($rowqpokes = mysql_fetch_md_assoc($qpokes)) {
 			</select>
 <?php
 $myuser = $_SESSION['accounts_id'];
-$qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser' AND is_market IS NULL");		
+$qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser' AND (is_market IS NULL OR is_market!=1)");		
 
 	while($rowqpokes = mysql_fetch_md_assoc($qpokes)) {
 ?>	

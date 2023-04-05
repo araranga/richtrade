@@ -215,7 +215,7 @@ if($total==0) {
 											?>
 											
 											</td>
-                                            <td><?php echo $row['battledata']; ?></td>
+                                            <td><?php echo date("M d, Y h:i A",strtotime($row['battledata'])); ?></td>
                                         </tr>
 									<?php
 									}
