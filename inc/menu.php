@@ -132,6 +132,20 @@
             </a>
 
             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="index.php?pages=pokebattleadmin" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>PVP History</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="index.php?pages=bossbattleadmin" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Boss History</p>
+                </a>
+              </li>
+
 
               <li class="nav-item">
                 <a href="index.php?pages=complan" class="nav-link">
