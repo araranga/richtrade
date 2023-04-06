@@ -795,7 +795,7 @@ function deductloser($loserpoke)
     if ($member['balance'] > 50)
     {
 		
-        mysql_query_md("UPDATE tbl_accounts SET balance = balance - 0.5 WHERE accounts_id='{$member['accounts_id']}'");
+        mysql_query_md("UPDATE tbl_accounts SET balance = balance - 0.25 WHERE accounts_id='{$member['accounts_id']}'");
 
     }
 

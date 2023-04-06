@@ -156,7 +156,7 @@ GROUP by a.id*/
                     <!-- The timeline -->
 					<?php
 					
-					 $query = "SELECT * FROM tbl_battle as a WHERE p1poke='{$rowqpokes['id']}' OR p2poke='{$rowqpokes['id']}' ORDER by id DESC";
+					 $query = "SELECT * FROM tbl_battle as a WHERE p1poke='{$rowqpokes['id']}' OR p2poke='{$rowqpokes['id']}' ORDER by id DESC LIMIT 20";
 					 $q = mysql_query_md($query);					
 					?>
                     <div>

@@ -69,6 +69,7 @@ Once you defeated the boss. The current hero will be restricted to fight it agai
               <!-- /.info-box-content -->
 </div>
 </div>
+
 <div id="poke-container" class="ui cards">
 <style>
 #overlayx {

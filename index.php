@@ -384,13 +384,74 @@ background-position: 570px 127px!important;
     </section>
 
 
+<br>
+<br>
+<hr>	
+<style>
+.ads {
+    width: 100%;
+}
 
+.ads2 {
+    margin: 0 auto;
+    width: 70%;
+    padding: 10px;
+}
+</style>
+<div class='ads'>
+<div class='ads2'>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4346027402657123"
+     crossorigin="anonymous"></script>
+<!-- footer main login -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-4346027402657123"
+     data-ad-slot="3301355061"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-4346027402657123"
+     data-ad-slot="4422865049"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>	
+</div>
+</div>
           <!-- right col -->
         </div>
         <!-- /.row (main row) -->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
@@ -449,6 +510,7 @@ background-position: 570px 127px!important;
  jQuery( document ).ready(function() {
       
 
+
       jQuery('.editor').summernote({
         height: 250
       });
@@ -469,6 +531,7 @@ background-position: 570px 127px!important;
 
 
 setInterval(function() { 
+
 /*
 		jQuery.post("action/aigenerate.php", {battlehash: Math.random()}, function(result){
 
