@@ -213,27 +213,6 @@ input.selectchar {
 </div>	
 
 
-<?php
-$q = mysql_query_md("SELECT * FROM tbl_emblem");
-?>
-<H2>EMBLEMS</h2>
-<p>Emblems can customize anytime.</p>
-<div class='tableborderrpg'>
-<table class='table table-striped table-bordered table-hover'>
-	<tr>
-		<td>Emblem Name</td>
-		<td>Effects</td>
-	</tr>
-	
-	<?php while($row = mysql_fetch_md_assoc($q)) { ?>
-	<tr>
-		<td><img src='/sprites/passive/<?php echo ($row['image']); ?>'><?php echo ucfirst($row['title_name']); ?></td>
-		<td><?php echo ucfirst($row['description']); ?></td>
-	</tr>		
-	<?php } ?>
-</table>
-</div>
-
 
 <H2>DAMAGES COMPUTATION</h2>
 <div class="alert alert-info alert-dismissible">

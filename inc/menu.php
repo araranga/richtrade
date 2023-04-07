@@ -76,6 +76,13 @@
                   <p>Edit Nickname</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="index.php?pages=cashflow" class="nav-link">
+                  <i class="fas fa-graph nav-icon">₱</i>
+                  <p>Battle Points Flow</p>
+                </a>
+              </li>			  
+			  
 	
            </ul>
 

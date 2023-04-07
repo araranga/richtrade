@@ -397,7 +397,21 @@ background-position: 570px 127px!important;
     width: 70%;
     padding: 10px;
 }
+ul.pagination {
+
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+ul.pagination a.active {
+    border-radius: 5px;
+}
+
+ul.pagination a {
+    border-radius: 5px;
+}
 </style>
+
 <div class='ads'>
 <div class='ads2'>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4346027402657123"

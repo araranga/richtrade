@@ -43,7 +43,7 @@ function getcoin()
 
     $rowdr2 = mysql_fetch_md_array(mysql_query_md("SELECT SUM(amount) as c FROM `tbl_withdraw_history`"));
 
-    $conv = $systemfund / ($rowdr["c"] + $rowdr2["c"]);
+    $conv = ($systemfund - ($rowdr["c"] + $rowdr2["c"])) * 0.0005;
 
     return $conv;
 }
@@ -173,7 +173,7 @@ function generatebattle($id)
 
             $is_dodge = getluck($poke2["speed"], $acc);
 
-            $curdamage = $curdamage - $poke2["defense"] / 2;
+            $curdamage = $curdamage - ($poke2["defense"] / 2);
 
             if ($curdamage < 0)
             {
@@ -509,7 +509,7 @@ function generatebattle($id)
 
             $is_dodge = getluck($poke1["speed"], $acc);
 
-            $curdamage = $curdamage - $poke1["defense"] / 2;
+            $curdamage = $curdamage - ($poke1["defense"] / 2);
 
             if ($curdamage < 0)
             {
@@ -794,7 +794,7 @@ function deductloser($loserpoke)
 
     if ($member['balance'] > 50)
     {
-		
+		mysql_query_md("INSERT INTO tbl_income SET user='{$member['accounts_id']}', message='You Lose a battle: -0.25'");
         mysql_query_md("UPDATE tbl_accounts SET balance = balance - 0.25 WHERE accounts_id='{$member['accounts_id']}'");
 
     }
@@ -808,6 +808,7 @@ function checkpoke($winnerpoke)
     $userid = $poke["user"];
     $rewardwin = systemconfig("battlereward");
     mysql_query_md("UPDATE tbl_accounts SET balance = balance + $rewardwin WHERE accounts_id='$userid'");
+	mysql_query_md("INSERT INTO tbl_income SET user='{$userid}', message='Your Won a battle: {$rewardwin}'");
 
     $req = $poke["level"] * 6;
 
@@ -1782,7 +1783,7 @@ function generatebattleboss($id)
 
             $is_dodge = getluck($poke2["speed"], $acc);
 
-            $curdamage = $curdamage - $poke2["defense"] / 2;
+            $curdamage = $curdamage - ($poke2["defense"] / 2);
 
             if ($curdamage < 0)
             {
@@ -2119,7 +2120,7 @@ function generatebattleboss($id)
 
             $is_dodge = getluck($poke1["speed"], $acc);
 
-            $curdamage = $curdamage - $poke1["defense"] / 2;
+            $curdamage = $curdamage - ($poke1["defense"] / 2);
 
             if ($curdamage < 0)
             {
@@ -2401,6 +2402,9 @@ function generatebattleboss($id)
 
         $NewDate = Date('y:m:d h:i:s', strtotime('+30 days'));
 
+
+
+		mysql_query_md("INSERT INTO tbl_income SET user='{$getuser}', message='You Won a boss battle: {$reward}'");
         mysql_query_md("INSERT INTO tbl_achievement SET hero='{$poke1['id']}',boss='{$poke2['id']}',victorytext='$vt',fightdate = CURRENT_DATE 	+ INTERVAL 20 DAY");
 
     }

@@ -50,8 +50,8 @@ while($row2 = mysql_fetch_md_assoc($q2)){
 		}
 		
 		
-		addeco($_POST['withdraw'] * 0.20);
-		
+		addeco($_POST['withdraw'] * 0.05);
+		mysql_query_md("INSERT INTO tbl_income SET user='{$accounts_id}', message='Your Purchase a items({$item['title_name']} X $qty): -{$_POST['withdraw']}'");
 		mysql_query_md("UPDATE tbl_accounts SET balance='".$sum."' WHERE accounts_id='$accounts_id'");
 		$success = 1;
 		

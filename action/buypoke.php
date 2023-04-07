@@ -61,7 +61,7 @@ function trans()
 		mysql_query_md("UPDATE tbl_accounts SET balance= balance + {$total}  WHERE accounts_id='{$row1['user']}'");
 
 
-
+		mysql_query_md("INSERT INTO tbl_income SET user='{$row1['user']}', message='Your Marketplace item sold: {$total} to ID:{$_SESSION['fullname']}'");
 
 
 		$row = mysql_fetch_md_assoc($q);		
