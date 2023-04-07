@@ -62,7 +62,27 @@ function trans()
 
 
 		mysql_query_md("INSERT INTO tbl_income SET user='{$row1['user']}', message='Your Marketplace item sold: {$total} to ID:{$_SESSION['fullname']}'");
+		
+		
+		$seller = loadmember($row1['user']);
+		
+		$to = $seller['email'];
+		$subject = "PocketFighterz - MarketPlace - Item Sold: {$poke['hash']}";
+		$txt = "Your Marketplace item sold: {$total} to ID:{$_SESSION['fullname']}";
+		// Always set content-type when sending HTML email
+		$headers = "MIME-Version: 1.0" . "\r\n";
+		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
+		$mailtemp = file_get_contents("sprites/email.txt");
+		
+		
+		$mailtemplate = str_replace(array("SUBJECT_DATA","CONTENT_DATA","P_DATA"),array("MarketPlace - Sold: {$poke['hash']}","You earn: {$total}","Please note that your price was deducted by 20%. for System fee."),$mailtemp);
+
+		// More headers
+		$headers .= "From: noreply@pocketfighters.com" . "\r\n" .
+		"CC: hero@pocketfighters.com";
+
+		mail($to,$subject,$mailtemplate,$headers);		
 
 		$row = mysql_fetch_md_assoc($q);		
 		?>
