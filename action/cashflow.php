@@ -13,7 +13,7 @@ require_once("./function.php");
  $query = "SELECT * FROM tbl_income as a WHERE user='$accounts_id' ORDER by id DESC $limit";
 
  $q = mysql_query_md($query);
- $pagecount = getpagecount($total,10);
+ $pagecount = getpagecount($total,50);
 ?>
 <h2>Points Flow</h2>
 

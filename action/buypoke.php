@@ -63,6 +63,8 @@ function trans()
 
 		mysql_query_md("INSERT INTO tbl_income SET user='{$row1['user']}', message='Your Marketplace item sold: {$total} to ID:{$_SESSION['fullname']}'");
 		
+		mysql_query_md("INSERT INTO tbl_income SET user='{$_SESSION['accounts_id']}', message='You buy Marketplace ITEM: {$total} to ID:{$poke['hash']}'");
+		
 		
 		$seller = loadmember($row1['user']);
 		
