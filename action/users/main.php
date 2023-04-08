@@ -4,7 +4,7 @@
  $total = countquery("SELECT username FROM tbl_accounts $where");
  //primary query
  $limit = getlimit(10,$_GET['p']);
-  $query = "SELECT * FROM tbl_accounts $where $limit";
+  $query = "SELECT * FROM tbl_accounts $where $limit ORDER by balance DESC";
 
  $q = mysql_query_md($query);
  $pagecount = getpagecount($total,10);
