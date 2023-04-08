@@ -822,7 +822,7 @@ function checkpoke($winnerpoke)
     $userid = $poke["user"];
     $rewardwin = systemconfig("battlereward");
     mysql_query_md("UPDATE tbl_accounts SET balance = balance + $rewardwin WHERE accounts_id='$userid'");
-	mysql_query_md("INSERT INTO tbl_income SET user='{$userid}', message='Your Won a battle: {$rewardwin}'");
+	mysql_query_md("INSERT INTO tbl_income SET user='{$userid}', message='You Won a battle: {$rewardwin}'");
 
     $req = $poke["level"] * 6;
 
@@ -1383,7 +1383,8 @@ function savebattlebot($hash, $user)
 
     $user = $poke["user"];
 
-    $rewardwin = systemconfig("battlelimitbot");
+
+   $rewardwin = systemconfig("battlelimitbot") + $_GET['ai'];
 
     $current = date("Y-m-d");
 
