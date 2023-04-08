@@ -88,12 +88,12 @@ no_damage_to
 <table class='table table-striped table-bordered table-hover'>
 	<tr>
 		<td>Type</td>
-		<td>Double Damage From</td>
-		<td>Double Damage To</td>
-		<td>Half Damage From</td>
-		<td>Half Damage To</td>
-		<td>No Damage From</td>
-		<td>No Damage To</td>
+		<td>Enemy:+75% atk</td>
+		<td>User:+75% atk</td>
+		<td>Enemy:-35% atk</td>
+		<td>User:-35% atk</td>
+		<td>Enemy:-65% atk</td>
+		<td>User:-65% atk</td>
 	</tr>
 	
 	<?php while($row = mysql_fetch_md_assoc($q)) { ?>

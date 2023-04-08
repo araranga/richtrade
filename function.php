@@ -153,17 +153,17 @@ function generatebattle($id)
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["double_damage_to"], $v) !== false)
                 {
                     $adddmg = "Its super effective!";
-                    $curdamage = $curdamage * 2;
+                    $curdamage = $curdamage + ($curdamage * 0.75);
                 }
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["half_damage_to"], $v) !== false)
                 {
                     $adddmg = "Its not effective!";
-                    $curdamage = $curdamage / 2;
+                    $curdamage = $curdamage - ($curdamage * 0.35);
                 }
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["no_damage_to"], $v) !== false)
                 {
                     $adddmg = "It cause super low damage!";
-                    $curdamage = $curdamage / 3;
+                    $curdamage = $curdamage - ($curdamage * 0.55);
                 }
             }
 
@@ -289,11 +289,18 @@ function generatebattle($id)
 
             }
 
-            if ($emblem1 == 'dpsregen' && $hp1 != $fullhp1)
+            if ($emblem1 == 'dpsregen' && $hp1 <= $fullhp1)
             {
                 $dps_regen1++;
                 $dpsatk = round($poke1['defense'] * 1.5);
                 $hp1 = $hp1 + $dpsatk;
+				
+				if($hp1>=$fullhp1){
+					
+					$hp1 = $fullhp1;
+				}
+				
+				
                 $datalogs["damage"] = 0;
                 $datalogs["notes"] = array(
                     "Forest Buff heals use by: {$poke1["pokename"]}: +($dpsatk)!"
@@ -489,17 +496,17 @@ function generatebattle($id)
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["double_damage_to"], $v) !== false)
                 {
                     $adddmg = "Its super effective!";
-                    $curdamage = $curdamage * 2;
+                    $curdamage = $curdamage + ($curdamage * 0.65);
                 }
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["half_damage_to"], $v) !== false)
                 {
                     $adddmg = "Its not effective!";
-                    $curdamage = $curdamage / 2;
+                    $curdamage = $curdamage - ($curdamage * 0.35);
                 }
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["no_damage_to"], $v) !== false)
                 {
                     $adddmg = "It cause super low damage!";
-                    $curdamage = $curdamage / 3;
+                    $curdamage = $curdamage - ($curdamage * 0.55);
                 }
             }
 
@@ -613,11 +620,18 @@ function generatebattle($id)
 
             }
 
-            if ($emblem2 == 'dpsregen' && $hp2 != $fullhp2)
+            if ($emblem2 == 'dpsregen' && $hp2 <= $fullhp2)
             {
                 $dps_regen2++;
                 $dpsatk = round($poke2['defense'] * 1.5);
                 $hp2 = $hp2 + $dpsatk;
+				
+				if($hp2>=$fullhp2){
+					
+					$hp2 = $fullhp2;
+				}				
+				
+				
                 $datalogs["damage"] = 0;
                 $datalogs["notes"] = array(
                     "Forest Buff heals use by: {$poke2["pokename"]}: +($dpsatk)!"
@@ -1763,17 +1777,17 @@ function generatebattleboss($id)
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["double_damage_to"], $v) !== false)
                 {
                     $adddmg = "Its super effective!";
-                    $curdamage = $curdamage * 2;
+                    $curdamage = $curdamage + ($curdamage * 0.65);
                 }
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["half_damage_to"], $v) !== false)
                 {
                     $adddmg = "Its not effective!";
-                    $curdamage = $curdamage / 2;
+                    $curdamage = $curdamage - ($curdamage * 0.35);
                 }
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["no_damage_to"], $v) !== false)
                 {
                     $adddmg = "It cause super low damage!";
-                    $curdamage = $curdamage / 3;
+                    $curdamage = $curdamage - ($curdamage * 0.75);
                 }
             }
 
@@ -2100,17 +2114,17 @@ function generatebattleboss($id)
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["double_damage_to"], $v) !== false)
                 {
                     $adddmg = "Its super effective!";
-                    $curdamage = $curdamage * 2;
+                    $curdamage = $curdamage + ($curdamage * 0.65);
                 }
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["half_damage_to"], $v) !== false)
                 {
                     $adddmg = "Its not effective!";
-                    $curdamage = $curdamage / 2;
+                    $curdamage = $curdamage - ($curdamage * 0.35);
                 }
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["no_damage_to"], $v) !== false)
                 {
                     $adddmg = "It cause super low damage!";
-                    $curdamage = $curdamage / 3;
+                    $curdamage = $curdamage - ($curdamage * 0.75);
                 }
             }
 
