@@ -321,7 +321,7 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 		</div>
 		
 		   <div class="image">  
-				<div class='mainchar flipme showchar' style='background: url(/actors/<?php echo $rowqpokes['front']; ?>) 0px 0px;'></div>		   
+				<div class='mainchar flipme showcharbattle' style='background: url(/actors/<?php echo $rowqpokes['front']; ?>) 0px 0px;'></div>		   
 		   </div>
 		   <hr>
 		   <?php
@@ -345,7 +345,7 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 		   <span>HP:<?php echo $rowqpokes['hp']; ?></span>
 		   <span>Speed:<?php echo $rowqpokes['speed']; ?></span>
 		   <span>Critical:<?php echo $rowqpokes['critical']; ?></span>
-		   <span>Accuracy:<?php echo $rowqpokes['accuracy']; ?></span><br/>	
+		   <span>Accuracy:<?php echo $rowqpokes['accuracy']; ?></span>
 		   
 
 
@@ -375,17 +375,53 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 			
 		   ?>
 		   
-		   </span>
-		   <br/>	
+		   </span>	
+		   <div id='rowqpoke<?php echo $rowqpokes['id']; ?>' class='loadingbattle'>
+			<?php
+				$queryxcountbattle = "SELECT * FROM tbl_battle WHERE (p1poke='{$rowqpokes['id']}' OR p2poke='{$rowqpokes['id']}') AND winner IS NULL";
+				$qxqueryxcountbattle = mysql_query_md($queryxcountbattle);
+				$countxbattle = mysql_num_rows_md($qxqueryxcountbattle);
+				if(!empty($countxbattle)){
+					?>
+					<i class="fas fa-spinner fa-spin"></i>Your Warrior already have pending battle. Please wait. See here: <a href="index.php?pages=pokebattle">Battles!</a>
+					<?php
+				}
+			?>		
+			<?php
+				$queryxcountbattle = "SELECT * FROM tbl_battle WHERE (p1poke='{$rowqpokes['id']}') AND winner IS NOT NULL AND v1 IS NULL";
+				$qxqueryxcountbattle = mysql_query_md($queryxcountbattle);
+				$countxbattle = mysql_num_rows_md($qxqueryxcountbattle);
+				if(!empty($countxbattle)){
+					$databattlecount = mysql_fetch_md_assoc($qxqueryxcountbattle);
+					?>
+					Your battle is ready view  <a href='/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>'>here</a><hr>
+					<?php
+				}
+			?>		
+
+			<?php
+				$queryxcountbattle = "SELECT * FROM tbl_battle WHERE (p2poke='{$rowqpokes['id']}') AND winner IS NOT NULL AND v2 IS NULL";
+				$qxqueryxcountbattle = mysql_query_md($queryxcountbattle);
+				$countxbattle = mysql_num_rows_md($qxqueryxcountbattle);
+				if(!empty($countxbattle)){
+					$databattlecount = mysql_fetch_md_assoc($qxqueryxcountbattle);
+					?>
+					Your battle is ready view  <a href='/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>'>here</a><hr>
+					<?php
+				}
+			?>		
+
+   
+		   
+		   </div>
+		   
 			<input class="btn btn-info btn-lg btnbattle" type="button" onclick="window.location='index.php?pages=viewpoke&pokeid=<?php echo $rowqpokes['hash']; ?>'" name="battle" value="View">
 			<?php if(empty($rowqpokes['is_market'])) { ?>
-			<br/>
+			 <input class="btn btn-primary btn-lg btnbattle" type="button" onclick="battleme('<?php echo $rowqpokes['hash']; ?>','<?php echo $rowqpokes['id']; ?>')" name="battle" value="Battle!">
 		   <input class="btn btn-success btn-lg btnbattle" style='background-color: green;' type="button" onclick="emblemme('<?php echo $rowqpokes['hash']; ?>',<?php echo $rowqpokes['emblem']; ?>)" name="emblem" value="Update Emblem">			
-		   <br>
-		   <input class="btn btn-primary btn-lg btnbattle" type="button" onclick="battleme('<?php echo $rowqpokes['hash']; ?>')" name="battle" value="Battle!">
-		   <br>
+		  
+		   
 		   <input class="btn btn-secondary btn-lg btnbattle" type="button" onclick="window.location='index.php?pages=useitems&pokeid=<?php echo $rowqpokes['id']; ?>'" name="battle" value="Upgrade!">
-		   <br>
 		   <input class="btn btn-info btn-lg btnbattle" style='background-color: #ff0000;' type="button" onclick="sellme('<?php echo $rowqpokes['hash']; ?>')" name="sell" value="Sell!">
 
 			<?php } else { 
@@ -575,48 +611,17 @@ function emblemme(battlehash,emblemdata){
 
 
 
-	function battleme(battlehash){
-<?php
-$totalimit = systemconfig("battlelimit") + $battlebonus;
-?>
-		<?php if($battlecount==$totalimit) { ?>
-			alert("Limit of <?php echo systemconfig("battlelimit"); ?>  battles a days only");
-			return;
-		<?php } ?>
-		
-		jQuery('.hashbattle').text(battlehash);
-		jQuery('#battlenow').trigger('click');
-		jQuery('#battlebody').html("");
-		
-		var htmlpoke = jQuery('#poke-'+battlehash).html();
-		jQuery('#battlebody2').html("<div class=\"ui card\">"+htmlpoke+"</div>");
-		
-		jQuery('#savebattle').attr('battlehash',battlehash);
-
-	
-		
-		
-		//toastr.success("Your battle has done watch here <a href=''>Watch</a>");
-		
+	function battleme(battlehash,id){
+		savebattle(battlehash,id);
 	}
 	
 	
-	function savebattle(id){
-		
-		
-		<?php if($battlecount==$totalimit) { ?>
-			alert("Limit of <?php echo systemconfig("battlelimit"); ?>  battles a days only");
-			return;
-		<?php } ?>
-		
-		var battlehash = jQuery(id).attr('battlehash');
-		
+	function savebattle(battlehash,id){
+			
+		jQuery('#rowqpokes'+id).html('');
 		jQuery('#battlebody').html("<p>Loading..</p>");
 		jQuery.post("action/savebattle.php", {battlehash: battlehash}, function(result){
-			jQuery('#battlebody').html(result);
-			jQuery('#overlayx').show();
-			generateaibattle();
-			jQuery('#savebattle').hide();
+			jQuery('#rowqpoke'+id).html(result);
 		});				
 	}
 	
@@ -624,3 +629,14 @@ $totalimit = systemconfig("battlelimit") + $battlebonus;
 	
 	
 </script>
+<style>
+.btn-group-lg>.btn, .btn-lg {
+    font-size:12px!important;
+    margin-top:5px;
+    padding:10px;
+}
+.mainchar.flipme.showcharbattle {
+    margin-top: 55px;
+    margin-left: 83px;
+}
+</style>

@@ -77,7 +77,7 @@ $winmsg = $winnerdata['pokename']." WINS!";
 ?>
 
 
-<h2 style='word-break: break-all;'>Battle View ID#: <p><?php echo md5($_GET['id']); ?></p></h2>
+<h6 style='word-break: break-all;'>Battle View ID#: <p><?php echo md5($_GET['id']); ?></p></h6>
 <style>
 
 @media screen and (max-width: 600px) {
@@ -238,6 +238,9 @@ foreach($images as $image) {
 	$character[$finalimg] = $finalimg;
 }
 ?>	
+.annc{
+	display:none;
+}
 .stadium {
   background: url('/sprites/arena/<?php echo array_rand($character); ?>') 175px 521px;
  

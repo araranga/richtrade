@@ -10,6 +10,6 @@ if(empty($_REQUEST['battlehash'])){
 
 
 savebattle($_REQUEST['battlehash']);
-
+$poke = loadpoke($_REQUEST['battlehash']);
 ?>
-<div class="countdowndata"></div>
+<div class="countdowndata<?php echo $poke['id']; ?>" data-hash='<?php echo $_REQUEST['battlehash']; ?>'></div>

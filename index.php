@@ -546,11 +546,9 @@ ul.pagination a {
 
 setInterval(function() { 
 
-/*
 		jQuery.post("action/aigenerate.php", {battlehash: Math.random()}, function(result){
 
 		});	
-*/
 		jQuery.post("action/generatebattle.php", {battlehash: Math.random()}, function(result){
 
 		});	
@@ -558,7 +556,21 @@ setInterval(function() {
 		<?php if($_SESSION['robot']!=1) { ?>
 		jQuery.post("action/generatebattlenoti.php", {battlehash: Math.random()}, function(result){
 			if(result!=''){
-				toastr.success(result);
+				//toastr.success(result);
+				
+				<?php if($_GET['pages']!='pokebattleview') { ?>
+				if(jQuery('#modal-battleload:visible').length)
+				{
+					
+				}else{
+					jQuery('#battlenowload').trigger('click');
+					jQuery('#battleloadbody').html(result);								
+				}
+				<?php } ?>
+				
+				<?php if($_GET['pages']=='pokebattleview') { ?>
+				toastr.success(result);	
+				<?php } ?>
 
 			}
 			
@@ -588,28 +600,28 @@ setInterval(function() {
  });
  
  
- 
- function generateaibattle(){
-	 
-var timeleft = 180;
-var downloadTimer = setInterval(function(){
-  if(timeleft <= 0){
-    clearInterval(downloadTimer);
-    jQuery(".countdowndata").html("----");
-  } else {
-    jQuery(".countdowndata").html("Estimated: "+ timeleft + " seconds remaining");
-  }
-  timeleft -= 1;
-}, 1000);	 
-	 
-    setTimeout(function() { 
-		jQuery.post("action/aigenerate.php", {battlehash: Math.random()}, function(result){
-		});	
-    }, 30000);	 
-	  
- }
 </script>
 
+
+<button id='battlenowload' type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-battleload">
+                  Launch Primary Modal
+                </button>
+<div class="modal fade" id="modal-battleload" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Your Battle Is Ready!!</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span></button>
+            </div>
+			
+            <div id='battleloadbody' class="modal-body">
+            </div>			
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+</div>		
 
 </body>
 </html>
