@@ -221,12 +221,14 @@ function generatebattle($id)
 
             if ($emblem1 == 'dpshp')
             {
+				
+				$dpshpadd = 0.01 * $roundp1;
 
-                $dpsatk = round($fullhp1 * 0.09);
+                $dpsatk = round($fullhp1 * (0.06 + $dpshpadd));
                 $curdamage = $curdamage + $dpsatk;
                 $notes[] = "Poison attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 
-                if ($roundp1 == 4)
+                if ($roundp1 == 5)
                 {
                     $emblem1 = '';
                 }
@@ -289,7 +291,7 @@ function generatebattle($id)
 
             }
 
-            if ($emblem1 == 'dpsregen' && $hp1 <= $fullhp1)
+            if ($emblem1 == 'dpsregen' && $hp1 < $fullhp1)
             {
                 $dps_regen1++;
                 $dpsatk = round($poke1['defense'] * 1.5);
@@ -552,12 +554,12 @@ function generatebattle($id)
 
             if ($emblem2 == 'dpshp')
             {
-
-                $dpsatk = round($fullhp2 * 0.09);
+				$dpshpadd = 0.01 * $roundp2;
+                $dpsatk = round($fullhp2 * (0.06 + $dpshpadd));
                 $curdamage = $curdamage + $dpsatk;
                 $notes[] = "Poison attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 
-                if ($roundp2 == 4)
+                if ($roundp2 == 5)
                 {
                     $emblem2 = '';
                 }
@@ -620,7 +622,7 @@ function generatebattle($id)
 
             }
 
-            if ($emblem2 == 'dpsregen' && $hp2 <= $fullhp2)
+            if ($emblem2 == 'dpsregen' && $hp2 < $fullhp2)
             {
                 $dps_regen2++;
                 $dpsatk = round($poke2['defense'] * 1.5);
@@ -1847,11 +1849,13 @@ function generatebattleboss($id)
             if ($emblem1 == 'dpshp')
             {
 
-                $dpsatk = round($fullhp1 * 0.09);
+				$dpshpadd = 0.01 * $roundp1;
+
+                $dpsatk = round($fullhp1 * (0.06 + $dpshpadd));
                 $curdamage = $curdamage + $dpsatk;
                 $notes[] = "Poison attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 
-                if ($roundp1 == 4)
+                if ($roundp1 == 5)
                 {
                     $emblem1 = '';
                 }
@@ -2171,12 +2175,12 @@ function generatebattleboss($id)
 
             if ($emblem2 == 'dpshp')
             {
-
-                $dpsatk = round($fullhp2 * 0.09);
+				$dpshpadd = 0.01 * $roundp2;
+                $dpsatk = round($fullhp2 * (0.06 + $dpshpadd));
                 $curdamage = $curdamage + $dpsatk;
                 $notes[] = "Poison attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 
-                if ($roundp2 == 4)
+                if ($roundp2 == 5)
                 {
                     $emblem2 = '';
                 }
