@@ -860,7 +860,7 @@ function loadmovesfrontend($hash)
     $skillarray = [];
     while ($skillsd = mysql_fetch_md_assoc($skillsq))
     {
-        $skillarray[$skillsd["identifier"]] = $skillsd;
+        $skillarray[$skillsd["id"]] = $skillsd;
     }
 
     return $skillarray;
@@ -1406,8 +1406,8 @@ function savebattlebot($hash, $user)
 
     $level = $poke['level'];
 
-    $lessthan = $poke['level'] - 6;
-    $greaterthan = $poke['level'] + 6;
+    $lessthan = $poke['level'] - systemconfig("gaplevel");
+    $greaterthan = $poke['level'] + systemconfig("gaplevel");
     if ($lessthan < 0)
     {
         $lessthan = 0;
@@ -1415,7 +1415,7 @@ function savebattlebot($hash, $user)
 
     if (empty($count))
     {
-        $queryp2 = "SELECT * FROM tbl_battle WHERE p2poke IS NULL AND p1poke!='$id' AND p1user!='$user' AND winner IS NULL AND (level >= $lessthan AND level <= $greaterthan)";
+        $queryp2 = "SELECT * FROM tbl_battle WHERE p2poke IS NULL AND p1poke!='$id' AND p1user!='$user' AND winner IS NULL AND (level >= $lessthan AND level <= $greaterthan) ORDER by level ASC";
         $qp2 = mysql_query_md($queryp2);
         $countp2 = mysql_num_rows_md($qp2);
         ///player 2
@@ -1469,8 +1469,8 @@ function savebattle($hash)
 
     $level = $poke['level'];
 
-    $lessthan = $poke['level'] - 6;
-    $greaterthan = $poke['level'] + 6;
+    $lessthan = $poke['level'] - systemconfig("gaplevel");
+    $greaterthan = $poke['level'] + systemconfig("gaplevel");
     if ($lessthan < 0)
     {
         $lessthan = 0;
@@ -1513,7 +1513,7 @@ function savebattle($hash)
 
     if (empty($count))
     {
-        $queryp2 = "SELECT * FROM tbl_battle WHERE p2poke IS NULL AND p1poke!='$id' AND p1user!='$user' AND winner IS NULL AND (level >= $lessthan AND level <= $greaterthan)";
+        $queryp2 = "SELECT * FROM tbl_battle WHERE p2poke IS NULL AND p1poke!='$id' AND p1user!='$user' AND winner IS NULL AND (level >= $lessthan AND level <= $greaterthan) ORDER by level ASC";
         $qp2 = mysql_query_md($queryp2);
         $countp2 = mysql_num_rows_md($qp2);
         ///player 2

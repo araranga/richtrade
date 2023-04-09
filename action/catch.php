@@ -214,6 +214,7 @@ input.selectchar {
 
 
 
+
 <H2>DAMAGES COMPUTATION</h2>
 <div class="alert alert-info alert-dismissible">
 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -236,31 +237,24 @@ no_damage_to
 <table class='table table-striped table-bordered table-hover'>
 	<tr>
 		<td>Type</td>
-		<td>Enemy:+75% atk</td>
-		<td>User:+75% atk</td>
-		<td>Enemy:-35% atk</td>
-		<td>User:-35% atk</td>
-		<td>Enemy:-65% atk</td>
-		<td>User:-65% atk</td>
+		<td colspan='3'>Attack (Outgoing)</td>
+		<td colspan='3'>Defense (Ingoing)</td>
 	</tr>
 	
+	<tr style='text-align:center;font-weight:700;'>
+		<td>-</td>
+		<td>+75%</td>
+		<td>-35%</td>
+		<td>-65%</td>
+		<td>+75%</td>
+		<td>-35%</td>
+		<td>-65%</td>
+	</tr>
 	<?php while($row = mysql_fetch_md_assoc($q)) { ?>
 	<tr>
 		<td><?php echo ucfirst($row['type']); ?></td>
 		
-		
-		
-		<td>
-		<?php foreach(explode("|",$row['double_damage_from']) as $tt) { 
-			
-			if(!empty($tt)) { 
-		
-		?>
-		<div class='typesdata <?php echo $tt; ?>'><img src='sprites/type/<?php echo strtolower($tt); ?>.png' style='width:25px;margin-right:1px;'><?php echo ucfirst($tt); ?></div>
-		<?php } } ?>
-		</td>
-
-
+	
 
 
 		<td>
@@ -272,21 +266,7 @@ no_damage_to
 		<div class='typesdata <?php echo $tt; ?>'><img src='sprites/type/<?php echo strtolower($tt); ?>.png' style='width:25px;margin-right:1px;'><?php echo ucfirst($tt); ?></div>
 		<?php } } ?>
 		</td>
-
-
-
-
-		<td>
-		<?php foreach(explode("|",$row['half_damage_from']) as $tt) { 
-			
-			if(!empty($tt)) { 
-		
-		?>
-		<div class='typesdata <?php echo $tt; ?>'><img src='sprites/type/<?php echo strtolower($tt); ?>.png' style='width:25px;margin-right:1px;'><?php echo ucfirst($tt); ?></div>
-		<?php } } ?>
-		</td>
-		
-		
+	
 		<td>
 		<?php foreach(explode("|",$row['half_damage_to']) as $tt) { 
 			
@@ -297,16 +277,6 @@ no_damage_to
 		<?php } } ?>
 		</td>
 
-
-		<td>
-		<?php foreach(explode("|",$row['no_damage_from']) as $tt) { 
-			
-			if(!empty($tt)) { 
-		
-		?>
-		<div class='typesdata <?php echo $tt; ?>'><img src='sprites/type/<?php echo strtolower($tt); ?>.png' style='width:25px;margin-right:1px;'><?php echo ucfirst($tt); ?></div>
-		<?php } } ?>
-		</td>		
 
 
 		<td>
@@ -321,8 +291,50 @@ no_damage_to
 
 
 
+	
+		
+		<td>
+		<?php foreach(explode("|",$row['double_damage_from']) as $tt) { 
+			
+			if(!empty($tt)) { 
+		
+		?>
+		<div class='typesdata <?php echo $tt; ?>'><img src='sprites/type/<?php echo strtolower($tt); ?>.png' style='width:25px;margin-right:1px;'><?php echo ucfirst($tt); ?></div>
+		<?php } } ?>
+		</td>
+		<td>
+		<?php foreach(explode("|",$row['half_damage_from']) as $tt) { 
+			
+			if(!empty($tt)) { 
+		
+		?>
+		<div class='typesdata <?php echo $tt; ?>'><img src='sprites/type/<?php echo strtolower($tt); ?>.png' style='width:25px;margin-right:1px;'><?php echo ucfirst($tt); ?></div>
+		<?php } } ?>
+		</td>
+		
+
+		<td>
+		<?php foreach(explode("|",$row['no_damage_from']) as $tt) { 
+			
+			if(!empty($tt)) { 
+		
+		?>
+		<div class='typesdata <?php echo $tt; ?>'><img src='sprites/type/<?php echo strtolower($tt); ?>.png' style='width:25px;margin-right:1px;'><?php echo ucfirst($tt); ?></div>
+		<?php } } ?>
+		</td>	
+		
+		
+
+
+
+
+
+
 
 	</tr>	
 	<?php } ?>
 </table>
+
+
+
 </div>
