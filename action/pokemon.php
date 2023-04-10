@@ -314,8 +314,7 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 		<div id='poke-<?php echo $rowqpokes['hash']; ?>' class="ui card">
 		
 		<div class='typedataholder'>
-			<?php foreach(explode("|",$rowqpokes['pokeclass']) as $tt) { ?>
-				
+			<?php foreach(explode("|",$rowqpokes['pokeclass']) as $tt) { ?>			
 				<div class='typesdata <?php echo $tt; ?>'><img src='sprites/type/<?php echo strtolower($tt); ?>.png' style='width:25px;margin-right:1px;'><?php echo ucfirst($tt); ?></div>
 			<?php } ?>	
 		</div>
@@ -388,26 +387,31 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 				}
 			?>		
 			<?php
+			
+				$view = 0;
 				$queryxcountbattle = "SELECT * FROM tbl_battle WHERE (p1poke='{$rowqpokes['id']}') AND winner IS NOT NULL AND v1 IS NULL";
 				$qxqueryxcountbattle = mysql_query_md($queryxcountbattle);
 				$countxbattle = mysql_num_rows_md($qxqueryxcountbattle);
 				if(!empty($countxbattle)){
 					$databattlecount = mysql_fetch_md_assoc($qxqueryxcountbattle);
+					$view = 1;
 					?>
-					Your battle is ready view  <a href='/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>'>here</a><hr>
+					Your battle is ready view  <a href='/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>&v1=1'>here</a><hr>
 					<?php
 				}
 			?>		
 
 			<?php
+				if($view==0){
 				$queryxcountbattle = "SELECT * FROM tbl_battle WHERE (p2poke='{$rowqpokes['id']}') AND winner IS NOT NULL AND v2 IS NULL";
 				$qxqueryxcountbattle = mysql_query_md($queryxcountbattle);
 				$countxbattle = mysql_num_rows_md($qxqueryxcountbattle);
 				if(!empty($countxbattle)){
 					$databattlecount = mysql_fetch_md_assoc($qxqueryxcountbattle);
 					?>
-					Your battle is ready view  <a href='/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>'>here</a><hr>
+					Your battle is ready view  <a href='/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>&v2=1'>here</a><hr>
 					<?php
+				}
 				}
 			?>		
 

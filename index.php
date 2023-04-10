@@ -569,7 +569,7 @@ setInterval(function() {
 				<?php } ?>
 				
 				<?php if($_GET['pages']=='pokebattleview') { ?>
-				toastr.success(result);	
+				//toastr.success(result);	
 				<?php } ?>
 
 			}
@@ -603,7 +603,7 @@ setInterval(function() {
 </script>
 
 
-<button id='battlenowload' type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-battleload">
+<button id='battlenowload' type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-battleload" style='display:none;'>
                   Launch Primary Modal
                 </button>
 <div class="modal fade" id="modal-battleload" style="display: none;">
