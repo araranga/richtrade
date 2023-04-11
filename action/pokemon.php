@@ -396,7 +396,7 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 					$databattlecount = mysql_fetch_md_assoc($qxqueryxcountbattle);
 					$view = 1;
 					?>
-					Your battle is ready view  <a href='/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>&v1=1'>here</a><hr>
+					Your battle is ready view  <a href='/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>&v=1'>here</a><hr>
 					<?php
 				}
 			?>		
@@ -409,7 +409,7 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 				if(!empty($countxbattle)){
 					$databattlecount = mysql_fetch_md_assoc($qxqueryxcountbattle);
 					?>
-					Your battle is ready view  <a href='/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>&v2=1'>here</a><hr>
+					Your battle is ready view  <a href='/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>&v=2'>here</a><hr>
 					<?php
 				}
 				}

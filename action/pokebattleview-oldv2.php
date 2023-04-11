@@ -13,9 +13,6 @@ $count = mysql_num_rows_md($q);
 $row = mysql_fetch_md_assoc($q);
 $logs = $row['logs'];
 
-$fullhp1 = $row['fullhp1'];
-$fullhp2 = $row['fullhp2'];
-
 $checkold =  mysql_num_rows_md(mysql_query_md("SELECT * FROM tbl_battle WHERE id ='$id' AND logs LIKE '%hp1%'"));
 if(empty($checkold))
 {
@@ -26,15 +23,6 @@ window.location = '/index.php?pages=pokebattleview-old&id=<?php echo $id; ?>'
 <?php
 }
 
-$checkold =  mysql_num_rows_md(mysql_query_md("SELECT * FROM tbl_battle WHERE id ='$id' AND logs LIKE '%hp1%' AND fullhp1 IS NOT NULL"));
-if(!empty($checkold))
-{
-?>
-<script>
-window.location = '/index.php?pages=pokebattleview-oldv2&id=<?php echo $id; ?>&v=<?php echo $_GET['v']; ?>'
-</script>
-<?php
-}
 
 
 $logs = json_decode($row['logs'],true);
@@ -491,8 +479,8 @@ font-size: 15px;
 			</h2>
 			<p><?php $x2= loadmember($p1['user']); echo $x2['fullname'];?></p>
             <div>
-               <progress id='progressp1' max="<?php echo $fullhp1; ?>" value="<?php echo $fullhp1; ?>"></progress>
-               <p><span id='progressp1txt'><?php echo $fullhp1; ?></span>/<?php echo $fullhp1; ?></p>
+               <progress id='progressp1' max="<?php echo $p1['hp']; ?>" value="<?php echo $p1['hp']; ?>"></progress>
+               <p><span id='progressp1txt'><?php echo $p1['hp']; ?></span>/<?php echo $p1['hp']; ?></p>
             </div>
          </aside>
       </section>
@@ -511,8 +499,8 @@ font-size: 15px;
 			</h2>
 			<p><?php $x2= loadmember($p2['user']); echo $x2['fullname'];?></p>
             <div>
-               <progress id='progressp2' max="<?php echo $fullhp2; ?>" value="<?php echo $fullhp2; ?>"></progress>
-               <p><span id='progressp2txt'><?php echo $fullhp2; ?></span>/<?php echo $fullhp2; ?></p>
+               <progress id='progressp2' max="<?php echo $p2['hp']; ?>" value="<?php echo $p2['hp']; ?>"></progress>
+               <p><span id='progressp2txt'><?php echo $p2['hp']; ?></span>/<?php echo $p2['hp']; ?></p>
             </div>
          </aside>
 

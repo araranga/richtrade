@@ -56,8 +56,8 @@ function deductloser($loserpoke)
 
     if ($member['balance'] > 50)
     {
-		mysql_query_md("INSERT INTO tbl_income SET user='{$member['accounts_id']}', message='You Lose a battle: -0.25'");
-        mysql_query_md("UPDATE tbl_accounts SET balance = balance - 0.25 WHERE accounts_id='{$member['accounts_id']}'");
+		mysql_query_md("INSERT INTO tbl_income SET user='{$member['accounts_id']}', message='You Lose a battle: -0.5'");
+        mysql_query_md("UPDATE tbl_accounts SET balance = balance - 0.5 WHERE accounts_id='{$member['accounts_id']}'");
 
     }
 
@@ -721,6 +721,23 @@ function savebattle($hash)
     {
         $lessthan = 0;
     }
+	
+	if($poke['level']<=5){
+		
+		
+		$lessthan = 1;
+		$greaterthan = 6;
+	}else{
+		
+		$lessthan = 6;
+		$greaterthan = 30;
+		
+	}
+	
+	
+	//echo "Debug::: $lessthan == $greaterthan";
+	
+	
 
     $loaduser = loadmember($poke['user']);
     $battlebonus = 0;
@@ -759,7 +776,7 @@ function savebattle($hash)
 
     if (empty($count))
     {
-        $queryp2 = "SELECT * FROM tbl_battle WHERE p2poke IS NULL AND p1poke!='$id' AND p1user!='$user' AND winner IS NULL AND (level >= $lessthan AND level <= $greaterthan) ORDER by level ASC";
+        $queryp2 = "SELECT * FROM tbl_battle WHERE p2poke IS NULL AND p1poke!='$id' AND p1user!='$user' AND winner IS NULL AND (level >= $lessthan AND level <= $greaterthan) ORDER by RAND() LIMIT 1";
         $qp2 = mysql_query_md($queryp2);
         $countp2 = mysql_num_rows_md($qp2);
         ///player 2

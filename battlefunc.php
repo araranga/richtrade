@@ -1,6 +1,4 @@
 <?php
-
-
 function generatebattle($id)
 {
     $query = "SELECT * FROM tbl_battle WHERE id ='$id' AND winner IS NULL";
@@ -23,7 +21,30 @@ function generatebattle($id)
     //preload emblem
     $emblem1 = getEmblem($poke1['emblem']);
     $emblem2 = getEmblem($poke2['emblem']);
+	
+	
+	
+	
+	if($emblem1=='focus'){
+		
 
+		$poke1["attack"] = addmore($poke1["attack"], 1, 0.15);
+		$poke1["accuracy"] = addmore($poke1["accuracy"], 1, 0.10);
+		$poke1["speed"] = addmore($poke1["speed"], 1, 0.10);
+		
+		
+	}
+	if($emblem2=='focus'){
+		
+
+		$poke2["attack"] = addmore($poke2["attack"], 1, 0.15);
+		$poke2["accuracy"] = addmore($poke2["accuracy"], 1, 0.10);
+		$poke2["speed"] = addmore($poke2["speed"], 1, 0.10);
+		
+		
+	}
+	
+	
     $roundp1 = 0;
     $roundp2 = 0;
 
@@ -46,9 +67,22 @@ function generatebattle($id)
     $turn = rand(1, 2);
     $logs = [];
 
-    $fullhp1 = $hp1 = $poke1["hp"];
-    $fullhp2 = $hp2 = $poke2["hp"];
-
+    $fullhp1 = $hp1 = $poke1["hp"] + 2000;
+    $fullhp2 = $hp2 = $poke2["hp"] + 2000;
+	
+	
+	$p1level = $poke1['level'] - $poke2['level'];
+	$p2level = $poke2['level'] - $poke1['level'];
+	
+	$p1gap = 0;
+	$p2gap = 0;
+	if($p1level>=0 && $p1level>=6){		
+		$p2gap = 1;	
+	}
+	if($p2level>=0 && $p2level>=6){		
+		$p1gap = 1;	
+	}
+	
     $winnerpoke = 0;
 
     $turn = 2;
@@ -179,6 +213,26 @@ function generatebattle($id)
 			}
 			
 			
+
+
+			
+			if($emblem1=='thunderstrike'){
+		
+
+                if ($roundp1 == 4)
+                {
+
+                $dpsatk = round(($fullhp1 - $hp1) * 0.95);
+                $curdamage = $curdamage + $dpsatk;
+                $notes[] = "ThunderStrike attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
+
+				}					
+				
+				
+			}
+
+
+
 			
 			
 			
@@ -194,6 +248,15 @@ function generatebattle($id)
                     $emblem1 = '';
                 }
             }
+
+
+
+
+
+
+
+
+
 
             if ($emblem1 == 'dpshp')
             {
@@ -332,7 +395,8 @@ function generatebattle($id)
                 if ($is_double_attack == 1)
                 {
                     $notes = array();
-                    $notes[] = "Reflect Shield!! Deals ($curdamage)";
+					$curdamage = $curdamage + ($curdamage * 0.20);
+				    $notes[] = "Reflect Shield Used by {$poke2['pokename']}!! Deals ($curdamage)";
 
                     $hp1 = $hp1 - $curdamage;
                     $datalogs = [];
@@ -528,6 +592,29 @@ function generatebattle($id)
 				
 			}
             //BEFORE ATK
+			
+			
+			
+			if($emblem2=='thunderstrike'){
+		
+
+                if ($roundp2 == 4)
+                {
+
+                $dpsatk = round(($fullhp2 - $hp2) * 0.95);
+                $curdamage = $curdamage + $dpsatk;
+                $notes[] = "ThunderStrike attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
+
+				}					
+				
+				
+			}			
+			
+			
+			
+			
+			
+			
             if ($emblem2 == 'dpsatk')
             {
 
@@ -677,7 +764,8 @@ function generatebattle($id)
                 if ($is_double_attack == 1)
                 {
                     $notes = array();
-                    $notes[] = "Reflect Shield!! Deals ($curdamage)";
+					$curdamage = $curdamage + ($curdamage * 0.20);
+				    $notes[] = "Reflect Shield Used by {$poke1['pokename']}!! Deals ($curdamage)";
 
                     $hp2 = $hp2 - $curdamage;
                     $datalogs = [];
@@ -783,11 +871,13 @@ function generatebattle($id)
     }
 
     $mylogs = addslashes(json_encode($logs));
-    mysql_query_md("UPDATE tbl_battle SET winner='$winnerpoke', logs='$mylogs' WHERE id='$id'");
-
+    mysql_query_md("UPDATE tbl_battle SET winner='$winnerpoke', logs='$mylogs',fullhp1='$fullhp1',fullhp2='$fullhp2' WHERE id='$id'");
+	
+	
+	if(!empty($p1gap) && !empty($p2gap)){
     mysql_query_md("UPDATE tbl_pokemon_users SET win = win + 1,exp = exp + 1 WHERE id='$winnerpoke'");
     mysql_query_md("UPDATE tbl_pokemon_users SET lose = lose + 1 WHERE id='$loserpoke'");
-
+	}
     checkpoke($winnerpoke);
     deductloser($loserpoke);
 }
@@ -815,11 +905,40 @@ function generatebattleboss($id)
     $queryacvq = mysql_query_md($queryacv);
     $acvcount = mysql_num_rows_md($queryacvq);
 
-    $poke2["hp"] = addmore($poke2["hp"], $acvcount, 0.25);
+    $poke2["hp"] = addmore($poke2["hp"], $acvcount, 0.35);
     $poke2["defense"] = addmore($poke2["defense"], $acvcount, 1.30);
     $poke2["attack"] = addmore($poke2["attack"], $acvcount, 0.35);
     $poke2["accuracy"] = addmore($poke2["accuracy"], $acvcount, 0.50);
     $poke2["speed"] = addmore($poke2["speed"], $acvcount, 0.15);
+	
+	
+	
+	
+	if($emblem1=='focus'){
+		
+
+		$poke1["attack"] = addmore($poke1["attack"], 1, 0.15);
+		$poke1["accuracy"] = addmore($poke1["accuracy"], 1, 0.10);
+		$poke1["speed"] = addmore($poke1["speed"], 1, 0.10);
+		
+		
+	}
+	if($emblem2=='focus'){
+		
+
+		$poke2["attack"] = addmore($poke2["attack"], 1, 0.15);
+		$poke2["accuracy"] = addmore($poke2["accuracy"], 1, 0.10);
+		$poke2["speed"] = addmore($poke2["speed"], 1, 0.10);
+		
+		
+	}	
+	
+	
+	
+	
+	
+	
+	
 
     //var_dump($poke1);
     //var_dump($poke2);
@@ -995,6 +1114,29 @@ function generatebattleboss($id)
 				
 			}
             //BEFORE ATK
+			
+			
+			if($emblem1=='thunderstrike'){
+		
+
+                if ($roundp1 == 4)
+                {
+
+                $dpsatk = round(($fullhp1 - $hp1) * 0.95);
+                $curdamage = $curdamage + $dpsatk;
+                $notes[] = "ThunderStrike attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
+
+				}					
+				
+				
+			}				
+			
+			
+			
+			
+			
+			
+			
             if ($emblem1 == 'dpsatk')
             {
 
@@ -1139,7 +1281,8 @@ function generatebattleboss($id)
                 if ($is_double_attack == 1)
                 {
                     $notes = array();
-                    $notes[] = "Reflect Shield!! Deals ($curdamage)";
+					$curdamage = $curdamage + ($curdamage * 0.20);
+				    $notes[] = "Reflect Shield Used by {$poke2['pokename']}!! Deals ($curdamage)";
 
                     $hp1 = $hp1 - $curdamage;
                     $datalogs = [];
@@ -1331,6 +1474,27 @@ function generatebattleboss($id)
 				
 				
 			}
+			
+			
+			if($emblem2=='thunderstrike'){
+		
+
+                if ($roundp2 == 4)
+                {
+
+                $dpsatk = round(($fullhp2 - $hp2) * 0.95);
+                $curdamage = $curdamage + $dpsatk;
+                $notes[] = "ThunderStrike attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
+
+				}					
+				
+				
+			}				
+			
+			
+			
+			
+			
             //BEFORE ATK
             if ($emblem2 == 'dpsatk')
             {
@@ -1475,7 +1639,8 @@ function generatebattleboss($id)
                 if ($is_double_attack == 1)
                 {
                     $notes = array();
-                    $notes[] = "Reflect Shield!! Deals ($curdamage)";
+					$curdamage = $curdamage + ($curdamage * 0.20);
+				    $notes[] = "Reflect Shield Used by {$poke1['pokename']}!! Deals ($curdamage)";
 
                     $hp2 = $hp2 - $curdamage;
                     $datalogs = [];

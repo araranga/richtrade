@@ -24,7 +24,7 @@ if(!empty($countxbattle)){
 	?>
 	Your are still have pending battle watch <a href='/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>&v1=1'>here</a><hr>
 	<script>
-		window.location = "/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>&v1=1";
+		window.location = "/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>&v=1";
 	</script>
 	<?php
 	exit();
@@ -38,7 +38,7 @@ if(!empty($countxbattle)){
 	?>
 	Your are still have pending battle watch  <a href='/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>&v2=1'>here</a><hr>
 	<script>
-		window.location = "/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>&v2=1";
+		window.location = "/index.php?pages=pokebattleview&id=<?php echo $databattlecount['id']; ?>&v=2";
 	</script>	
 	<?php
 	exit();
