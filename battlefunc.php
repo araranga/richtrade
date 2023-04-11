@@ -223,7 +223,7 @@ function generatebattle($id)
                 if ($roundp1 == 4)
                 {
 
-                $dpsatk = round(($fullhp1 - $hp1) * 0.95);
+                $dpsatk = round(($fullhp1 - $hp1) * 0.85);
                 $curdamage = $curdamage + $dpsatk;
                 $notes[] = "ThunderStrike attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 
@@ -602,7 +602,7 @@ function generatebattle($id)
                 if ($roundp2 == 4)
                 {
 
-                $dpsatk = round(($fullhp2 - $hp2) * 0.95);
+                $dpsatk = round(($fullhp2 - $hp2) * 0.85);
                 $curdamage = $curdamage + $dpsatk;
                 $notes[] = "ThunderStrike attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 
@@ -876,7 +876,8 @@ function generatebattle($id)
     mysql_query_md("UPDATE tbl_battle SET winner='$winnerpoke', logs='$mylogs',fullhp1='$fullhp1',fullhp2='$fullhp2',hash='$debug' WHERE id='$id'");
 	
 	
-	if(!empty($p1gap) && !empty($p2gap)){
+	if(empty($p1gap) && empty($p2gap))
+	{
     mysql_query_md("UPDATE tbl_pokemon_users SET win = win + 1,exp = exp + 1 WHERE id='$winnerpoke'");
     mysql_query_md("UPDATE tbl_pokemon_users SET lose = lose + 1 WHERE id='$loserpoke'");
 	}
@@ -1124,7 +1125,7 @@ function generatebattleboss($id)
                 if ($roundp1 == 4)
                 {
 
-                $dpsatk = round(($fullhp1 - $hp1) * 0.95);
+                $dpsatk = round(($fullhp1 - $hp1) * 0.85);
                 $curdamage = $curdamage + $dpsatk;
                 $notes[] = "ThunderStrike attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 
@@ -1484,7 +1485,7 @@ function generatebattleboss($id)
                 if ($roundp2 == 4)
                 {
 
-                $dpsatk = round(($fullhp2 - $hp2) * 0.95);
+                $dpsatk = round(($fullhp2 - $hp2) * 0.85);
                 $curdamage = $curdamage + $dpsatk;
                 $notes[] = "ThunderStrike attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
 
