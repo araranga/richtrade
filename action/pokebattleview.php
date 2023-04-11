@@ -26,9 +26,10 @@ window.location = '/index.php?pages=pokebattleview-old&id=<?php echo $id; ?>'
 <?php
 }
 
-$checkold =  mysql_num_rows_md(mysql_query_md("SELECT * FROM tbl_battle WHERE id ='$id' AND logs LIKE '%hp1%' AND fullhp1 IS NOT NULL"));
+$checkold =  mysql_num_rows_md(mysql_query_md("SELECT * FROM tbl_battle WHERE id ='$id' AND logs LIKE '%hp1%' AND fullhp1 IS NULL"));
 if(!empty($checkold))
 {
+
 ?>
 <script>
 window.location = '/index.php?pages=pokebattleview-oldv2&id=<?php echo $id; ?>&v=<?php echo $_GET['v']; ?>'
