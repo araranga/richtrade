@@ -76,12 +76,13 @@ function generatebattle($id)
 	
 	$p1gap = 0;
 	$p2gap = 0;
-	if($p1level>=0 && $p1level>=6){		
+	if($p1level>=0 && $p1level>=8){		
 		$p2gap = 1;	
 	}
-	if($p2level>=0 && $p2level>=6){		
+	if($p2level>=0 && $p2level>=8){		
 		$p1gap = 1;	
 	}
+	
 	
     $winnerpoke = 0;
 
@@ -870,8 +871,9 @@ function generatebattle($id)
         }
     }
 
+	$debug = $p1level."====".$p2level."=====".$p1gap."===".$p2gap;
     $mylogs = addslashes(json_encode($logs));
-    mysql_query_md("UPDATE tbl_battle SET winner='$winnerpoke', logs='$mylogs',fullhp1='$fullhp1',fullhp2='$fullhp2' WHERE id='$id'");
+    mysql_query_md("UPDATE tbl_battle SET winner='$winnerpoke', logs='$mylogs',fullhp1='$fullhp1',fullhp2='$fullhp2',hash='$debug' WHERE id='$id'");
 	
 	
 	if(!empty($p1gap) && !empty($p2gap)){

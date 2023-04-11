@@ -65,7 +65,7 @@ while($row2 = mysql_fetch_md_assoc($q2)){
 							$levelrate = loadpokev2($poketarget);
 							pokelevelup($poketarget,$levelrate['rate']);
 							mysql_query_md("UPDATE tbl_item_history SET is_use=1,pokemon_id=$poketarget WHERE id='$k'");
-							mysql_query_md("UPDATE tbl_pokemon_users SET exp = exp + 5 WHERE id='$poketarget'");
+							mysql_query_md("UPDATE tbl_pokemon_users SET exp = (6 * level) - 6 WHERE id='$poketarget'");
 							
 						}
 						

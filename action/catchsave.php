@@ -109,8 +109,8 @@ while($x<=ceil($_POST['withdraw']))
 		$hp = rand(600,800) + 1000;
 		$user = $_SESSION['accounts_id'];
 		$speed = rand(10,40);
-		$critical = rand(1,30);
-		$accuracy = rand(1,30);
+		$critical = rand(5,30);
+		$accuracy = rand(5,30);
 		$rate = rand(5,10);
 		
 		$level = 1;
@@ -154,9 +154,9 @@ $acc2 = rand(50,90);
 $acc3 = rand(50,90);
 
 
-$ident1 = slugifychar($title1);
-$ident2 = slugifychar($title2);
-$ident3 = slugifychar($title3);
+$ident1 = slugifychar($title1.rand());
+$ident2 = slugifychar($title2.rand());
+$ident3 = slugifychar($title3.rand());
 
 mysql_query_md("INSERT INTO tbl_movesreindex SET typebattle='$element1',power='$dmg1',title='$title1',accuracy='$acc1',pokehash='$hash',activate=1,identifier='$ident1'");
 mysql_query_md("INSERT INTO tbl_movesreindex SET typebattle='$element2',power='$dmg2',title='$title2',accuracy='$acc2',pokehash='$hash',activate=1,identifier='$ident2'");
