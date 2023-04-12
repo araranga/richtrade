@@ -7,13 +7,13 @@ require_once("./function.php");
  $field = array("transnum","email","username","accounts_id");
  $where = getwheresearch($field);
 
- $total = countquery("SELECT id FROM tbl_battle");
+ $total = countquery("SELECT id FROM tbl_battle WHERE p1user='$accounts_id' OR p2user='$accounts_id'");
  //primary query
- $limit = getlimit(45,$_GET['p']);
- $query = "SELECT * FROM tbl_battle as a ORDER by id DESC $limit";
+ $limit = getlimit(10,$_GET['p']);
+ $query = "SELECT * FROM tbl_battle as a WHERE p1user='$accounts_id' OR p2user='$accounts_id' ORDER by id DESC $limit";
 
  $q = mysql_query_md($query);
- $pagecount = getpagecount($total,45);
+ $pagecount = getpagecount($total,10);
 ?>
 <h2>Battle History</h2>
 
@@ -56,7 +56,6 @@ if($total==0) {
 .bname2 {
     font-size: 17px;
     font-weight: 700;
-	word-wrap: break-word;
 }	
 
 .findingmatch{
