@@ -644,7 +644,7 @@ function showfight(){
 			  var dataturn = jQuery(abc).attr('data-turn');
 			  var notes = jQuery(abc).attr('data-notes');
 		      console.log(jQuery(abc).text());
-			  jQuery('#battlelogs').append("<br> Round"+jQuery(abc).attr('data-round')+" --"+notes);
+			  jQuery('#battlelogs').append("<br> <span class='roundcolor"+jQuery(abc).attr('data-round')+"'>Round "+jQuery(abc).attr('data-round')+"</span> : "+notes);
 			  
 			  jQuery('#heroeffs').html('');
 			  jQuery('#enemyeffs').html('');
@@ -787,13 +787,41 @@ if(datadamage=='0'){
 		}
 	?>
 	
-	<div id='blogs<?php echo $logc ?>' class='btllogs' hp1="<?php echo $a['hp1']; ?>" hp2="<?php echo $a['hp2']; ?>" data-skill='<?php echo $a['skillname']; ?>' data-element='<?php echo $a['element']; ?>' data-round='<?php echo $round - 1; ?>' data-turn='<?php echo $turn; ?>' data-dealer='<?php echo $a['dealer']; ?>' data-enemyhp='<?php echo $a['enemyhp']; ?>' data-damage='<?php echo $a['damage']; ?>' data-notes='<?php for ($x = 1; $x <= $round; $x++) { echo ">>>"; } ?><?php echo htmlentities(implode(" , ",$a['notes'])); ?>'>
+	<div id='blogs<?php echo $logc ?>' class='btllogs' hp1="<?php echo $a['hp1']; ?>" hp2="<?php echo $a['hp2']; ?>" data-skill='<?php echo $a['skillname']; ?>' data-element='<?php echo $a['element']; ?>' data-round='<?php echo $round - 1; ?>' data-turn='<?php echo $turn; ?>' data-dealer='<?php echo $a['dealer']; ?>' data-enemyhp='<?php echo $a['enemyhp']; ?>' data-damage='<?php echo $a['damage']; ?>' data-notes='<?php echo htmlentities(implode(" , ",$a['notes'])); ?>'>
 	Turn <?php echo $logc ?>:
 	</div>
 	<?php
 		$logc++;
 	}
 ?>
+
+
+<?php
+
+function rand_color() {
+    return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+}
+$roundcolor = array();
+
+for ($x = 1; $x <= $round; $x++) {
+	
+	$roundcolor[] = rand_color();
+}
+
+
+
+?>
+
+<style>
+<?php foreach($roundcolor as $rck=>$rcv) { ?>
+  .roundcolor<?php echo $rck; ?> {
+	  
+	  color:<?php echo $rcv; ?>;
+	  font-weight:700;
+  }
+<?php } ?>
+</style>
+
 <h2>Battle Logs:</h2>
 <div id='battlelogs'>
 </div>
