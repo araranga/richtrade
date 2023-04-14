@@ -25,6 +25,10 @@ foreach($rowxxx as $key=>$val)
 <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
 <body class="hold-transition sidebar-mini layout-fixed">
   <style>
+div#modal-primary-emblem td {
+    width: 50%;
+}  
+  
 .battle .itemweapon {
     display: block!important;
 }  

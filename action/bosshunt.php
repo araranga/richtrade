@@ -113,8 +113,8 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_bosses ORDER by hp ASC");
 			<?php } ?>	
 		</div>
 
-		   <div class="image">  
-				<img src='/sprites/boss/<?php echo $rowqpokes['main']; ?>' style='width:100%;'>	   
+		   <div class="image" style='margin:0 auto;'>  
+				<img src='/sprites/boss/<?php echo $rowqpokes['main']; ?>' style='height:100px;'>	   
 		   </div>
 		   <h4><?php echo $rowqpokes['pokename']; ?></h4>
 		   <p class='idsdata'>ID:#<?php echo $rowqpokes['hash']; ?></p>

@@ -68,7 +68,7 @@ require_once("./function.php");
               <hr>
 
               <h4 class="mt-3"><small>Please select one</small></h4>
-              <div class="btn-group btn-group-toggle">
+              <div class="btn-group2 btn-group-toggle2">
 
               	<?php 
               	foreach($rate as $data) { 

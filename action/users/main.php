@@ -4,7 +4,14 @@
  $total = countquery("SELECT username FROM tbl_accounts $where");
  //primary query
  $limit = getlimit(10,$_GET['p']);
-  $query = "SELECT * FROM tbl_accounts $where ORDER by balance DESC $limit";
+ 
+ $orderby = $_GET['orderby'];
+ 
+ if(empty($orderby)){
+	 
+	 $orderby = "accounts_id";
+ }
+  $query = "SELECT * FROM tbl_accounts $where ORDER by $orderby DESC $limit";
 
  $q = mysql_query_md($query);
  $pagecount = getpagecount($total,10);
@@ -43,6 +50,9 @@ foreach($field as $ff){
                     <input type='submit' name='search_button' class="btn btn-primary"/>
                     </form>
                   </div>
+				  
+				  <a href='<?php echo $url = "?search=".$_GET['search']."&pages=".$_GET['pages']."&search_button=Submit&orderby=accounts_id&p=".$c;?>'>Newest Member</a> /
+				  <a href='<?php echo $url = "?search=".$_GET['search']."&pages=".$_GET['pages']."&search_button=Submit&orderby=balance&p=".$c;?>'>Highest Balance</a>
                </div>
             </div>            
          </div>    
@@ -101,7 +111,7 @@ foreach($field as $ff){
                           {
                             $active = 'active';
                           }
-                          $url = "?search=".$_GET['search']."&pages=".$_GET['pages']."&search_button=Submit&p=".$c;
+                          $url = "?search=".$_GET['search']."&pages=".$_GET['pages']."&search_button=Submit&p=".$c."&orderby=".$_GET['orderby'];
                       ?>
                         <li class="paginate_button <?php echo $active; ?>" aria-controls="dataTables-example" tabindex="0"><a href="<?php echo $url; ?>"><?php echo $c; ?></a></li>
                       <?php
