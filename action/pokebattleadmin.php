@@ -10,7 +10,7 @@ require_once("./function.php");
  $total = countquery("SELECT id FROM tbl_battle");
  //primary query
  $limit = getlimit(45,$_GET['p']);
- $query = "SELECT * FROM tbl_battle as a ORDER by id DESC $limit";
+ $query = "SELECT * FROM tbl_battle as a ORDER by battledata DESC $limit";
 
  $q = mysql_query_md($query);
  $pagecount = getpagecount($total,45);
