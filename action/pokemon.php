@@ -318,10 +318,18 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 				<div class='typesdata <?php echo $tt; ?>'><img src='sprites/type/<?php echo strtolower($tt); ?>.png' style='width:25px;margin-right:1px;'><?php echo ucfirst($tt); ?></div>
 			<?php } ?>	
 		</div>
-		
+		   <?php 
+			if(empty($rowqpokes['weapon'])){
+				$rowqpokes['weapon'] = "sword";
+			}
+		   ?>
 		   <div class="image">  
-				<div class='mainchar flipme showcharbattle' style='background: url(/actors/<?php echo $rowqpokes['front']; ?>) 0px 0px;'></div>		   
+				<div class='mainchar flipme showcharbattle battle' style='background: url(/actors/<?php echo $rowqpokes['front']; ?>) 0px 0px;'>
+					<div class='itemweapon itemweapon-<?php echo $rowqpokes['weapon']; ?>'></div>
+				</div>		   
 		   </div>
+		   
+		   
 		   <hr>
 		   <?php
 			$levelnxt = ($rowqpokes['exp'] - (($rowqpokes['level']) * 6));

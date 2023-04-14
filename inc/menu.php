@@ -174,7 +174,12 @@
                   <p>Bosses</p>
                 </a>
               </li>			  
-			  
+	              <li class="nav-item">
+                <a href="index.php?pages=weapons" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Weapons</p>
+                </a>
+              </li>		  
 			  
               <li class="nav-item">
                 <a href="index.php?pages=items" class="nav-link">

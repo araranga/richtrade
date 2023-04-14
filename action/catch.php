@@ -54,7 +54,7 @@ $field[] = array("type"=>"text","value"=>"pokename","label"=>"Warrior Name");
 $field[] = array("type"=>"password","value"=>"password","label"=>"Please enter password:");
 //$field[] = array("type"=>"number","value"=>"withdraw","label"=>"Number of Draw:");
 
-$field[] = array("type"=>"select","value"=>"weapon","label"=>"Weapon (this is for aethestic):","option"=>listweapon());
+//$field[] = array("type"=>"select","value"=>"weapon","label"=>"Weapon (this is for aethestic):","option"=>listweapon());
 
 
 
@@ -90,6 +90,27 @@ $field[] = array("type"=>"select","value"=>"element3","label"=>"Skill 3 Element:
       <form id='catchpoke' method='POST' action='#'>
          <?php echo loadform($field,$sdata); ?>
 		 <input type='hidden' name='withdraw' value='1'>
+<H2>SELECT WEAPON (Design Only)</h2>			 
+<div>	 
+<?php
+$countavatar = 0;
+$qweapons = mysql_query_md("SELECT * FROM tbl_weapons WHERE is_free = 1");
+while($qweaponsr=mysql_fetch_md_array($qweapons))
+{
+	$countavatar++;
+?>		 
+		 
+	   <div class="imageselection">  
+			<label for="countavatarimg<?php echo $countavatar; ?>" >
+			<div class='itemweapondemo itemweapon-<?php echo $qweaponsr['slug'];?>'></div>
+			</label>
+			<input <?php if($countavatar==1) { echo "checked='checked'"; } ?>required id='countavatarimg<?php echo $countavatar; ?>' class='selectchar' type='radio' name='weapon' value='<?php echo $qweaponsr['slug'];?>'>			
+	   </div>     
+<?php
+}
+?>
+<br style='clear:both;'/>
+</div>		 
 <H2>SELECT AVATAR</h2>		 
 <div>	 
 <?php

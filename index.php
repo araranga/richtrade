@@ -42,67 +42,29 @@ div#modal-primary-emblem td {
 	display:none;
 }
 
-
-.itemweapon-claw{
-    background: url(/sprites/weapon.png) 83px -207px;
-}
-.itemweapon-punch {
-
-	background:url('/sprites/weapon.png') 86px -270px;
-
+.itemweapondemo {
+    width: 60px;
+    height: 49px;	
 }
 
-.itemweapon-pike{
-    background:url('/sprites/weapon.png') 99px -334px;
-}
 
-.itemweapon-gun{
-   background:url('/sprites/weapon.png') 86px -140px;
-}
-
-.itemweapon-crossbow{
-
-background:url('/sprites/weapon.png') 86px -76px;
-}
-
-.itemweapon-bow{
-
-background:url('/sprites/weapon.png') 86px -14px;
-}
-
-.itemweapon-sword{
+<?php
+$qweapons = mysql_query_md("SELECT * FROM tbl_weapons");
+while($qweaponsr=mysql_fetch_md_array($qweapons))
+{
 	
-	background:url('/sprites/weapon.png') -197px -85px;
+	?>
+.itemweapon-<?php echo $qweaponsr['slug']; ?>{
 
+background:url('/sprites/<?php echo $qweaponsr['image']; ?>') <?php echo $qweaponsr['description']; ?>;
+}  	
+	<?php
 }
 
-.itemweapon-staff{
-
-  background:url('/sprites/weapon.png') -197px 44px;
-
-}
-
-.itemweapon-whip{
-
-  background:url('/sprites/weapon.png') -195px 108px;
-
-}
-
-.itemweapon-axe{
-background:url('/sprites/weapon.png') -195px 174px;
-}
+?>
 
 
-.itemweapon-mace{
-background:url('/sprites/weapon.png') -197px 233px;
-}
-
-.itemweapon-dagger{
-
-background:url('/sprites/weapon.png') -198px 362px;
-}  
-  
-  
+ 
     
   
 .user-panel .info {
