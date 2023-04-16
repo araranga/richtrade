@@ -179,26 +179,26 @@ function itemshow(){
 	<h1>Your Items</h1>
 	<div id="poke-container" class="ui cards">
 	<input type='hidden' name='pages' value='useitems'>
-	<?php
-	$myuser = $_SESSION['accounts_id'];
-	$qpokes = mysql_query_md("SELECT * FROM tbl_item_history WHERE accounts_id='$myuser' AND is_use=0");		
+<?php
+$myuser = $_SESSION['accounts_id'];
+$qpokes = mysql_query_md("SELECT COUNT(*) as total,itemid FROM tbl_item_history WHERE accounts_id='$myuser' AND is_use=0 GROUP by itemid");		
 
-		while($rowqpokesx = mysql_fetch_md_assoc($qpokes)) {
-			
-			$rowqpokes = loaditem($rowqpokesx['itemid']);
-			
-	?>	
-			<div id='pokeitemv2-<?php echo $rowqpokes['id']; ?>' class="ui card" >
+	while($rowqpokesx = mysql_fetch_md_assoc($qpokes)) {
+		
+		$rowqpokes = loaditem($rowqpokesx['itemid']);
+		
+?>	
+		<div id='pokeitemv2-<?php echo $rowqpokes['id']; ?>' class="ui card" >
 
-			   <div class="image">
-			   <br/>
-			   <img class='uipokeimg' srcset="sprites/items/<?php echo $rowqpokes['image']; ?>"></div><br>
-			   <h4><?php echo $rowqpokes['title_name']; ?></h4>
-			   <p><?php echo $rowqpokes['description']; ?></p>
-			</div>
-	<?php
-		}
-	?>	
+		   <div class="image">
+		   <br/>
+		   <img class='uipokeimg' srcset="sprites/items/<?php echo $rowqpokes['image']; ?>"></div><br>
+		   <h4><?php echo $rowqpokes['title_name']; ?> x <?php echo $rowqpokesx['total']; ?></h4>
+		   <p><?php echo $rowqpokes['description']; ?></p>
+		</div>
+<?php
+	}
+?>	
 			
 			<div id='pokeitemv2-xxx' class="ui card">
 			   <div class="image">
@@ -207,8 +207,13 @@ function itemshow(){
 			   <h4>Quest Scroll x <?php echo $_SESSION['pokeballs']; ?></h4>
 			   <p>Hire a fighters alongside with you.</p>
 			</div>		
-			
-
+			<div id='pokeitemv2-xxx' class="ui card">
+			   <div class="image">
+			   <br/>
+			    <img class='uipokeimg' srcset="sprites/items/chest.png"></div><br>
+			   <h4>Chest x <?php echo $_SESSION['chest']; ?></h4>
+			   <p>Open this to get a chance to get rare items.</p>
+			</div>
 	
 	
 	</div>	

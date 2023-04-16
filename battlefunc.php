@@ -45,6 +45,49 @@ function generatebattle($id)
 	}
 	
 	
+	$stats_up = array("hp","speed","critical","accuracy","attack","defense");
+
+
+   $getweapon1 = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$poke1['id']}' LIMIT 1"));		
+   $getweapon2 = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$poke2['id']}' LIMIT 1"));	 
+	
+	
+	
+	if(!empty($getweapon1['id'])){
+	
+		foreach($stats_up as $sup){
+			
+			if(!empty($getweapon1[$sup]))
+			{
+				$poke1[$sup] = $poke1[$sup] + $getweapon1[$sup];
+				
+			}
+			
+		}
+	
+		
+	}
+	
+	if(!empty($getweapon2['id'])){
+	
+		foreach($stats_up as $sup){
+			
+			if(!empty($getweapon2[$sup]))
+			{
+				$poke2[$sup] = $poke2[$sup] + $getweapon2[$sup];
+				
+			}
+			
+		}
+	
+		
+	}	
+	
+	
+	
+	
+	
+	
     $roundp1 = 0;
     $roundp2 = 0;
 
@@ -938,7 +981,25 @@ function generatebattleboss($id)
 	
 	
 	
+	$stats_up = array("hp","speed","critical","accuracy","attack","defense");
+
+
+    $getweapon1 = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$poke1['id']}' LIMIT 1"));		
+	if(!empty($getweapon1['id'])){
 	
+		foreach($stats_up as $sup){
+			
+			if(!empty($getweapon1[$sup]))
+			{
+				$poke1[$sup] = $poke1[$sup] + $getweapon1[$sup];
+				
+			}
+			
+		}
+	
+		
+	}
+		
 	
 	
 	
@@ -1749,7 +1810,7 @@ function generatebattleboss($id)
     }
 
     $mylogs = addslashes(json_encode($logs));
-    mysql_query_md("UPDATE tbl_battle_boss SET winner='$winnerpoke', logs='$mylogs' WHERE id='$id'");
+    mysql_query_md("UPDATE tbl_battle_boss SET winner='$winnerpoke', logs='$mylogs',fullhp1='$fullhp1',fullhp2='$fullhp2' WHERE id='$id'");
 
     if ($winnerpoke == $poke1['id'])
     {

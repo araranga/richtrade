@@ -7,15 +7,15 @@ require_once("./function.php");
  $field = array("transnum","email","username","accounts_id");
  $where = getwheresearch($field);
 
- $total = countquery("SELECT id FROM tbl_market WHERE sold IS NULL");
+ $total = countquery("SELECT CONCAT(id,'-hero') as aid FROM tbl_market WHERE sold IS NULL UNION SELECT CONCAT(id,'-item') as aid FROM tbl_market_item WHERE sold IS NULL");
  //primary query
  $limit = getlimit(25,$_GET['p']);
- $query = "SELECT * FROM tbl_market WHERE sold IS NULL ORDER by id DESC $limit";
+ $query = "SELECT CONCAT(pokeid,'-hero') as aid,user,amount FROM tbl_market WHERE sold IS NULL UNION SELECT CONCAT(pokeid,'-item') as aid,user,amount FROM tbl_market_item WHERE sold IS NULL $limit";
 
  $q = mysql_query_md($query);
  $pagecount = getpagecount($total,25);
 ?>
-<h2>Marketplace</h2>
+<h2>Marketplace - Warriors</h2>
 
 <?php
 if($total==0) {
@@ -30,8 +30,45 @@ if($total==0) {
 <?php
 	while($xxx = mysql_fetch_md_assoc($q)) {
 		
-		$rowqpokes = loadpokev2($xxx['pokeid']);
+		$checkdata = explode("-",$xxx['aid']);
+
+		$pokeid = $checkdata[0];
+		$typedata = $checkdata[1];
+		
 ?>	
+<?php 
+
+if($typedata=='item') { 
+$rowqpokesx = loadweaponv2($pokeid);
+$stats = array("hp","speed","critical","accuracy","attack","defense");
+?>
+	<div id="pokeitemv2-xxx" class="ui card">
+			   <div class="image">
+			   <br>
+			    <div class='itemweapondemo itemweapon-<?php echo $rowqpokesx['weapon']; ?>' style='margin: 0 auto;'></div>
+		   <h4><?php echo $rowqpokesx['pokename']; ?></h4>
+		   <h5 style='font-weight:700;'>Amount:<?php echo number_format($xxx['amount'],2); ?></h5>
+		   <p class='idsdata'>ID:#<?php echo $rowqpokesx['hash']; ?></p>
+			   <p>
+			   <?php 
+			   foreach($rowqpokesx as $fkey=>$fval){ 
+					if(!empty($fval) && in_array($fkey,$stats)){
+					echo ucfirst($fkey).": ".$fval."<br>";
+					}
+			   }
+			   ?>
+			   </p>
+			</div>
+		   <?php if($xxx['user']!=$_SESSION['accounts_id']) { ?>
+			<input class="btn btn-info btn-lg btnbattle" type="button" onclick="window.location='index.php?pages=buypokeweapon&pokeid=<?php echo $rowqpokesx['hash']; ?>'" name="battle" value="Buy Now">
+		   <?php } else { ?>
+			<span>This is your item</span>
+		   <?php } ?>
+	</div>
+<?php } ?>
+<?php if($typedata=='hero') { 
+$rowqpokes = loadpokev2($pokeid);
+?>
 		<div id='poke-<?php echo $rowqpokes['hash']; ?>' class="ui card">
 		<div class='typedataholder'>
 			<?php foreach(explode("|",$rowqpokes['pokeclass']) as $tt) { ?>
@@ -83,6 +120,7 @@ if($total==0) {
 			<span>This is your item</span>
 		   <?php } ?>
 		</div>
+<?php } ?>
 <?php
 	}
 ?>	

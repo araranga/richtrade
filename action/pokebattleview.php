@@ -523,6 +523,24 @@ font-size: 15px;
 </section>
 <?php
 
+
+$getweapon = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$p1['id']}' LIMIT 1"));
+
+if(!empty($getweapon['weapon'])){
+	
+	$p1['weapon'] = $getweapon['weapon'];
+	
+}
+
+$getweapon = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$p2['id']}' LIMIT 1"));
+
+if(!empty($getweapon['weapon'])){
+	
+	$p2['weapon'] = $getweapon['weapon'];
+	
+}
+			
+
    if(empty($p1['weapon'])){
 	   
 	  $p1['weapon'] =  array_rand(listweapon(),1);

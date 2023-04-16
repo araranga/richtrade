@@ -34,7 +34,12 @@
                   <p>Item Shop</p>
                 </a>
               </li>
-
+              <li class="nav-item">
+                <a href="index.php?pages=treasure" class="nav-link">
+                  <i class="nav-icon"><img src="treasure.png" style="width: 32px;"></i>
+                  <p>Treasure Hunt</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="index.php?pages=market" class="nav-link">
                   <i class="nav-icon"><img src="shop.png" style="width: 32px;"></i>

@@ -455,6 +455,21 @@ font-size: 15px;
     <section class="hero rpg">
       <section class="char">
 
+<?php
+
+$fullhp1 = $row['fullhp1'];
+$fullhp2 = $row['fullhp2'];
+
+if(!empty($fullhp1)){
+	
+	$p1['hp'] = $fullhp1;
+}
+if(!empty($fullhp2)){
+	
+	$p2['hp'] = $fullhp2;
+}
+
+?>
           
          <aside class="data rpgleft">
             <h2>
@@ -492,7 +507,23 @@ font-size: 15px;
    <br style='clear:both;'/>
 </section>
 <?php
+$getweapon = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$p1['id']}' LIMIT 1"));
 
+if(!empty($getweapon['weapon'])){
+	
+	$p1['weapon'] = $getweapon['weapon'];
+	
+}
+
+$getweapon = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$p2['id']}' LIMIT 1"));
+
+if(!empty($getweapon['weapon'])){
+	
+	$p2['weapon'] = $getweapon['weapon'];
+	
+}
+	
+	
    if(empty($p1['weapon'])){
 	   
 	  $p1['weapon'] =  array_rand(listweapon(),1);

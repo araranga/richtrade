@@ -191,6 +191,21 @@ function loadpoke($hash)
     return $row;
 }
 
+function loadweapon($hash)
+{
+    $q = mysql_query_md("SELECT * FROM tbl_items_users WHERE hash='$hash'");
+    $row = mysql_fetch_md_assoc($q);
+    return $row;
+}
+
+function loadweaponv2($hash)
+{
+    $q = mysql_query_md("SELECT * FROM tbl_items_users WHERE id='$hash'");
+    $row = mysql_fetch_md_assoc($q);
+    return $row;
+}
+
+
 function loadboss($hash)
 {
     $q = mysql_query_md("SELECT * FROM tbl_bosses WHERE hash='$hash'");
@@ -233,7 +248,7 @@ function getEmblem($id)
 function getluck($chance, $odds)
 {
     $luck = rand(1, $odds);
-
+	
     if ($chance >= $luck)
     {
         return 1;

@@ -243,8 +243,6 @@ if($success!='')
 
 <script>
 jQuery('#pokeremain').text("<?php echo $row['pokeballs']; ?>");
-
-
 window.location = 'index.php?pages=pokemon';
 </script>
 

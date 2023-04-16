@@ -106,6 +106,9 @@ img.vsinfo {
 		
 		
 		<?php
+		
+			$extrasp1 = "";
+			$extrasp2 = "";		
 		if(!empty($rowqpoke['winner'])){
 			$extrasp1 = "";
 			$extrasp2 = "";
@@ -145,6 +148,11 @@ img.vsinfo {
 			}else{
 				
 				$rand = "modalsm".rand();
+				
+				$getweapon = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$p1['id']}' LIMIT 1"));		
+				$p1['weapon_name'] = $getweapon['pokename'];				
+				
+				
 				$buttonids = $modalsm[$rand] = $p1;
 				?>
 			<div class='bname2'><?php echo $p1['pokename']; ?></div>
@@ -179,6 +187,10 @@ View Stats
 			}else{
 				
 				$rand = "modalsm".rand();
+				
+				$getweapon = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$p2['id']}' LIMIT 1"));		
+				$p2['weapon_name'] = $getweapon['pokename'];				
+				
 				$buttonids = $modalsm[$rand] = $p2;				
 				
 				?>
@@ -308,7 +320,12 @@ View Stats
 														   else{
 															  $emb = loademblem($rowqpokes['emblem']); 
 															   echo "<strong>Emblem: ".$emb['title_name']."</strong>";
-														   }														   
+														   }
+
+															if(!empty($rowqpokes['weapon_name'])){
+																 echo "<br>";
+																echo "<strong>Weapon : ".$rowqpokes['weapon_name']."</strong>"; 
+															}														   
 														   ?>
 														   
 														   </span><br/>	

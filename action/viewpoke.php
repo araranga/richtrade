@@ -67,6 +67,9 @@ GROUP by a.id*/
 				<p class="text-muted text-center" style='font-weight:700'>Level:<?php echo $rowqpokes['level']; ?></p>
 
                 <ul class="list-group list-group-unbordered mb-3">
+				
+
+				
                   <li class="list-group-item">
                     <b>Attack</b> <a class="float-right"><?php echo $rowqpokes['attack']; ?></a>
                   </li>
@@ -91,6 +94,9 @@ GROUP by a.id*/
                   <li class="list-group-item">
                     <b>Battle Records</b> <a class="float-right"><?php echo $wr; ?></a>
                   </li>				  
+				  
+				  
+				  
 				  
 
 		<?php
@@ -150,6 +156,37 @@ GROUP by a.id*/
                     </div>
 					<?php }  if(empty(count($itemarray))) { echo "<p>No Items Attached</p>";} ?>
                     <!-- /.post -->
+					
+					
+					
+					
+				  <?php $getweapon = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$rowqpokes['id']}' LIMIT 1")); ?>
+				  <?php if(!empty($getweapon['id'])) { 
+				  $stats = array("hp","speed","critical","accuracy","attack","defense");
+				  ?>
+				  Item equipped:
+						<div class="ui card">
+								   <div id="pokeitemv2-<?php echo $getweapon['hash']; ?>" class="image">
+								   <br>
+									<div class='itemweapondemo itemweapon-<?php echo $getweapon['weapon']; ?>' style='margin: 0 auto;'></div>
+								   <h6><?php echo $getweapon['pokename']; ?></h6>
+								   <p class='idsdata'>ID:#<?php echo $getweapon['hash']; ?></p>
+								   
+
+								   <?php 
+								   foreach($getweapon as $fkey=>$fval){ 
+										if(!empty($fval) && in_array($fkey,$stats)){
+										echo ucfirst($fkey).": ".$fval."<br>";
+										}
+								   }
+								   ?>
+								   </p>
+								</div>
+						</div>	
+				  <?php } ?>					
+					
+					
+					
                   </div>
                   <!-- /.tab-pane -->
                   <div class="tab-pane" id="timeline">

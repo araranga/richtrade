@@ -284,6 +284,8 @@ for ($i = $for_start; $i <= $for_end; $i = strtotime('+1 week', $i)) {
 
             function loadform($field,$sdata = array(),$is_editable_field = 1)
             {
+				
+
                $return = '<div class="card card-primary"><div class="card-body">';
                foreach($field as $inputs)
                {

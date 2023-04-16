@@ -48,7 +48,10 @@ while($row2 = mysql_fetch_md_assoc($q2)){
 			mysql_query_md("UPDATE tbl_accounts SET pokeballs= pokeballs + $qty WHERE accounts_id='$accounts_id'");
 			$is_use = 1;
 		}
-		
+		if($item['target_attr']=='chest'){
+			mysql_query_md("UPDATE tbl_accounts SET chest= chest + $qty WHERE accounts_id='$accounts_id'");
+			$is_use = 1;
+		}		
 		
 		addeco($_POST['withdraw'] * 0.05);
 		mysql_query_md("INSERT INTO tbl_income SET user='{$accounts_id}', message='Your Purchase a items({$item['title_name']} X $qty): -{$_POST['withdraw']}'");
@@ -119,7 +122,7 @@ $field[] = array("type"=>"password","value"=>"password","label"=>"Please enter p
 <input type='hidden' name='pages' value='useitems'>
 <?php
 $myuser = $_SESSION['accounts_id'];
-$qpokes = mysql_query_md("SELECT * FROM tbl_item_history WHERE accounts_id='$myuser' AND is_use=0");		
+$qpokes = mysql_query_md("SELECT COUNT(*) as total,itemid FROM tbl_item_history WHERE accounts_id='$myuser' AND is_use=0 GROUP by itemid");		
 
 	while($rowqpokesx = mysql_fetch_md_assoc($qpokes)) {
 		
@@ -131,12 +134,13 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_item_history WHERE accounts_id='$myu
 		   <div class="image">
 		   <br/>
 		   <img class='uipokeimg' srcset="sprites/items/<?php echo $rowqpokes['image']; ?>"></div><br>
-		   <h4><?php echo $rowqpokes['title_name']; ?></h4>
+		   <h4><?php echo $rowqpokes['title_name']; ?> x <?php echo $rowqpokesx['total']; ?></h4>
 		   <p><?php echo $rowqpokes['description']; ?></p>
 		</div>
 <?php
 	}
 ?>	
+	
 
 			<div id='pokeitemv2-xxx' class="ui card">
 			   <div class="image">
@@ -145,7 +149,14 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_item_history WHERE accounts_id='$myu
 			   <h4>Quest Scroll x <?php echo $row['pokeballs']; ?></h4>
 			   <p>Use to hire Warriors</p>
 			</div>	
-	
+			<div id='pokeitemv2-xxx' class="ui card">
+			   <div class="image">
+			   <br/>
+			    <img class='uipokeimg' srcset="sprites/items/chest.png"></div><br>
+			   <h4>Chest x <?php echo $row['chest']; ?></h4>
+			   <p>Open this to get a chance to get rare items.</p>
+			</div>	
+		
 		
 </div>	
 </form>

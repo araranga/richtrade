@@ -660,7 +660,7 @@ function emblemme(battlehash,emblemdata){
 
 
 <?php
-$qweapons = mysql_query_md("SELECT * FROM tbl_weapons");
+$qweapons = mysql_query_md("SELECT * FROM tbl_weapons WHERE is_free!=1 ORDER by RAND()");
 while($qweaponsr=mysql_fetch_md_array($qweapons))
 {
 	

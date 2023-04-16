@@ -322,6 +322,16 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 			if(empty($rowqpokes['weapon'])){
 				$rowqpokes['weapon'] = "sword";
 			}
+			
+			
+			$getweapon = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$rowqpokes['id']}' LIMIT 1"));
+			
+			if(!empty($getweapon['weapon'])){
+				
+				$rowqpokes['weapon'] = $getweapon['weapon'];
+				
+			}
+			
 		   ?>
 		   <div class="image">  
 				<div class='mainchar flipme showcharbattle battle' style='background: url(/actors/<?php echo $rowqpokes['front']; ?>) 0px 0px;'>
@@ -379,6 +389,13 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 			  $emb = loademblem($rowqpokes['emblem']); 
 			   echo "<strong>Emblem: ".$emb['title_name']."</strong>";
 		   }
+		   
+			$getweapon = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$rowqpokes['id']}' LIMIT 1"));		
+			$rowqpokes['weapon_name'] = $getweapon['pokename'];		   
+			if(!empty($rowqpokes['weapon_name'])){
+				 echo "<br>";
+				echo "<strong>Weapon : ".$rowqpokes['weapon_name']."</strong>"; 
+			}		   
 			
 		   ?>
 		   

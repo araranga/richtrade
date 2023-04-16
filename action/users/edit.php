@@ -20,6 +20,10 @@ $field[] = array("type"=>"select","value"=>"role","label"=>"Role","option"=>arra
 $field[] = array("type"=>"text","value"=>"deadline","label"=>"Battle Points Bonus expiry");
 $field[] = array("type"=>"number","value"=>"deadline_bonus","label"=>"Bonus Battle");
 $field[] = array("type"=>"number","value"=>"pokeballs","label"=>"Scrolls");
+
+
+$field[] = array("type"=>"number","value"=>"chest","label"=>"Chest");
+
 $complan = array();
 $queryx  = mysql_query_md("SELECT * FROM tbl_rate");
 $complan[0] = "Select a Complan";
