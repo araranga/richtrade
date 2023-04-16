@@ -86,6 +86,12 @@ function itemshow(){
 $myuser = $_SESSION['accounts_id'];
 $qpokes = mysql_query_md("SELECT * FROM `tbl_items_users` WHERE user ='$myuser'");		
 $stats = array("hp","speed","critical","accuracy","attack","defense");
+	
+	if(empty(mysql_num_rows_md($qpokes))){
+		
+		echo "You have no weapon so far. Open a chest now!";
+	}
+
 	while($rowqpokesx = mysql_fetch_md_assoc($qpokes)) {
 		
 

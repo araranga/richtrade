@@ -43,10 +43,13 @@ $error = '';
 			$error .= "<i class=\"fa fa-warning\"></i>You have no Chest Left. You can buy it on the Item Shop ;)<br>";
 		}
 	
-
+		
+		if(empty($error)){
+			mysql_query_md("UPDATE tbl_accounts SET chest=chest - 1 WHERE accounts_id='$accounts_id'");
 		if(!getluck(2,100)){
 			
 			$error .= "<i class=\"fa fa-warning\"></i>It seems the chest is empty. Try again later.<br>";
+		}
 		}
 	}
 	
@@ -162,7 +165,7 @@ if($error==''){
 
 
 	
-mysql_query_md("UPDATE tbl_accounts SET chest=chest - 1 WHERE accounts_id='$accounts_id'");
+
 $q = mysql_query_md("SELECT * FROM tbl_accounts WHERE accounts_id='$accounts_id'");
 $row = mysql_fetch_md_assoc($q);	
 	
@@ -199,12 +202,12 @@ if($error!='')
 <?php
 }
 ?>
-This page will refresh in 5 seconds.
+This page will refresh in seconds.
 <script>
 jQuery('#walletbalancechest').text("<?php echo $row['chest']; ?>");
 </script>
 <script>
-setTimeout(myGreeting, 5000);
+setTimeout(myGreeting, 2000);
 
 function myGreeting(){
 	
