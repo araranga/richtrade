@@ -742,11 +742,6 @@ function savebattle($hash)
 		
 		$lessthan = 1;
 		$greaterthan = 6;
-	}else{
-		
-		$lessthan = 6;
-		$greaterthan = 30;
-		
 	}
 	
 	

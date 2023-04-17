@@ -122,7 +122,7 @@ $stats = array("hp","speed","critical","accuracy","attack","defense");
 			   </p>
 			</div>
 		<?php if(empty($rowqpokesx['is_market'])) { ?>
-		   <input data-json='<?php echo json_encode($rowqpokesx); ?>' class="btn btn-secondary btn-sm" type="button" onclick="equipitems('<?php echo $rowqpokesx['hash']; ?>','<?php echo $rowqpokesx['weapon']; ?>',this)" name="battle" value="Equip!">
+		   <input data-json='<?php echo (json_encode($rowqpokesx,JSON_HEX_APOS)); ?>' class="btn btn-secondary btn-sm" type="button" onclick="equipitems('<?php echo $rowqpokesx['hash']; ?>','<?php echo $rowqpokesx['weapon']; ?>',this)" name="battle" value="Equip!">
 		   <input class="btn btn-info btn-sm" style='background-color: #ff0000;margin-top:5px;' type="button" onclick="sellmeitems('<?php echo $rowqpokesx['hash']; ?>')" name="sell" value="Sell!">	
 	    <?php } else { ?>
 			<p>Item is on market</p>
