@@ -1,4 +1,5 @@
 <?php
+exit();
 session_start();
 require_once("../connect.php");
 require_once("../function.php");
@@ -31,27 +32,30 @@ function numberToRomanRepresentation($number) {
 }
 
 $error = '';
-	if($_POST['password']!='')
-	{
-		
-		if($_POST['password']!=$row['password'])
-		{
-			$error .= "<i class=\"fa fa-warning\"></i>Password do not match.<br>";
-		}
-		if(1>$row['chest']) 
-		{
-			$error .= "<i class=\"fa fa-warning\"></i>You have no Chest Left. You can buy it on the Item Shop ;)<br>";
-		}
+
+if(empty($_POST['password'])){
 	
+	$error .= "<i class=\"fa fa-warning\"></i>Password is required.<br>";
+	
+}
 		
-		if(empty($error)){
-			mysql_query_md("UPDATE tbl_accounts SET chest=chest - 1 WHERE accounts_id='$accounts_id'");
-		if(!getluck(2,100)){
-			
-			$error .= "<i class=\"fa fa-warning\"></i>It seems the chest is empty. Try again later.<br>";
-		}
-		}
-	}
+if($_POST['password']!=$row['password'])
+{
+	$error .= "<i class=\"fa fa-warning\"></i>Password do not match.<br>";
+}
+if(1>$row['chest']) 
+{
+	$error .= "<i class=\"fa fa-warning\"></i>You have no Chest Left. You can buy it on the Item Shop ;)<br>";
+}
+
+
+if(empty($error)){
+	mysql_query_md("UPDATE tbl_accounts SET chest=chest - 1 WHERE accounts_id='$accounts_id'");
+if(!getluck(2,100)){
+	
+	$error .= "<i class=\"fa fa-warning\"></i>It seems the chest is empty. Try again later.<br>";
+}
+}
 	
 	
 	$stats = array("hp","speed","critical","accuracy","attack","defense");
