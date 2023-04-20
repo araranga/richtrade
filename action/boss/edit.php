@@ -23,6 +23,10 @@ while($rowxxx = mysql_fetch_md_assoc($q)) {
 }
 $field[] = array("type"=>"select","value"=>"pokeclass","label"=>"Armor Element:","option"=>$damages);
 $field[] = array("type"=>"number","value"=>"reward","label"=>"Reward");
+
+$field[] = array("type"=>"number","value"=>"level","label"=>"Level");
+
+
 $field[] = array("type"=>"text","value"=>"attack","label"=>"Attack");
 $field[] = array("type"=>"text","value"=>"defense","label"=>"Defense");
 $field[] = array("type"=>"text","value"=>"hp","label"=>"HP");

@@ -125,7 +125,10 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_bosses ORDER by hp ASC");
 		   <span>Critical:<?php echo $rowqpokes['critical']; ?></span>
 		   <span>Accuracy:<?php echo $rowqpokes['accuracy']; ?></span><br/>	
 
-			<strong><span >Points Reward:<?php echo $rowqpokes['reward']; ?></span></strong><br/>	
+			<strong><span >Points Reward:<?php echo $rowqpokes['reward']; ?></span></strong><br/>
+
+
+              <strong><span >Required Level:<?php echo $rowqpokes['level']; ?></span></strong><br/>			
 		   <span>
 		   
 		   <?php 
