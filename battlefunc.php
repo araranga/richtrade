@@ -84,6 +84,15 @@ function generatebattle($id)
 	}	
 	
 	
+	var_dump($poke1);
+	
+	var_dump($poke2);
+	
+	var_dump($skill1);
+	
+	var_dump($skill2);
+	
+	
 	
 	
 	
@@ -910,12 +919,15 @@ function generatebattle($id)
 
         if ($tira == 10000)
         {
-            $winner = 1;
+           // $winner = 1;
         }
     }
 
 	$debug = $p1level."====".$p2level."=====".$p1gap."===".$p2gap;
-    $mylogs = addslashes(json_encode($logs));
+    $mylogs = json_encode($logs,JSON_HEX_APOS);
+	
+	var_dump($logs);
+	
     mysql_query_md("UPDATE tbl_battle SET winner='$winnerpoke', logs='$mylogs',fullhp1='$fullhp1',fullhp2='$fullhp2',hash='$debug' WHERE id='$id'");
 	
 	

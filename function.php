@@ -267,7 +267,7 @@ function loadpoketype($type)
 }
 function loadpokeskill($hash)
 {
-    $row = [];
+    $row = array();
     $q = mysql_query_md("SELECT * FROM tbl_movesreindex WHERE activate='1' AND pokehash='$hash'");
     while ($rowqpokes = mysql_fetch_md_assoc($q))
     {
