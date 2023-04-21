@@ -185,6 +185,23 @@ $field[] = array("type"=>"password","value"=>"password","label"=>"Please enter p
 //$field[] = array("type"=>"number","value"=>"withdraw","label"=>"Amount to withdraw:");
 //$field[] = array("type"=>"select","value"=>"stores","label"=>"Branch","option"=>getarrayconfig('stores'));
 ?>
+<div class="mt-4">
+<div class="callout callout-warning">
+Insufficient Amount? You can buy back this item using GCASH. 
+
+<br/>
+Amount to send: <strong><?php echo round($row1['amount'] * getcoin(),2); ?></strong><br/> 
+REFERENCE: <strong>#<?php echo $_GET['pokeid']; ?></strong><br/> 
+<br/>
+Lastly send this in <strong>hello@pocketfighters.com</strong>
+
+
+Please note processing might take around. 1-2hours.
+
+<br/>
+<img src="/gcash.jpg" style="width:150px;">
+</div>
+</div>
 
 <div class="panel panel-default">
    <div class="panel-body">
