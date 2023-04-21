@@ -16,6 +16,14 @@ if(empty($row1)){
 	exit("your not allow");
 }
 
+
+
+if($poke['is_market']!=1){
+	exit("your not allow");
+}
+
+
+
 function trans()
 {
     $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -43,6 +51,15 @@ function trans()
 		{
 			$error .= "<i class=\"fa fa-warning\"></i>Amount to pay(".$_POST['withdraw'].") is insufficient on current balance(".$row['balance'].").<br>";
 		}
+		
+		
+		$countchar = mysql_num_rows_md(mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$accounts_id' AND level>=15"));
+		if(empty($countchar)){
+			
+			$error .= "<i class=\"fa fa-warning\"></i>You must have atleast 1 level 15 hero.<br>";
+			
+		}		
+		
 		
 		if($error=='')
 		{

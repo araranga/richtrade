@@ -44,6 +44,13 @@ if($qmarketcount<=1){
 }
 
 
+if($poke['level']<10){
+	
+	echo "Warrior must be atleast level 10 onwards to qualified into selling";
+	exit();
+}
+
+
 if($amount<=0){
 
 	echo "Please add correct amount";

@@ -493,6 +493,7 @@ $qpokes = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE user='$myuser'")
 			<h5><i class="icon fas fa-info"></i>Hey!</h5>
 			5% of the amount here when you sold this will be go to the system fund and helps the economy better.
 			Please note that any warrior of you on market will not able to cancel it. So please put price that is reasonable ;)
+			Warrior must be atleast level 10 to qualified to sell.
 			</div>			
 			
 			

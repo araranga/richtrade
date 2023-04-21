@@ -78,6 +78,45 @@ function itemshow(){
 
 <hr>
 
+
+<?php 
+if(!empty($_GET['remove'])){ 
+
+$poke = loadweapon($_GET['remove']);
+	if($poke['user']!=$accounts_id){
+		
+		
+		$error .= "<i class=\"fa fa-warning\"></i>Not allowed item is not yours.<br>";
+		
+	}
+	
+
+	
+	if(empty($error)){
+		mysql_query_md("UPDATE tbl_items_users SET pokemon = '' WHERE hash='{$_GET['remove']}'");
+		$success = 1;
+	}
+}
+?>
+
+
+<?php
+if($success!='')
+{
+?>
+<div class="noti"><ul class="fa-ul"><li><i class="fa fa-check fa-li"></i>Item successfully remove the warrior. </li></ul></div>
+<?php
+}
+?>
+<?php
+if($error!='')
+{
+?>
+<div class="warning"><ul class="fa-ul"><li><?php echo $error;?></li></ul></div>
+<?php
+}
+?>
+
 <div id='pokeitemsholder'>
 	<h1>Your Weapons</h1>
 	<div id="poke-container" class="ui cards">
@@ -109,7 +148,10 @@ $stats = array("hp","speed","critical","accuracy","attack","defense");
 			   
 					$pokedata = loadpokev2($rowqpokesx['pokemon']);
 			   ?>
-			   <p style='color:green'>Used by:<?php echo $pokedata['pokename']; ?></p>
+			   <p style='color:green'>
+			   Used by:<?php echo $pokedata['pokename']; ?><br/>
+			   <input class="btn btn-info btn-sm" style='background-color: #ff0000;margin-top:5px;' type="button" onclick="removeitem('<?php echo $rowqpokesx['hash']; ?>')" name="Unequip" value="Unequip!">
+			   </p>
 			   <?php } ?>
 			   <p>
 			   <?php 
@@ -141,6 +183,12 @@ $stats = array("hp","speed","critical","accuracy","attack","defense");
 
 
 <script>
+function removeitem(battlehash){
+	
+	window.location = '/index.php?pages=treasure&remove='+battlehash+'#pokeitemsholder';
+	
+}
+
 function saveselltreasure(){
 	var hash = jQuery('#sellhash').val();
 	var amount = parseInt(jQuery('#sellamount').val());

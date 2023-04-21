@@ -16,6 +16,15 @@ if(empty($row1)){
 	exit("your not allow");
 }
 
+
+
+if($poke['is_market']!=1){
+	exit("your not allow");
+}
+
+
+
+
 function trans()
 {
     $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
