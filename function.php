@@ -73,7 +73,11 @@ function checkpoke($winnerpoke)
 	mysql_query_md("INSERT INTO tbl_income SET user='{$userid}', message='You Won a battle: {$rewardwin}'");
 
     $req = $poke["level"] * 6;
-
+	
+	if($poke['level']==25){
+		return;
+	}
+	
     if ($req == $poke["exp"])
     {
         pokelevelup($winnerpoke, $poke["rate"]);
@@ -743,6 +747,14 @@ function savebattle($hash)
 		$lessthan = 1;
 		$greaterthan = 6;
 	}
+	
+	
+	if($poke['level']<=10 && $poke['level']>=6){
+		
+		$lessthan = 6;
+		
+	}
+	
 	
 	
 	//echo "Debug::: $lessthan == $greaterthan";

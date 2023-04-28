@@ -23,25 +23,50 @@ function generatebattle($id)
     $emblem2 = getEmblem($poke2['emblem']);
 	
 	
+	//check if gap
+	$p1level = $poke1['level'] - $poke2['level'];
+	$p2level = $poke2['level'] - $poke1['level'];
 	
+	$p1gap = 0;
+	$p2gap = 0;
+	if($p1level>=0 && $p1level>=8){		
+		$p2gap = 1;	
+	}
+	if($p2level>=0 && $p2level>=8){		
+		$p1gap = 1;	
+	}
+		
+
+	if($p1gap){
+
+		$poke1["attack"] = addmore($poke1["attack"], 1, 0.20);
+		$poke1["accuracy"] = addmore($poke1["accuracy"], 1, 0.15);
+		$poke1["speed"] = addmore($poke1["speed"], 1, 0.15);		
+		
+	}
+		
+	if($p2gap){
+
+		$poke2["attack"] = addmore($poke2["attack"], 1, 0.20);
+		$poke2["accuracy"] = addmore($poke2["accuracy"], 1, 0.15);
+		$poke2["speed"] = addmore($poke2["speed"], 1, 0.15);		
+		
+	}
+			
 	
 	if($emblem1=='focus'){
 		
-
 		$poke1["attack"] = addmore($poke1["attack"], 1, 0.15);
 		$poke1["accuracy"] = addmore($poke1["accuracy"], 1, 0.10);
 		$poke1["speed"] = addmore($poke1["speed"], 1, 0.10);
-		
-		
+			
 	}
 	if($emblem2=='focus'){
 		
-
 		$poke2["attack"] = addmore($poke2["attack"], 1, 0.15);
 		$poke2["accuracy"] = addmore($poke2["accuracy"], 1, 0.10);
 		$poke2["speed"] = addmore($poke2["speed"], 1, 0.10);
-		
-		
+			
 	}
 	
 	
@@ -123,18 +148,7 @@ function generatebattle($id)
     $fullhp2 = $hp2 = $poke2["hp"] + 2000;
 	
 	
-	$p1level = $poke1['level'] - $poke2['level'];
-	$p2level = $poke2['level'] - $poke1['level'];
-	
-	$p1gap = 0;
-	$p2gap = 0;
-	if($p1level>=0 && $p1level>=8){		
-		$p2gap = 1;	
-	}
-	if($p2level>=0 && $p2level>=8){		
-		$p1gap = 1;	
-	}
-	
+
 	
     $winnerpoke = 0;
 
@@ -182,6 +196,9 @@ function generatebattle($id)
             }
 
             $initial_msg = $notes[] = "{$poke1["pokename"]} Uses {$tiraskill["title"]}({$tiraskill["typebattle"]}) to {$poke2["pokename"]}({$poke2["pokeclass"]})";
+			
+			
+			$tiraskill["power"] = rand(180,270);
 
             $initialdmg = $curdamage = $tiraskill["power"] + $poke1["attack"];
 
@@ -568,6 +585,8 @@ function generatebattle($id)
             }
 
             $initial_msg = $notes[] = "{$poke2["pokename"]} Uses {$tiraskill["title"]}({$tiraskill["typebattle"]}) to {$poke1["pokename"]}({$poke1["pokeclass"]})";
+			
+			$tiraskill["power"] = rand(180,270);
 
             $initialdmg = $curdamage = $tiraskill["power"] + $poke2["attack"];
 
@@ -1116,6 +1135,8 @@ function generatebattleboss($id)
             }
 
             $initial_msg = $notes[] = "{$poke1["pokename"]} Uses {$tiraskill["title"]}({$tiraskill["typebattle"]}) to {$poke2["pokename"]}({$poke2["pokeclass"]})";
+			
+			$tiraskill["power"] = rand(180,270);
 
             $initialdmg = $curdamage = $tiraskill["power"] + $poke1["attack"];
 
