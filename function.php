@@ -74,11 +74,11 @@ function checkpoke($winnerpoke)
 
     $req = $poke["level"] * 6;
 	
-	if($poke['level']==25){
+	if($poke['level']==30){
 		return;
 	}
 	
-    if ($req == $poke["exp"])
+    if ($req >= $poke["exp"])
     {
         pokelevelup($winnerpoke, $poke["rate"]);
     }

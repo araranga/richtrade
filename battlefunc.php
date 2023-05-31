@@ -1851,6 +1851,8 @@ function generatebattleboss($id)
     if ($winnerpoke == $poke1['id'])
     {
         $reward = $poke2['reward'];
+		$reward = addmore($poke2["reward"], $acvcount, 0.15);
+		
         $getuser = $poke1['user'];
         mysql_query_md("UPDATE tbl_accounts SET balance = balance + $reward WHERE accounts_id='$getuser'");
 

@@ -471,7 +471,7 @@ if(!empty($fullhp2)){
     $queryacv = "SELECT * FROM tbl_achievement WHERE hero='{$row["p1poke"]}' AND boss='{$row["p2poke"]}'";
     $queryacvq = mysql_query_md($queryacv);
     $acvcount = mysql_num_rows_md($queryacvq);
-    $p2["hp"] = addmore($p2["hp"], $acvcount, 0.20);	
+    //$p2["hp"] = addmore($p2["hp"], $acvcount, 0.20);	
 	
 	
 }
@@ -500,7 +500,7 @@ if(!empty($fullhp2)){
           
          <aside class="data rpgleft">
             <h2>
-			<?php echo $p2['pokename']; ?>
+			<?php echo $p2['pokename']; ?> LVL.<?php echo $acvcount; ?>
 			</h2>
 			<p>Evil Spirits</p>
             <div>
