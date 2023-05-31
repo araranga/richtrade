@@ -1,5 +1,4 @@
 <?php
-exit();
 session_start();
 require_once("../connect.php");
 require_once("../function.php");
@@ -51,8 +50,15 @@ if(1>$row['chest'])
 
 if(empty($error)){
 	mysql_query_md("UPDATE tbl_accounts SET chest=chest - 1 WHERE accounts_id='$accounts_id'");
-if(!getluck(2,100)){
 	
+	$chance = 8 + $row['chest_chance'];
+	
+	if($accounts_id==20){
+		
+		$chance = 100;
+	}
+if(!getluck($chance,100)){
+	mysql_query_md("UPDATE tbl_accounts SET chest_chance=chest_chance + 1 WHERE accounts_id='$accounts_id'");
 	$error .= "<i class=\"fa fa-warning\"></i>It seems the chest is empty. Try again later.<br>";
 }
 }

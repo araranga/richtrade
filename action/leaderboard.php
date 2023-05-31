@@ -7,10 +7,10 @@ require_once("./function.php");
  $field = array("transnum","email","username","accounts_id");
  $where = getwheresearch($field);
 
- $total = countquery("SELECT *,((win - lose) * 20) as winrate FROM `tbl_pokemon_users` WHERE user IN (SELECT user FROM `tbl_battlelog` where battledata > now() - INTERVAL 2 day AND user NOT IN (SELECT accounts_id FROM `tbl_accounts` WHERE robot = 1) GROUP by user)   ORDER by winrate DESC LIMIT 20");
+ $total = countquery("SELECT *,((win - lose) * 20) as winrate FROM `tbl_pokemon_users` WHERE user IN (SELECT user FROM `tbl_battlelog` where battledata > now() - INTERVAL 10 day AND user NOT IN (SELECT accounts_id FROM `tbl_accounts` WHERE robot = 2) GROUP by user)   ORDER by winrate DESC LIMIT 20");
  //primary query
  $limit = getlimit(20,$_GET['p']);
- $query = "SELECT *,((win - lose) * 20) as winrate FROM `tbl_pokemon_users` WHERE user IN (SELECT user FROM `tbl_battlelog` where battledata > now() - INTERVAL 3 day AND user NOT IN (SELECT accounts_id FROM `tbl_accounts` WHERE robot = 1) GROUP by user)   ORDER by winrate DESC LIMIT 20";
+ $query = "SELECT *,((win - lose) * 20) as winrate FROM `tbl_pokemon_users` WHERE user IN (SELECT user FROM `tbl_battlelog` where battledata > now() - INTERVAL 10 day AND user NOT IN (SELECT accounts_id FROM `tbl_accounts` WHERE robot = 2) GROUP by user)   ORDER by winrate DESC LIMIT 20";
 
  $q = mysql_query_md($query);
  $pagecount = getpagecount($total,20);

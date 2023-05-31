@@ -18,7 +18,7 @@ $field[] = array("type"=>"password","value"=>"password","label"=>"Please enter p
 <div class="alert alert-info alert-dismissible">
 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 <h5><i class="icon fas fa-info"></i>Hey!</h5>
-2% chance to get a item that helps your hero to win battle with rare battle weapons.
+<?php echo $chance = 8 + $row['chest_chance']; ?>% chance to get a item that helps your hero to win battle with rare battle weapons.
 </div>
 
 

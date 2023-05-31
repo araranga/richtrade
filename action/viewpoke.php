@@ -429,7 +429,7 @@ $skillarray = loadmovesfrontend($_GET['pokeid']);
 ?>
 									    <tr <?php if($aaa['activate']) { echo "style='background-color: #00f900;'"; } else { echo "style='opacity: 0.85;'"; }?>>
                                             <td><?php echo $aaa['title']; ?></td>
-                                            <td><?php echo $aaa['power']; ?></td>
+                                            <td>180-270</td>
                                             <td><?php echo $aaa['accuracy']; ?></td>
                                             <td><?php echo $aaa['typebattle']; ?></td>
                                         </tr>

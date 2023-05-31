@@ -467,6 +467,13 @@ if(!empty($fullhp1)){
 if(!empty($fullhp2)){
 	
 	$p2['hp'] = $fullhp2;
+	
+    $queryacv = "SELECT * FROM tbl_achievement WHERE hero='{$row["p1poke"]}' AND boss='{$row["p2poke"]}'";
+    $queryacvq = mysql_query_md($queryacv);
+    $acvcount = mysql_num_rows_md($queryacvq);
+    $p2["hp"] = addmore($p2["hp"], $acvcount, 0.20);	
+	
+	
 }
 
 ?>

@@ -186,7 +186,9 @@ function generatebattle($id)
 
             $tiraskill = $skill1[array_rand($skill1) ];
 
-            $is_crit = getluck($poke1["critical"], 100);
+
+			$is_crit_chance = 100 + ($poke2["defense"] * 0.25);
+            $is_crit = getluck($poke1["critical"], $is_crit_chance);
 
             $notes = [];
 
@@ -575,7 +577,8 @@ function generatebattle($id)
 
             $tiraskill = $skill2[array_rand($skill2) ];
 
-            $is_crit = getluck($poke2["critical"], 100);
+			$is_crit_chance = 100 + ($poke1["defense"] * 0.25);
+            $is_crit = getluck($poke2["critical"], $is_crit_chance);			
 
             $notes = [];
 
@@ -630,7 +633,7 @@ function generatebattle($id)
 
             $is_dodge = getluck($poke1["speed"], $acc);
 
-            $curdamage = $curdamage - ($poke1["defense"] / 2);
+            $curdamage = $curdamage - ($poke1["defense"] * 0.6);
 
             if ($curdamage < 0)
             {
@@ -982,13 +985,13 @@ function generatebattleboss($id)
     $queryacvq = mysql_query_md($queryacv);
     $acvcount = mysql_num_rows_md($queryacvq);
 
-    $poke2["hp"] = addmore($poke2["hp"], $acvcount, 0.35);
-    $poke2["defense"] = addmore($poke2["defense"], $acvcount, 1.30);
-    $poke2["attack"] = addmore($poke2["attack"], $acvcount, 0.35);
-    $poke2["accuracy"] = addmore($poke2["accuracy"], $acvcount, 0.50);
+    $poke2["hp"] = addmore($poke2["hp"], $acvcount, 0.20);
+    $poke2["defense"] = addmore($poke2["defense"], $acvcount, 1);
+    $poke2["attack"] = addmore($poke2["attack"], $acvcount, 0.20);
+    $poke2["accuracy"] = addmore($poke2["accuracy"], $acvcount, 0.25);
     $poke2["speed"] = addmore($poke2["speed"], $acvcount, 0.15);
 	
-	
+	//6DC*wC822R@j
 	
 	
 	if($emblem1=='focus'){
@@ -1168,7 +1171,7 @@ function generatebattleboss($id)
 
             $is_dodge = getluck($poke2["speed"], $acc);
 
-            $curdamage = $curdamage - ($poke2["defense"] / 2);
+            $curdamage = $curdamage - ($poke2["defense"] * 0.6);
 
             if ($curdamage < 0)
             {
@@ -1677,7 +1680,7 @@ function generatebattleboss($id)
 
             }
 
-            if ($emblem2 == 'dpsregen' && $hp2 != $fullhp2)
+            if ($emblem2 == 'dpsregen' && $hp2 < $fullhp2)
             {
                 $dps_regen2++;
                 $dpsatk = round($poke2['defense'] * 2.25);

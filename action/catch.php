@@ -67,15 +67,15 @@ $field[] = array("type"=>"select","value"=>"avatar_class","label"=>"Armor Elemen
 //$field[] = array("type"=>"select","value"=>"stores","label"=>"Branch","option"=>getarrayconfig('stores'));
 
 
-$field[] = array("type"=>"text","value"=>"skill1","label"=>"Skill 1 Name (Highest Damage Output)");
+$field[] = array("type"=>"text","value"=>"skill1","label"=>"Skill 1 Name");
 $field[] = array("type"=>"select","value"=>"element1","label"=>"Skill 1 Element:","option"=>$damages);
 
 
-$field[] = array("type"=>"text","value"=>"skill2","label"=>"Skill 2 Name (Medium Damage Output)");
+$field[] = array("type"=>"text","value"=>"skill2","label"=>"Skill 2 Name");
 $field[] = array("type"=>"select","value"=>"element2","label"=>"Skill 2 Element:","option"=>$damages);
 
 
-$field[] = array("type"=>"text","value"=>"skill3","label"=>"Skill 3 Name (Lowest Damage Output)");
+$field[] = array("type"=>"text","value"=>"skill3","label"=>"Skill 3 Name");
 $field[] = array("type"=>"select","value"=>"element3","label"=>"Skill 3 Element:","option"=>$damages);
 
 
