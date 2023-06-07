@@ -675,7 +675,7 @@ function savebattlebot($hash, $user)
     if ($countx >= $rewardwin)
     {
         echo "Limited of $rewardwin Battle Per Day only";
-        exit();
+        return;
     }
 
     $query = "SELECT * FROM tbl_battle WHERE (p1poke='$id' OR p2poke='$id') AND winner IS NULL";

@@ -21,7 +21,7 @@ $field[] = array("type"=>"text","value"=>"deadline","label"=>"Battle Points Bonu
 $field[] = array("type"=>"number","value"=>"deadline_bonus","label"=>"Bonus Battle");
 $field[] = array("type"=>"number","value"=>"pokeballs","label"=>"Scrolls");
 
-
+$field[] = array("type"=>"text","value"=>"robot","label"=>"Robot");
 $field[] = array("type"=>"number","value"=>"chest","label"=>"Chest");
 
 $complan = array();

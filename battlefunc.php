@@ -73,6 +73,8 @@ function generatebattle($id)
 	
 	$stats_up = array("hp","speed","critical","accuracy","attack","defense");
 	
+	$stats_upv2 = array("speed","critical","accuracy","attack","defense");
+	
 	
 	if(!empty($poke1['is_god']))
 	{
@@ -80,7 +82,7 @@ function generatebattle($id)
 
 			
 		
-		foreach($stats_up as $sup){
+		foreach($stats_upv2 as $sup){
 			
 			$poke1[$sup] = addmore($poke1[$sup], 1, (rand(15,80) / 100));
 			
@@ -95,7 +97,7 @@ function generatebattle($id)
 
 			
 		
-		foreach($stats_up as $sup){
+		foreach($stats_upv2 as $sup){
 			
 			$poke2[$sup] = addmore($poke2[$sup], 1, (rand(15,80) / 100));
 			
