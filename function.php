@@ -60,6 +60,13 @@ function deductloser($loserpoke)
         mysql_query_md("UPDATE tbl_accounts SET balance = balance - 0.5 WHERE accounts_id='{$member['accounts_id']}'");
 
     }
+	
+    if ($member['balance'] > 100)
+    {
+		mysql_query_md("INSERT INTO tbl_income SET user='{$member['accounts_id']}', message='You Lose a battle: -1'");
+        mysql_query_md("UPDATE tbl_accounts SET balance = balance - 1 WHERE accounts_id='{$member['accounts_id']}'");
+
+    }	
 
 }
 
@@ -68,9 +75,15 @@ function checkpoke($winnerpoke)
     $poke = loadpokev2($winnerpoke);
 
     $userid = $poke["user"];
+	
+	$member = loadmember($poke['user']);
+	
+	
     $rewardwin = systemconfig("battlereward");
+	if(empty($member['robot'])){
     mysql_query_md("UPDATE tbl_accounts SET balance = balance + $rewardwin WHERE accounts_id='$userid'");
 	mysql_query_md("INSERT INTO tbl_income SET user='{$userid}', message='You Won a battle: {$rewardwin}'");
+	}
 
     $req = $poke["level"] * 6;
 	
@@ -78,7 +91,7 @@ function checkpoke($winnerpoke)
 		return;
 	}
 	
-    if ($req >= $poke["exp"])
+    if ($req <= $poke["exp"])
     {
         pokelevelup($winnerpoke, $poke["rate"]);
     }

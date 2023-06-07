@@ -1,8 +1,17 @@
 <?php
-include("battlefuncboss.php");
-function generatebattle($id)
+
+
+//////////////BOSS BATTTLE//////////////////
+//////////////BOSS BATTTLE//////////////////
+//////////////BOSS BATTTLE//////////////////
+//////////////BOSS BATTTLE//////////////////
+//////////////BOSS BATTTLE//////////////////
+//////////////BOSS BATTTLE//////////////////
+
+
+function generatebattleboss($id)
 {
-    $query = "SELECT * FROM tbl_battle WHERE id ='$id' AND winner IS NULL";
+    $query = "SELECT * FROM tbl_battle_boss WHERE id ='$id' AND winner IS NULL";
     $q = mysql_query_md($query);
     $row = mysql_fetch_md_assoc($q);
     if (empty($row))
@@ -12,103 +21,46 @@ function generatebattle($id)
     }
     //loading pokemon
     $poke1 = loadpokev2($row["p1poke"]);
-    $poke2 = loadpokev2($row["p2poke"]);
-    //var_dump($poke1);
-    //var_dump($poke2);
-    //preload skills
-    $skill1 = loadpokeskill($poke1["hash"]);
-    $skill2 = loadpokeskill($poke2["hash"]);
+    $poke2 = loadbossv2($row["p2poke"]);
 
-    //preload emblem
-    $emblem1 = getEmblem($poke1['emblem']);
-    $emblem2 = getEmblem($poke2['emblem']);
+    $queryacv = "SELECT * FROM tbl_achievement WHERE hero='{$row["p1poke"]}' AND boss='{$row["p2poke"]}'";
+    $queryacvq = mysql_query_md($queryacv);
+    $acvcount = mysql_num_rows_md($queryacvq);
+
+    $poke2["hp"] = addmore($poke2["hp"], $acvcount, 0.20);
+    $poke2["defense"] = addmore($poke2["defense"], $acvcount, 1);
+    $poke2["attack"] = addmore($poke2["attack"], $acvcount, 0.35);
+    $poke2["accuracy"] = addmore($poke2["accuracy"], $acvcount, 0.25);
+    $poke2["speed"] = addmore($poke2["speed"], $acvcount, 0.15);
 	
+	//6DC*wC822R@j
 	
-	//check if gap
-	$p1level = $poke1['level'] - $poke2['level'];
-	$p2level = $poke2['level'] - $poke1['level'];
-	
-	$p1gap = 0;
-	$p2gap = 0;
-	if($p1level>=0 && $p1level>=8){		
-		$p2gap = 1;	
-	}
-	if($p2level>=0 && $p2level>=8){		
-		$p1gap = 1;	
-	}
-		
-
-	if($p1gap){
-
-		$poke1["attack"] = addmore($poke1["attack"], 1, 0.20);
-		$poke1["accuracy"] = addmore($poke1["accuracy"], 1, 0.15);
-		$poke1["speed"] = addmore($poke1["speed"], 1, 0.15);		
-		
-	}
-		
-	if($p2gap){
-
-		$poke2["attack"] = addmore($poke2["attack"], 1, 0.20);
-		$poke2["accuracy"] = addmore($poke2["accuracy"], 1, 0.15);
-		$poke2["speed"] = addmore($poke2["speed"], 1, 0.15);		
-		
-	}
-			
 	
 	if($emblem1=='focus'){
 		
+
 		$poke1["attack"] = addmore($poke1["attack"], 1, 0.15);
 		$poke1["accuracy"] = addmore($poke1["accuracy"], 1, 0.10);
 		$poke1["speed"] = addmore($poke1["speed"], 1, 0.10);
-			
+		
+		
 	}
 	if($emblem2=='focus'){
 		
+
 		$poke2["attack"] = addmore($poke2["attack"], 1, 0.15);
 		$poke2["accuracy"] = addmore($poke2["accuracy"], 1, 0.10);
 		$poke2["speed"] = addmore($poke2["speed"], 1, 0.10);
-			
-	}
+		
+		
+	}	
+	
 	
 	
 	$stats_up = array("hp","speed","critical","accuracy","attack","defense");
-	
-	
-	if(!empty($poke1['is_god']))
-	{
-		
-
-			
-		
-		foreach($stats_up as $sup){
-			
-			$poke1[$sup] = addmore($poke1[$sup], 1, (rand(15,80) / 100));
-			
-		}
-			
-	}
-	
-	
-	if(!empty($poke2['is_god']))
-	{
-		
-
-			
-		
-		foreach($stats_up as $sup){
-			
-			$poke2[$sup] = addmore($poke2[$sup], 1, (rand(15,80) / 100));
-			
-		}
-			
-	}	
 
 
-   $getweapon1 = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$poke1['id']}' LIMIT 1"));		
-   $getweapon2 = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$poke2['id']}' LIMIT 1"));	 
-	
-	
-	
+    $getweapon1 = mysql_fetch_md_assoc(mysql_query_md("SELECT * FROM tbl_items_users WHERE pokemon='{$poke1['id']}' LIMIT 1"));		
 	if(!empty($getweapon1['id'])){
 	
 		foreach($stats_up as $sup){
@@ -123,36 +75,40 @@ function generatebattle($id)
 	
 		
 	}
-	
-	if(!empty($getweapon2['id'])){
-	
-		foreach($stats_up as $sup){
-			
-			if(!empty($getweapon2[$sup]))
-			{
-				$poke2[$sup] = $poke2[$sup] + $getweapon2[$sup];
-				
-			}
-			
-		}
-	
 		
-	}	
-	
-	
-	var_dump($poke1);
-	
-	var_dump($poke2);
-	
-	var_dump($skill1);
-	
-	var_dump($skill2);
 	
 	
 	
-	
-	
-	
+
+    //var_dump($poke1);
+    //var_dump($poke2);
+    //preload skills
+    $skill1 = loadpokeskill($poke1["hash"]);
+    //$skill2 = loadpokeskill($poke2["hash"]);
+    $skillboss = array();
+
+    $skillboss[] = array(
+        "title" => $poke2['skillname1'],
+        "typebattle" => $poke2['element1'],
+        "power" => $poke2['power1']
+    );
+    $skillboss[] = array(
+        "title" => $poke2['skillname2'],
+        "typebattle" => $poke2['element2'],
+        "power" => $poke2['power2']
+    );
+    $skillboss[] = array(
+        "title" => $poke2['skillname3'],
+        "typebattle" => $poke2['element3'],
+        "power" => $poke2['power3']
+    );
+
+    $skill2 = $skillboss;
+
+    //preload emblem
+    $emblem1 = getEmblem($poke1['emblem']);
+    $emblem2 = getEmblem($poke2['emblem']);
+
     $roundp1 = 0;
     $roundp2 = 0;
 
@@ -175,15 +131,12 @@ function generatebattle($id)
     $turn = rand(1, 2);
     $logs = [];
 
-    $fullhp1 = $hp1 = $poke1["hp"] + 2000;
-    $fullhp2 = $hp2 = $poke2["hp"] + 2000;
-	
-	
+    $fullhp1 = $hp1 = $poke1["hp"];
+    $fullhp2 = $hp2 = $poke2["hp"];
 
-	
     $winnerpoke = 0;
 
-    $turn = 2;
+    $turn = 1;
 
     while ($winner != 1)
     {
@@ -217,9 +170,7 @@ function generatebattle($id)
 
             $tiraskill = $skill1[array_rand($skill1) ];
 
-
-			$is_crit_chance = 100 + ($poke2["defense"] * 0.25);
-            $is_crit = getluck($poke1["critical"], $is_crit_chance);
+            $is_crit = getluck($poke1["critical"], 100);
 
             $notes = [];
 
@@ -229,7 +180,6 @@ function generatebattle($id)
             }
 
             $initial_msg = $notes[] = "{$poke1["pokename"]} Uses {$tiraskill["title"]}({$tiraskill["typebattle"]}) to {$poke2["pokename"]}({$poke2["pokeclass"]})";
-			
 			
 			$tiraskill["power"] = rand(180,270);
 
@@ -243,7 +193,7 @@ function generatebattle($id)
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["double_damage_to"], $v) !== false)
                 {
                     $adddmg = "Its super effective!";
-                    $curdamage = $curdamage + ($curdamage * 0.75);
+                    $curdamage = $curdamage + ($curdamage * 0.65);
                 }
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["half_damage_to"], $v) !== false)
                 {
@@ -253,7 +203,7 @@ function generatebattle($id)
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["no_damage_to"], $v) !== false)
                 {
                     $adddmg = "It cause super low damage!";
-                    $curdamage = $curdamage - ($curdamage * 0.55);
+                    $curdamage = $curdamage - ($curdamage * 0.75);
                 }
             }
 
@@ -263,7 +213,7 @@ function generatebattle($id)
 
             $is_dodge = getluck($poke2["speed"], $acc);
 
-            $curdamage = $curdamage - ($poke2["defense"] / 2);
+            $curdamage = $curdamage - ($poke2["defense"] * 0.6);
 
             if ($curdamage < 0)
             {
@@ -294,15 +244,6 @@ function generatebattle($id)
                 $notes[] = "Deals a $curdamage!";
                 $notes[] = $adddmg;
             }
-
-            //BEFORE ATK
-			
-			
-			
-			
-			
-			
-			
 			if($emblem1== 'desire'){
 				
 					
@@ -314,10 +255,8 @@ function generatebattle($id)
 				
 				
 			}
+            //BEFORE ATK
 			
-			
-
-
 			
 			if($emblem1=='thunderstrike'){
 		
@@ -332,10 +271,11 @@ function generatebattle($id)
 				}					
 				
 				
-			}
-
-
-
+			}				
+			
+			
+			
+			
 			
 			
 			
@@ -344,7 +284,7 @@ function generatebattle($id)
 
                 $dpsatk = round($poke1['attack'] * 0.75);
                 $curdamage = $curdamage + $dpsatk;
-                $notes[] = "Fire attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
+                $notes[] = "Fire attacks give +($dpsatk) additonal dmg! Total of ($curdamage";
 
                 if ($roundp1 == 6)
                 {
@@ -352,18 +292,9 @@ function generatebattle($id)
                 }
             }
 
-
-
-
-
-
-
-
-
-
             if ($emblem1 == 'dpshp')
             {
-				
+
 				$dpshpadd = 0.01 * $roundp1;
 
                 $dpsatk = round($fullhp1 * (0.06 + $dpshpadd));
@@ -379,7 +310,7 @@ function generatebattle($id)
             if ($emblem1 == 'lastwill')
             {
                 $lastwill_comp = ($hp1 / $fullhp1) * 100;
-                if ($lastwill_comp <= 25)
+                if ($lastwill_comp <= 21)
                 {
                     $dpsatk = ($curdamage * 1.50);
                     $curdamage = $curdamage + $dpsatk;
@@ -421,30 +352,24 @@ function generatebattle($id)
                 if ($is_double_attack == 1)
                 {
                     $curdamage = $initialdmg + 250;
+
                     if ($is_crit)
                     {
                         $curdamage = $curdamage * 2;
                     }
                     $notes = array();
                     $notes[] = $initial_msg;
-                    $notes[] = "Armor Break Activated use by {$poke1["pokename"]} !! Deals ($curdamage)";
+                    $notes[] = "Armor Break Activated use by: {$poke1["pokename"]}!! Deals ($curdamage)";
 
                 }
 
             }
 
-            if ($emblem1 == 'dpsregen' && $hp1 < $fullhp1)
+            if ($emblem1 == 'dpsregen' && $hp1 <= $fullhp1)
             {
                 $dps_regen1++;
-                $dpsatk = round($poke1['defense'] * 1.5);
+                $dpsatk = round($poke1['defense'] * 2.25);
                 $hp1 = $hp1 + $dpsatk;
-				
-				if($hp1>=$fullhp1){
-					
-					$hp1 = $fullhp1;
-				}
-				
-				
                 $datalogs["damage"] = 0;
                 $datalogs["notes"] = array(
                     "Forest Buff heals use by: {$poke1["pokename"]}: +($dpsatk)!"
@@ -608,8 +533,7 @@ function generatebattle($id)
 
             $tiraskill = $skill2[array_rand($skill2) ];
 
-			$is_crit_chance = 100 + ($poke1["defense"] * 0.25);
-            $is_crit = getluck($poke2["critical"], $is_crit_chance);			
+            $is_crit = getluck($poke2["critical"], 100);
 
             $notes = [];
 
@@ -619,8 +543,6 @@ function generatebattle($id)
             }
 
             $initial_msg = $notes[] = "{$poke2["pokename"]} Uses {$tiraskill["title"]}({$tiraskill["typebattle"]}) to {$poke1["pokename"]}({$poke1["pokeclass"]})";
-			
-			$tiraskill["power"] = rand(180,270);
 
             $initialdmg = $curdamage = $tiraskill["power"] + $poke2["attack"];
 
@@ -654,7 +576,7 @@ function generatebattle($id)
                 if (strpos($pokeclassdata[$tiraskill["typebattle"]]["no_damage_to"], $v) !== false)
                 {
                     $adddmg = "It cause super low damage!";
-                    $curdamage = $curdamage - ($curdamage * 0.55);
+                    $curdamage = $curdamage - ($curdamage * 0.75);
                 }
             }
 
@@ -664,7 +586,7 @@ function generatebattle($id)
 
             $is_dodge = getluck($poke1["speed"], $acc);
 
-            $curdamage = $curdamage - ($poke1["defense"] * 0.6);
+            $curdamage = $curdamage - ($poke1["defense"] / 2);
 
             if ($curdamage < 0)
             {
@@ -683,9 +605,6 @@ function generatebattle($id)
                 $notes[] = "Deals a $curdamage!";
                 $notes[] = $adddmg;
             }
-			
-			
-			
 			if($emblem2== 'desire'){
 				
 					
@@ -697,8 +616,6 @@ function generatebattle($id)
 				
 				
 			}
-            //BEFORE ATK
-			
 			
 			
 			if($emblem2=='thunderstrike'){
@@ -714,19 +631,19 @@ function generatebattle($id)
 				}					
 				
 				
-			}			
+			}				
 			
 			
 			
 			
 			
-			
+            //BEFORE ATK
             if ($emblem2 == 'dpsatk')
             {
 
                 $dpsatk = round($poke2['attack'] * 0.75);
                 $curdamage = $curdamage + $dpsatk;
-                $notes[] = "Fire attacks give +($dpsatk) additonal dmg! Total of ($curdamage)";
+                $notes[] = "Fire attacks give +($dpsatk) additonal dmg! Total of ($curdamage";
 
                 if ($roundp2 == 6)
                 {
@@ -750,7 +667,7 @@ function generatebattle($id)
             if ($emblem2 == 'lastwill')
             {
                 $lastwill_comp = ($hp2 / $fullhp2) * 100;
-                if ($lastwill_comp <= 25)
+                if ($lastwill_comp <= 21)
                 {
                     $dpsatk = ($curdamage * 1.50);
                     $curdamage = $curdamage + $dpsatk;
@@ -770,7 +687,7 @@ function generatebattle($id)
                     $hp2 = $hp2 + $dpsatk;
                     $datalogs["damage"] = 0;
                     $datalogs["notes"] = array(
-                        "REGEN use by: {$poke2["pokename"]}:  +($dpsatk)!"
+                        "REGEN use by: {$poke2["pokename"]} +($dpsatk)!"
                     );
                     $datalogs["enemyhp"] = $hp1;
                     $datalogs["hp1"] = $hp1;
@@ -796,9 +713,10 @@ function generatebattle($id)
                     {
                         $curdamage = $curdamage * 2;
                     }
+
                     $notes = array();
                     $notes[] = $initial_msg;
-                    $notes[] = "Armor Break Activated used by {$poke2["pokename"]} !! Deals ($curdamage)";
+                    $notes[] = "Armor Break Activated!! Deals ($curdamage)";
 
                 }
 
@@ -807,18 +725,11 @@ function generatebattle($id)
             if ($emblem2 == 'dpsregen' && $hp2 < $fullhp2)
             {
                 $dps_regen2++;
-                $dpsatk = round($poke2['defense'] * 1.5);
+                $dpsatk = round($poke2['defense'] * 2.25);
                 $hp2 = $hp2 + $dpsatk;
-				
-				if($hp2>=$fullhp2){
-					
-					$hp2 = $fullhp2;
-				}				
-				
-				
                 $datalogs["damage"] = 0;
                 $datalogs["notes"] = array(
-                    "Forest Buff heals use by: {$poke2["pokename"]}: +($dpsatk)!"
+                    "Forest Buff heals use by: {$poke2["pokename"]} : +($dpsatk)!"
                 );
                 $datalogs["enemyhp"] = $hp1;
                 $datalogs["hp1"] = $hp1;
@@ -970,27 +881,40 @@ function generatebattle($id)
             $turn = 1;
         }
 
-        if ($tira == 10000)
+        if ($tira == 100000)
         {
-           // $winner = 1;
+            $winner = 1;
         }
     }
 
-	$debug = $p1level."====".$p2level."=====".$p1gap."===".$p2gap;
-    $mylogs = json_encode($logs,JSON_HEX_APOS);
+    $mylogs = addslashes(json_encode($logs));
+    mysql_query_md("UPDATE tbl_battle_boss SET winner='$winnerpoke', logs='$mylogs',fullhp1='$fullhp1',fullhp2='$fullhp2' WHERE id='$id'");
+
+    if ($winnerpoke == $poke1['id'])
+    {
+        $reward = $poke2['reward'];
+		$reward = addmore($poke2["reward"], $acvcount, 0.15);
+		
+        $getuser = $poke1['user'];
+        mysql_query_md("UPDATE tbl_accounts SET balance = balance + $reward WHERE accounts_id='$getuser'");
+
+        $vt = "Slayer of the {$poke2['pokename']}";
+
+        $NewDate = Date('y:m:d h:i:s', strtotime('+30 days'));
+
+
+
+		mysql_query_md("INSERT INTO tbl_income SET user='{$getuser}', message='You Won a boss battle: {$reward}'");
+        mysql_query_md("INSERT INTO tbl_achievement SET hero='{$poke1['id']}',boss='{$poke2['id']}',victorytext='$vt',fightdate = CURRENT_DATE 	+ INTERVAL 20 DAY");
+
+    }
 	
-	var_dump($logs);
-	
-    mysql_query_md("UPDATE tbl_battle SET winner='$winnerpoke', logs='$mylogs',fullhp1='$fullhp1',fullhp2='$fullhp2',hash='$debug' WHERE id='$id'");
-	
-	
-	if(empty($p1gap) && empty($p2gap))
-	{
-    mysql_query_md("UPDATE tbl_pokemon_users SET win = win + 1,exp = exp + 1 WHERE id='$winnerpoke'");
-    mysql_query_md("UPDATE tbl_pokemon_users SET lose = lose + 1 WHERE id='$loserpoke'");
+	if($loserpoke == $poke1['id']){
+		deductloser($loserpoke);
 	}
-    checkpoke($winnerpoke);
-    deductloser($loserpoke);
 }
+
+
+
 
 ?>
