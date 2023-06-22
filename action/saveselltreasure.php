@@ -39,6 +39,18 @@ if($amount<=0){
 }
 
 
+$marketcount = mysql_query_md("SELECT * FROM tbl_market_item WHERE pokeid='{$poke['id']}' ORDER by amount DESC");
+$mcount = mysql_fetch_md_assoc($marketcount);
+
+
+if($mcount['amount']>$amount){
+
+	echo "Amount must be higher on the last selling ({$mcount['amount']}).";
+	exit();	
+	
+}
+
+
 
 
 

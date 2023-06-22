@@ -905,7 +905,7 @@ function generatebattleboss($id)
 
 
 		mysql_query_md("INSERT INTO tbl_income SET user='{$getuser}', message='You Won a boss battle: {$reward}'");
-        mysql_query_md("INSERT INTO tbl_achievement SET hero='{$poke1['id']}',boss='{$poke2['id']}',victorytext='$vt',fightdate = CURRENT_DATE 	+ INTERVAL 20 DAY");
+        mysql_query_md("INSERT INTO tbl_achievement SET hero='{$poke1['id']}',boss='{$poke2['id']}',victorytext='$vt',fightdate = CURRENT_DATE 	+ INTERVAL 35 DAY");
 
     }
 	

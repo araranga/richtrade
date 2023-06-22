@@ -33,6 +33,23 @@ $poke = loadpoke($hash);
 $qmarket = mysql_query_md("SELECT * FROM tbl_pokemon_users WHERE (is_market IS NULL  OR is_market!=1) AND user='{$poke['user']}'");
 $qmarketcount = mysql_num_rows_md($qmarket);
 
+
+
+$marketcount = mysql_query_md("SELECT * FROM tbl_market WHERE pokeid='{$poke['id']}' ORDER by amount DESC");
+$mcount = mysql_fetch_md_assoc($marketcount);
+
+
+if($mcount['amount']>$amount){
+
+	echo "Amount must be higher on the last selling ({$mcount['amount']}).";
+	exit();	
+	
+}
+
+
+
+
+
 if($qmarketcount<=1){
 	
 
@@ -44,9 +61,9 @@ if($qmarketcount<=1){
 }
 
 
-if($poke['level']<10){
+if($poke['level']<25){
 	
-	echo "Warrior must be atleast level 10 onwards to qualified into selling";
+	echo "Warrior must be atleast level 15 onwards to qualified into selling";
 	exit();
 }
 
