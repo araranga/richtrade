@@ -170,7 +170,8 @@ function generatebattleboss($id)
 
             $tiraskill = $skill1[array_rand($skill1) ];
 
-            $is_crit = getluck($poke1["critical"], 100);
+			$is_crit_chance = 100 + ($poke2["defense"] * 0.25);
+            $is_crit = getluck($poke1["critical"], $is_crit_chance);
 
             $notes = [];
 
@@ -533,7 +534,8 @@ function generatebattleboss($id)
 
             $tiraskill = $skill2[array_rand($skill2) ];
 
-            $is_crit = getluck($poke2["critical"], 100);
+			$is_crit_chance = 100 + ($poke1["defense"] * 0.25);
+            $is_crit = getluck($poke2["critical"], $is_crit_chance);	
 
             $notes = [];
 
