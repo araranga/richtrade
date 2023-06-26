@@ -366,10 +366,10 @@ function generatebattleboss($id)
 
             }
 
-            if ($emblem1 == 'dpsregen' && $hp1 <= $fullhp1)
+            if ($emblem1 == 'dpsregen' && $hp1 < $fullhp1)
             {
                 $dps_regen1++;
-                $dpsatk = round($poke1['defense'] * 2.25);
+                $dpsatk = round($poke1['defense'] * 1.5);
                 $hp1 = $hp1 + $dpsatk;
                 $datalogs["damage"] = 0;
                 $datalogs["notes"] = array(
@@ -727,7 +727,7 @@ function generatebattleboss($id)
             if ($emblem2 == 'dpsregen' && $hp2 < $fullhp2)
             {
                 $dps_regen2++;
-                $dpsatk = round($poke2['defense'] * 2.25);
+                $dpsatk = round($poke2['defense'] * 1.5);
                 $hp2 = $hp2 + $dpsatk;
                 $datalogs["damage"] = 0;
                 $datalogs["notes"] = array(

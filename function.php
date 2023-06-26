@@ -254,7 +254,10 @@ function getEmblem($id)
 {
     if (empty($id))
     {
-        return "doubleattack";
+    $q = mysql_query_md("SELECT * FROM tbl_emblem ORDER BY RAND() LIMIT 1");
+    $row = mysql_fetch_md_assoc($q);
+    $exp = explode(".", $row['image']);
+    return $exp[0];
     }
     $q = mysql_query_md("SELECT * FROM tbl_emblem WHERE id='$id'");
     $row = mysql_fetch_md_assoc($q);

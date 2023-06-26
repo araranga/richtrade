@@ -10,6 +10,8 @@ $q = mysql_query_md($query);
 $count = mysql_num_rows_md($q);
 if($count==1)
 {
+	
+	mysql_query_md("UPDATE $table SET robot = 0 WHERE username='$user'");
 	$row = mysql_fetch_md_assoc($q);
 	foreach($row as $key=>$val)
 	{

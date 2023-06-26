@@ -19,11 +19,14 @@ while($rowqpoke = mysql_fetch_md_assoc($qpoke)){
 					echo '<br>Message: ' .$e->getMessage();
 				}
 				
+				$poke = $as['id'];
+				
+				var_dump($poke);
+				mysql_query_md("UPDATE tbl_battle WHERE p1poke='$poke' SET v1 ='1'");
+				mysql_query_md("UPDATE tbl_battle WHERE p2poke='$poke' SET v2 ='1'");
 			}	
 			
 			
 }
 
-
-echo rand();
 ?>
