@@ -44,6 +44,13 @@ function getcoin()
     $rowdr2 = mysql_fetch_md_array(mysql_query_md("SELECT SUM(amount) as c FROM `tbl_withdraw_history`"));
 
     $conv = ($systemfund - ($rowdr["c"] + $rowdr2["c"])) * 0.0005;
+	
+	if($conv<0){
+	
+		$conv = 0.05;
+		
+	}
+	
 
     return $conv;
 }
@@ -667,7 +674,7 @@ function savebattlebot($hash, $user)
     $user = $poke["user"];
 
 
-   $rewardwin = systemconfig("battlelimitbot") + $_GET['ai'];
+   $rewardwin = systemconfig("battlelimitbot") + $_GET['ai'] + 100000;
 
     $current = date("Y-m-d");
 

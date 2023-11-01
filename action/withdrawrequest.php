@@ -30,7 +30,7 @@ function trans()
 		
 		if($_POST['withdraw']<300)
 		{
-						$error .= "<i class=\"fa fa-warning\"></i>Minimum 300 coins is required.<br>";
+						//$error .= "<i class=\"fa fa-warning\"></i>Minimum 300 coins is required.<br>";
 		}		
 		
 		if($_POST['withdraw']>$row['balance']) 
@@ -47,6 +47,12 @@ function trans()
 			
 		}
 		
+		$totalwithdraw = $conv * $_POST['withdraw'];
+		
+		if($totalwithdraw<100){
+			
+			$error .= "<i class=\"fa fa-warning\"></i>Amount to withdraw $totalwithdraw must be atleast equal or greater than 100 pesos.<br>";
+		}
 		
 		if($error=='')
 		{
@@ -100,7 +106,7 @@ if($error!='')
 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 <h5><i class="icon fas fa-info"></i> Conversion</h5>
 *Your 1 point is now converted as <?php echo number_format($conv,5); ?> pesos<br/>
-*Limited 300 points to withdraw.
+*Amount to withdraw must be atleast 100 or higher in pesos.
 <br/>
 *Additional 12% deduction for withdrawal fee. Which help us pay server and stuff
 <br/>
