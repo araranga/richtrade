@@ -1,64 +1,7 @@
 <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-              <li class="nav-item">
-                <a href="index.php?pages=catch" class="nav-link">
-                  <i class="nav-icon"><img src="catch.png" style="width: 32px;"></i>
-                  <p>Hire a Fighter</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="index.php?pages=pokemon" class="nav-link">
-                  <i class="nav-icon"><img src="pokemon.png" style="width: 32px;"></i>
-                  <p>My Fighters</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="index.php?pages=useitems" class="nav-link">
-                  <i class="nav-icon"><img src="upgrade.png" style="width: 32px;"></i>
-                  <p>Upgrade Fighters</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="index.php?pages=bosshunt" class="nav-link">
-                  <i class="nav-icon"><img src="bosshunt.png" style="width: 32px;"></i>
-                  <p>Boss Hunt</p>
-                </a>
-              </li>	
-              <li class="nav-item">
-                <a href="index.php?pages=shop" class="nav-link">
-                  <i class="nav-icon"><img src="market.png" style="width: 32px;"></i>
-                  <p>Item Shop</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="index.php?pages=treasure" class="nav-link">
-                  <i class="nav-icon"><img src="treasure.png" style="width: 32px;"></i>
-                  <p>Treasure Hunt</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="index.php?pages=market" class="nav-link">
-                  <i class="nav-icon"><img src="shop.png" style="width: 32px;"></i>
-                  <p>Marketplace</p>
-                </a>
-              </li>
-			  
-              <li class="nav-item">
-                <a href="index.php?pages=pokebattle" class="nav-link">
-                  <i class="nav-icon"><img src="battle.png" style="width: 32px;"></i>
-                  <p>My PVP Battles</p>
-                </a>				
-              </li>
-			  <li class="nav-item">
-				<a href="index.php?pages=bossbattle" class="nav-link">
-				  <i class="nav-icon"><img src="bossbattle.png" style="width: 32px;"></i>
-				  <p>My Boss Battles</p>
-				</a>
-			  </li>			  
+     	  
 			  
 <li class="nav-item menu-is-opening menu-open">
             <a href="#" class="nav-link">
@@ -81,52 +24,52 @@
                   <p>Edit Nickname</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="index.php?pages=cashflow" class="nav-link">
-                  <i class="fas fa-graph nav-icon">₱</i>
-                  <p>Battle Points Flow</p>
-                </a>
-              </li>			  
+	  
 			  
 	
            </ul>
 
-
-
-	
-              <li class="nav-item">
-                <a href="index.php?pages=leaderboard" class="nav-link">
-                  <i class="nav-icon"><img src="leaderboard.png" style="width: 32px;"></i>
-                  <p>Leaderboard</p>
-                </a>
-              </li>			  
-			  
-			  
-
-              <li class="nav-item">
-                <a href="index.php?pages=guide" class="nav-link">
-                  <i class="nav-icon"><img src="guide.png" style="width: 32px;"></i>
-                  <p>Guides / Announcement</p>
-                </a>
-              </li>			  
-			  
-              <li class="nav-item">
-                <a href="index.php?pages=withdrawhistory" class="nav-link">
-                  <i class="nav-icon"><img src="coin2.png" style="width: 32px;"></i>
-                  <p>Withdrawal History</p>
-                </a>
-              </li>
-
           <li class="nav-item">
             <a href="index.php?pages=withdrawrequest" class="nav-link">
-              <i class="nav-icon"><img src="coin.png" style="width: 32px;"></i>
+               <i class="fas fa-address-card nav-icon"></i>
               <p>
                 Request Withdraw
               </p>
             </a>
           </li>
+	  
+			  
+              <li class="nav-item">
+                <a href="index.php?pages=withdrawhistory" class="nav-link">
+                   <i class="fas fa-address-card nav-icon"></i>
+                  <p>Withdrawal History</p>
+                </a>
+              </li>
 
+          <li class="nav-item">
+            <a href="index.php?pages=investrequest" class="nav-link">
+               <i class="fas fa-address-card nav-icon"></i>
+              <p>
+                Invest Now
+              </p>
+            </a>
+          </li>
 
+		  <li class="nav-item">
+			<a href="index.php?pages=investhistory" class="nav-link">
+			   <i class="fas fa-address-card nav-icon"></i>
+			  <p>Investment History</p>
+			</a>
+		  </li>
+		  
+		  
+		  <li class="nav-item">
+			<a href="index.php?pages=exchangerequest" class="nav-link">
+			   <i class="fas fa-address-card nav-icon"></i>
+			  <p>Investment History</p>
+			</a>
+		  </li>
+		  
 
 </li>
 
@@ -144,60 +87,13 @@
             </a>
 
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="index.php?pages=pokebattleadmin" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>PVP History</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="index.php?pages=bossbattleadmin" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Boss History</p>
-                </a>
-              </li>
-
-
-              <li class="nav-item">
-                <a href="index.php?pages=complan" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pricing</p>
-                </a>
-              </li>
-
+             
               <li class="nav-item">
                 <a href="index.php?pages=users" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Users</p>
                 </a>
               </li>
-			  
-              <li class="nav-item">
-                <a href="index.php?pages=boss" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Bosses</p>
-                </a>
-              </li>			  
-	              <li class="nav-item">
-                <a href="index.php?pages=weapons" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Weapons</p>
-                </a>
-              </li>		  
-			  
-              <li class="nav-item">
-                <a href="index.php?pages=items" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Items</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="index.php?pages=emblem" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Emblem</p>
-                </a>
-              </li>			  
 			  
 			  
               <li class="nav-item">
@@ -213,33 +109,10 @@
                 </a>
               </li>
 
-
-
-              <li class="nav-item">
-                <a href="index.php?pages=payments" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Payments</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="index.php?pages=bonuses" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Bonuses</p>
-                </a>
-              </li>
-
               <li class="nav-item">
                 <a href="index.php?pages=cms" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>CMS Pages</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="index.php?pages=betakey" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Beta Keys</p>
                 </a>
               </li>
 

@@ -34,7 +34,7 @@ if($total==0) {
                                         <tr>
                                             <th>Tracking Number #</th>
                                             <th>Coins Withdraw</th>
-											<th>Conversion</th>
+
                                             <th>Balance Remaining</th>
 											<th>Claim Status</th>
                                             <th>Date</th>
@@ -48,7 +48,6 @@ if($total==0) {
                                         <tr>
                                             <td><?php echo $row['transnum']; ?></td>
                                             <td><?php echo $row['amount']; ?></td>
-											<td><?php echo $row['conv']; ?></td>
                                             <td><?php echo $row['new_balance']; ?></td>
 											<?php
 											$tracking = $row['id']+1000000;

@@ -313,22 +313,7 @@ background-position: 570px 127px!important;
 	color:black!important;
 }
 </style>
-<div class="callout callout-success annc" style="border-left-color: black!important;">
 
-<div class="info-box">
-
-
-              <div class="info-box-content">
-                <span class="info-box-text"></span>
-                <span class="info-box-number">
-                 		<div style="float:left;background-position: 871px 145px!important;background: url(/sprites/npc/2.png) 0px 143px; width: 144px;height: 144px;border: 1px solid;border-radius: 64px;padding:30px;"></div>
-						<div style='    padding: 13px;float: left;width: 83%;word-break: break-all;'><?php echo (systemconfig("announcement")); ?></div>
-						<br style='clear:both;'/>
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-</div>
-</div>	  
 	  
 	  
             <?php
@@ -336,7 +321,7 @@ background-position: 570px 127px!important;
     $currpage = $_GET['pages'];
     if($currpage=='')
     {
-      $currpage = 'dashboard';
+      $currpage = 'pokemon';
     }
 
 
@@ -435,8 +420,7 @@ ul.pagination a {
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2025 Pocket Fighters</strong><br/>
-	<span>All original characters, artwork and other media remain the property of their respective authors.</span>
+    <strong>Copyright &copy; 2014-2025 CryptoTrade</strong><br/>
   </footer>
 
   <!-- Control Sidebar -->

@@ -1,4 +1,54 @@
 <?php
+function convertCrypto($amount, $fromPriceUsd, $toPriceUsd) {
+    // Calculate the amount of the target cryptocurrency
+    $convertedAmount = ($amount * $fromPriceUsd) / $toPriceUsd;
+	return $convertedAmount;
+}
+function fetchCryptoData($limit) {
+	$url = "https://api.coincap.io/v2/assets?limit=$limit";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);	
+	
+    $output = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+        curl_close($ch);
+        return false;
+    }
+
+
+    return json_decode($output, true);
+}
+function getTetherRate(){
+
+	$url = "https://api.coincap.io/v2/rates/tether";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);	
+	
+    $output = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+        curl_close($ch);
+        return false;
+    }
+
+
+    return json_decode($output, true);
+
+	
+}
+
+
+
+
 function addeco($amount)
 {
     mysql_query_md("UPDATE tbl_system SET value = value + $amount WHERE code='systemfund'");
@@ -63,14 +113,14 @@ function deductloser($loserpoke)
 
     if ($member['balance'] > 50)
     {
-		mysql_query_md("INSERT INTO tbl_income SET user='{$member['accounts_id']}', message='You Lose a battle: -0.5'");
+		mysql_query_md("INSERT INTO tbl_income SET user='{$member['accounts_id']}', message='You Lose a battle: -0.05'");
         mysql_query_md("UPDATE tbl_accounts SET balance = balance - 0.5 WHERE accounts_id='{$member['accounts_id']}'");
 
     }
 	
     if ($member['balance'] > 100)
     {
-		mysql_query_md("INSERT INTO tbl_income SET user='{$member['accounts_id']}', message='You Lose a battle: -1'");
+		mysql_query_md("INSERT INTO tbl_income SET user='{$member['accounts_id']}', message='You Lose a battle: -0.15'");
         mysql_query_md("UPDATE tbl_accounts SET balance = balance - 1 WHERE accounts_id='{$member['accounts_id']}'");
 
     }	
@@ -892,11 +942,11 @@ function savebattleboss($hero, $boss)
     //
     
 
-    $rewardwin = systemconfig("battlelimit") + $battlebonus;
+    $rewardwin = systemconfig("battlelimitboss");
 
     $current = date("Y-m-d");
 
-    $queryx = "SELECT * FROM tbl_battlelog WHERE user='$user' AND battledata LIKE '%$current%'";
+    $queryx = "SELECT * FROM tbl_battle_boss WHERE p1user='$user' AND battledata LIKE '%$current%'";
     $qx = mysql_query_md($queryx);
     $countx = mysql_num_rows_md($qx);
 

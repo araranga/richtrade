@@ -42,8 +42,6 @@
                     <form action='csv.php'> 
                     <select name='r'>
                         <option value='btc'>Bitcoin</option>
-                        <option value='kc'>Kringle Coins</option>
-                        <option value='billc'>The Billion Coins</option>
                     </select>
                     <input type='hidden' name='pages' value='<?php echo $_GET['pages'];?>'>
                     <input type='hidden' name='task' value='csv'>
@@ -64,7 +62,6 @@
                   <th>UserName / Email</th>
                   <th>Type</th>
                   <th>Coin</th>
-				  <th>Amount</th>
                   <th>Status</th>
                   <th>Action</th>
                </tr>
@@ -76,11 +73,10 @@
                     $pid =  $row['id'];
                   ?>
                <tr>
-                  <td><?php echo $row['transnum']; ?> / <?php echo $row['address']; ?></td>
+                  <td><?php echo $row['address']; ?></td>
                   <td><?php echo $row['username']; ?></td>
                   <td><?php echo $row['claimtype']; ?></td>
                   <td><?php echo $row['amount']; ?></td>
-				  <td><?php echo $row['conv']; ?></td>
                   <td>
                     <?php
                     if($row['claim_status']==0)

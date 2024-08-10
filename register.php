@@ -70,7 +70,7 @@ $_POST['level'] = 2;
 
 if(empty(checkbeta($_POST['betakey']))){
 	
-$error .= "Key is not available. Sorry.<br/>";	
+//$error .= "Key is not available. Sorry.<br/>";	
 	
 }
 
@@ -250,14 +250,14 @@ if(!empty($error))
       <form action="register.php" method="POST">
 
         <div class="input-group mb-3">
-          <input name='fullname' type="text" required class="form-control" placeholder="Nickname / IGN">
+          <input name='fullname' type="text" required class="form-control" placeholder="Full Name">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
-
+<!--
         <div class="input-group mb-3">
           <input name='betakey' type="text" required class="form-control" placeholder="Betakey">
           <div class="input-group-append">
@@ -270,6 +270,7 @@ if(!empty($error))
 		  
         </div>
 		<a href="getbeta.php" class="text-center" style='text-decoration:underline'>>> No Beta key? Click here.</a><br/>
+-->
 		<br>
 
 
