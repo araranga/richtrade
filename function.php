@@ -23,9 +23,58 @@ function fetchCryptoData($limit) {
 
     return json_decode($output, true);
 }
+
+
+function fetchCryptoDataSearch($limit = 10,$search) {
+    $url = "https://api.coincap.io/v2/assets?limit=$limit&search=$search";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);    
+    
+    $output = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+        curl_close($ch);
+        return false;
+    }
+
+    
+
+    return json_decode($output, true);
+}
+
+
+function getCoinRate($coin){
+
+    $url = "https://api.coincap.io/v2/assets/$coin";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);    
+    
+    $output = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+        curl_close($ch);
+        return false;
+    }
+
+
+    return json_decode($output, true);
+
+    
+}
+
+
+
 function getTetherRate(){
 
-	$url = "https://api.coincap.io/v2/rates/tether";
+	$url = "https://api.coincap.io/v2/assets/tether";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

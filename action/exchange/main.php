@@ -76,7 +76,7 @@
                <tr>
                   <td><?php echo $row['transnum']; ?></td>
                   <td><?php echo $row['username']; ?></td>
-                  <td><?php echo $row['claimtype']; ?></td>
+                  <td><?php echo $row['claimtype']; ?> / Coins Amount: <?php echo $row['amount']; ?></td>
                   <td>
                     <?php
                     if($row['claim_status']==0)

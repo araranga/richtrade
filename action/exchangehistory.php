@@ -32,7 +32,7 @@ if($total==0) {
                                         <tr>
                                             <th>Tracking Number #</th>
                                             <th>Transfer From</th>
-                                            <th>Address</th>
+                                            <th>Coins Amount</th>
 											<th>Claim Status</th>
                                             <th>Date</th>
                                         </tr>
@@ -44,8 +44,8 @@ if($total==0) {
 									?>
                                         <tr>
                                             <td><?php echo $row['transnum']; ?></td>
-                                            <td><?php echo $row['claimtype']; ?></td>
-                                            <td><?php echo $row['address']; ?></td>
+                                            <td><?php echo $row['claimtype']; ?> To Tether</td>
+                                            <td><?php echo $row['amount']; ?></td>
 
 											<?php
 											$tracking = $row['id']+1000000;
@@ -54,11 +54,11 @@ if($total==0) {
                                                 <?php 
                                                                                    
                                                 if($row['claim_status']==0){ 
-                                                    echo "Processing Request";
+                                                    echo "Pending Transfer(You)";
                                                 }
                                                 if($row['claim_status']==1)
                                                 {     
-                                                    echo "<p>Claimed</p>";
+                                                    echo "<p>Transferred (On your account)</p>";
                                                 }
                                                 ?>
                                             </th>

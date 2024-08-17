@@ -5,7 +5,7 @@
 			  
 <li class="nav-item menu-is-opening menu-open">
             <a href="#" class="nav-link">
-              <i class="nav-icon"><img src="account.png" style="width: 32px;"></i>
+              <i class="nav-icon"><i class="fas fa-lock nav-icon"></i></i>
               <p>
                 My Profile
                 <i class="fas fa-angle-left right"></i>
@@ -66,10 +66,15 @@
 		  <li class="nav-item">
 			<a href="index.php?pages=exchangerequest" class="nav-link">
 			   <i class="fas fa-address-card nav-icon"></i>
-			  <p>Investment History</p>
+			  <p>Exchange Request</p>
 			</a>
 		  </li>
-		  
+      <li class="nav-item">
+      <a href="index.php?pages=exchangehistory" class="nav-link">
+         <i class="fas fa-address-card nav-icon"></i>
+        <p>Exchange History</p>
+      </a>
+      </li>		  
 
 </li>
 

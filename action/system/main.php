@@ -18,7 +18,7 @@ $field2[] = array("type"=>"editor","value"=>"terms");
 //$field2[] = array("type"=>"text","value"=>"merchant_id","label"=>"Merchant ID.");
 #var_dump(generatedate($sdata));
 $field2[] = array("type"=>"text","value"=>"investpercent","label"=>"Percentage Invest.");
-
+$field2[] = array("type"=>"text","value"=>"admin_btc_address","label"=>"Wallet Address.");
 //
 ?>
 <h2>System Configuration</h2>
