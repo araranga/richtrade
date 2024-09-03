@@ -17,7 +17,11 @@ if($count==1)
 	{
 		$_SESSION[$key] = $val;
 	}
-	echo 1;
+	if(!empty($_SESSION['redirect'])){
+		echo 2;
+	}else{
+		echo 1;
+	}
 	
 }
 if(!empty($_REQUEST['stores'])){

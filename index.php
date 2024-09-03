@@ -2,10 +2,16 @@
 session_start();
 include("connect.php");
 include("function.php");
-if($_SESSION['accounts_id']=='')
+if($_SESSION['accounts_id']=='' && empty($_GET['fromCrypto']))
 {
 exit("<script> window.location='/web/index.php' </script>");
 }
+if(empty($_SESSION['accounts_id']) && !empty($_GET['fromCrypto'])) {
+    $requestUri = $_SERVER['REQUEST_URI'];
+    $_SESSION['redirect'] = $requestUri;
+    exit("<script> window.location='/login.php' </script>");
+}
+
 $main = getrow("tbl_logo");
 $tablerowxxx = "tbl_accounts";
 $queryrowxxx = "SELECT * FROM $tablerowxxx WHERE accounts_id='".$_SESSION['accounts_id']."'";
@@ -321,13 +327,15 @@ background-position: 570px 127px!important;
     $currpage = $_GET['pages'];
     if($currpage=='')
     {
-      $currpage = 'pokemon';
+      $currpage = 'dashboard';
     }
 
 
     if($currpage=='exchangerequest' && $_SESSION['activated']==0){
-      $currpage = "activate";
+      //$currpage = "activate";
     }
+	
+
     include("action/".$currpage.".php");
             ?>
       </div>

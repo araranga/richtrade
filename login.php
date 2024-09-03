@@ -160,17 +160,23 @@ if($_GET['error']==1)
     var stores = $('#stores').val();
     $('#notibar').html('<div class="noti"><ul class="fa-ul"><li><i class="fa fa-cog fa-spin fa-li"></i> Please wait.. Checking your acccount.</li></ul></div>');
     $.post("action/process-login.php",{username: username,password:password,stores:stores}, function(data, status){
-    //alert(data);
+   
     $('#notibar').html('');
-    if(data=="0")
+    if(data=="0" || data==0)
     {
       $('#notibar').html('<div class="warning"><ul class="fa-ul"><li><i class="fa fa-warning fa-li"></i>Please check your username/password. or Account does not exist.</li></ul></div>');
     }
-    if(data=="1")
+    if(data=="1" || data==1)
     {
       $('#notibar').html('<div class="noti"><ul class="fa-ul"><li><i class="fa fa-cog fa-spin fa-li"></i> Loading.. Your Account.</li></ul></div>');
       window.location = 'index.php';
     }
+    if(data=="2" || data==2)
+    {
+      $('#notibar').html('<div class="noti"><ul class="fa-ul"><li><i class="fa fa-cog fa-spin fa-li"></i> Loading.. Your Account.</li></ul></div>');
+      window.location = '<?php echo $_SESSION['redirect']; ?>';
+    }
+
     });   
   }
   </script>

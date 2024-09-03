@@ -33,8 +33,6 @@ require_once("../function.php");
 
 
 
-
-
 <!-- EXCHANGE -->
 
     <div class="container-xxl bg-light py-5 my-5">
@@ -42,15 +40,21 @@ require_once("../function.php");
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                 <h1 class="display-6">Exchange now!</h1>
                 <p class="text-primary fs-5 mb-5">Please note that you need to create account to proceed in exchange.</p>
+				<a href=''>Click here to register</a>
+				<br/>
             </div>
 			<?php
-				$cryptodata = fetchCryptoData(200);
+				$cryptodata = fetchCryptoData(50);
 
 				$tether = getTetherRate();
 				
-				$final_rate = $tether['data']['rateUsd'];
+			
 
 				
+				$final_rate = $tether['data']['priceUsd'];
+
+				
+
 	
 			
 			?>
@@ -84,6 +88,7 @@ require_once("../function.php");
 			<button data-price-usd='<?php echo $d['priceUsd']; ?>' 
 			data-symbol='<?php echo $d['symbol']; ?>' 
 			data-name='<?php echo $d['name']; ?>' 
+			data-id='<?php echo $d['id']; ?>'
 			onclick='openPopup(this)'>
 			Exchange Now
 			</button>
@@ -215,13 +220,26 @@ require_once("../function.php");
 	
 	<input id='data-price-usd' type='hidden'>
 	<input id='data-symbol' type='hidden'>
-		
-			<button>Process</button>
+	<input id='data-id' type='hidden'>	
+			<button onclick='processexhange()'>Process</button>
 	
   </div>
   
 </div>
 <script>
+//index.php?pages=exchangerequest&fromCrypto=BTC&cid=bitcoin
+
+function processexhange() {
+    var dataSymbol = jQuery('#data-symbol').val();
+    var dataId = jQuery('#data-id').val();    
+    var amountToConv = parseFloat(jQuery('#amounttoconv').val());
+
+    if (amountToConv) {
+        window.location = '/index.php?pages=exchangerequest&fromCrypto=' + dataSymbol + '&cid=' + dataId + '&amount=' + amountToConv;
+    }
+}
+
+
 function computeexchange(){
 
             const input = document.getElementById('amounttoconv');
@@ -250,7 +268,7 @@ function computeexchange(){
 			
 	
 	var btcRateUsd = parseFloat(jQuery('#data-price-usd').val());
-	var usdtRateUsd = parseFloat("<?php echo $tether['data']['rateUsd']; ?>");
+	var usdtRateUsd = parseFloat("<?php echo $final_rate; ?>");
 	var btcAmount = parseFloat(jQuery('#amounttoconv').val());
 	
 	var conv = convertBtcToUsdt(btcRateUsd, usdtRateUsd, btcAmount);
@@ -271,6 +289,7 @@ function computeexchange(){
 	jQuery('#exchange-name2').text(jQuery(aaa).attr('data-name'));
 	jQuery('#data-price-usd').val(jQuery(aaa).attr('data-price-usd'));
 	jQuery('#data-symbol').val(jQuery(aaa).attr('data-symbol'));
+	jQuery('#data-id').val(jQuery(aaa).attr('data-id'));
 	
   }
 
@@ -285,6 +304,9 @@ function computeexchange(){
 	}  
 
 </script>
+
+
+
 
 
 <?php include("inc/footer.php"); ?>

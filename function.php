@@ -5,10 +5,11 @@ function convertCrypto($amount, $fromPriceUsd, $toPriceUsd) {
 	return $convertedAmount;
 }
 function fetchCryptoData($limit) {
-	$url = "https://api.coincap.io/v2/assets?limit=$limit";
+	$url = "https://api.coincap.io/v2/assets?limit=$limit&rand=".rand();
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, bearer());
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);	
 	
@@ -26,10 +27,11 @@ function fetchCryptoData($limit) {
 
 
 function fetchCryptoDataSearch($limit = 10,$search) {
-    $url = "https://api.coincap.io/v2/assets?limit=$limit&search=$search";
+    $url = "https://api.coincap.io/v2/assets?limit=$limit&search=$search&rand=".rand();
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, bearer());
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);    
     
@@ -46,13 +48,24 @@ function fetchCryptoDataSearch($limit = 10,$search) {
     return json_decode($output, true);
 }
 
+function bearer(){
+	
+$headers = [
+    'Authorization: Bearer ' . '1f6c4f85-6296-4592-ab22-eb2aaae09a2b'
+];
+
+
+return $headers;
+	
+}
 
 function getCoinRate($coin){
 
-    $url = "https://api.coincap.io/v2/assets/$coin";
+    $url = "https://api.coincap.io/v2/assets/$coin?rand=".rand();
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, bearer());
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);    
     
@@ -74,10 +87,11 @@ function getCoinRate($coin){
 
 function getTetherRate(){
 
-	$url = "https://api.coincap.io/v2/assets/tether";
+	$url = "https://api.coincap.io/v2/assets/tether?rand=".rand();
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, bearer());
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);	
 	
@@ -88,8 +102,7 @@ function getTetherRate(){
         curl_close($ch);
         return false;
     }
-
-
+	
     return json_decode($output, true);
 
 	

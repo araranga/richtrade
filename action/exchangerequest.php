@@ -37,6 +37,7 @@ function trans()
 		$success = 1;
 		$trans = trans();
 		$amount = $_POST['amounttoconv'];
+		#echo "INSERT INTO tbl_exchange_history SET amount='$amount',transnum='$trans',claimtype='".$_POST['claimtype']."',claimtype_id='".$_POST['claimtype_id']."',accounts_id='$accounts_id'";
 		mysql_query_md("INSERT INTO tbl_exchange_history SET amount='$amount',transnum='$trans',claimtype='".$_POST['claimtype']."',claimtype_id='".$_POST['claimtype_id']."',accounts_id='$accounts_id'");		
 		}
 	}
@@ -94,6 +95,12 @@ $field = array();
 
 $sdata = array();
 $sdata['claimtype'] = $_GET['fromCrypto'];
+
+if(!empty($_GET['amount'])){
+	
+	$sdata['amounttoconv'] = $_GET['amount'];
+
+}
 
 
 
@@ -203,6 +210,14 @@ function computeexchange(){
 		return (btcAmount * btcRateUsd) / usdtRateUsd;
 	}  
 
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ensure jQuery is available
+        if (typeof jQuery !== 'undefined') {
+            computeexchange();
+        }
+    });
 </script>
 
 
